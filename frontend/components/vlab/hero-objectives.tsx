@@ -9,21 +9,12 @@ import {
   Code2,
   BrainCircuit,
   Database,
-  Network,
   ArrowRight,
-  PlayCircle,
-  CheckCircle2,
   ExternalLink,
-  Award,
-  BookOpen,
   Layers,
   Cpu,
-  Bot,
   BarChart3,
   Cloud,
-  Sparkles,
-  Zap,
-  GraduationCap
 } from "lucide-react";
 
 const VIRTUAL_LAB_STATEMENTS = [
@@ -143,9 +134,8 @@ export function HeroObjectives() {
   return (
     <section className="relative min-h-[80vh] flex flex-col justify-between pt-28 sm:pt-36 pb-14 px-4 sm:px-6 bg-white dark:bg-zinc-950 border-b border-slate-200/80 dark:border-zinc-800 overflow-hidden">
       <div className="container max-w-[1440px] mx-auto relative z-10 pt-2 sm:pt-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-
-          <div className="lg:col-span-7 w-full text-left space-y-7">
+        <div className="grid grid-cols-1 gap-8 items-center">
+          <div className="w-full text-left space-y-7">
             <AnimatePresence mode="wait">
               <motion.div
                 key={statementIdx}
@@ -155,11 +145,6 @@ export function HeroObjectives() {
                 transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-4"
               >
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0284c7]/10 border border-[#0284c7]/30 text-[#0284c7] dark:text-[#38bdf8] text-xs font-mono font-bold shadow-2xs">
-                  <Sparkles className="h-3.5 w-3.5 text-[#0284c7]" />
-                  <span>{currentStatement.badge}</span>
-                </div>
-
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.12] sm:leading-[1.08] font-heading">
                   {currentStatement.line1}{" "}
                   <span className="font-serif-italic font-normal text-slate-600 dark:text-slate-400">
@@ -177,26 +162,7 @@ export function HeroObjectives() {
               </motion.div>
             </AnimatePresence>
 
-            <div className="space-y-1.5 py-1 max-w-xl">
-              <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground">
-                <span className="flex items-center gap-1.5 text-[#0284c7] dark:text-[#38bdf8] font-bold">
-                  <Zap className="h-3 w-3" />
-                  <span>Synchronized Laboratory Cycle ({statementIdx + 1}/4)</span>
-                </span>
-                <span>8.0s Interval</span>
-              </div>
-              <div className="w-full h-1.5 bg-slate-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-                <motion.div
-                  key={`progress-bar-${statementIdx}`}
-                  initial={{ width: "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: 8.0, ease: "linear" }}
-                  className="h-full bg-gradient-to-r from-[#0284c7] via-sky-400 to-[#ea580c]"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2 w-full">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-3 w-full">
               <Button
                 asChild
                 size="lg"
@@ -220,85 +186,11 @@ export function HeroObjectives() {
                 </Link>
               </Button>
             </div>
-
-            <div className="flex flex-wrap items-center gap-1.5 pt-2 text-[11px] font-mono text-muted-foreground">
-              <span className="font-semibold text-foreground mr-1">Direct Labs:</span>
-              {[
-                { name: "DBMS", href: "/labs/dbms-lab" },
-                { name: "OOP (Java)", href: "/labs/oops-java" },
-                { name: "DSA", href: "/labs/data-structures" },
-                { name: "Big Data", href: "/labs/big-data-analytics" },
-                { name: "Cloud CSM", href: "/labs/cloud-service-management" },
-                { name: "Deep Learning", href: "/labs/ai-machine-learning" },
-                { name: "C Programming", href: "/labs/c-programming" },
-              ].map((labChip) => (
-                <Link
-                  key={labChip.name}
-                  href={labChip.href}
-                  className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-zinc-800/80 hover:bg-[#0284c7]/10 hover:text-[#0284c7] border border-slate-200 dark:border-zinc-700 transition-colors"
-                >
-                  {labChip.name}
-                </Link>
-              ))}
-            </div>
           </div>
-
-          <div className="lg:col-span-5 w-full flex justify-center items-center">
-            <div className="relative group w-full max-w-sm sm:max-w-md">
-              <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-[#0284c7]/30 via-sky-400/25 to-indigo-500/20 blur-2xl opacity-75 group-hover:opacity-100 transition duration-700 -z-10 animate-pulse" />
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-                className="relative rounded-3xl overflow-hidden bg-white/95 dark:bg-zinc-900/90 border border-sky-500/20 dark:border-sky-500/30 shadow-2xl p-6 sm:p-8 flex flex-col items-center text-center backdrop-blur-xl"
-              >
-                <div className="w-full flex items-center justify-between pb-4 border-b border-slate-100 dark:border-zinc-800">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 text-[#0284c7] dark:text-[#38bdf8] text-[11px] font-mono font-bold border border-sky-500/20">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    VIRTUAL LAB SIMULATOR
-                  </span>
-                  <span className="text-[10px] font-mono font-semibold text-slate-500 dark:text-zinc-400">
-                    AI &amp; DS LABS
-                  </span>
-                </div>
-
-                <div className="relative w-52 h-52 sm:w-64 sm:h-64 my-4 flex items-center justify-center">
-                  <div className="absolute inset-2 rounded-full bg-sky-500/10 dark:bg-sky-500/15 blur-xl animate-pulse" />
-                  <img
-                    src="/virtual-lab-icon.png"
-                    alt="Virtual Laboratory Platform"
-                    className="relative z-10 w-48 h-48 sm:w-56 sm:h-56 object-contain select-none group-hover:scale-105 transition-transform duration-500 drop-shadow-md"
-                  />
-                </div>
-
-                <div className="w-full space-y-2 pt-2 border-t border-slate-100 dark:border-zinc-800">
-                  <h3 className="text-base sm:text-lg font-black tracking-tight text-slate-900 dark:text-white font-heading">
-                    Virtual Laboratory Platform
-                  </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-medium">
-                    Department of Artificial Intelligence &amp; Data Science
-                  </p>
-                  <div className="flex flex-wrap items-center justify-center gap-1.5 pt-2">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 border border-slate-200 dark:border-zinc-700">
-                      Interactive Simulators
-                    </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 border border-slate-200 dark:border-zinc-700">
-                      Real-Time Code Engine
-                    </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 border border-slate-200 dark:border-zinc-700">
-                      Zero Setup
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-
         </div>
       </div>
 
-      {/* CONTINUOUS ROLLING / MARQUEE ANIMATED TITLE CARDS SHOWCASE */}
       <div className="w-full mt-14 overflow-hidden relative select-none">
-        {/* Subtle Fade Gradients on left and right */}
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
