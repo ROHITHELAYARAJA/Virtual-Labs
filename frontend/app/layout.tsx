@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/global/theme-provider";
 import { AuthProvider } from "@/context/auth-context";
@@ -59,6 +60,7 @@ export default function RootLayout({
               <StudentOnboardingModal />
             </div>
             <Toaster />
+            <Analytics />
           </AuthProvider>
         </ThemeProvider>
       </body>
