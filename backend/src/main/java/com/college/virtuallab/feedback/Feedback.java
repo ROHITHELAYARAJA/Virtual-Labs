@@ -12,7 +12,7 @@ public class Feedback extends BaseEntity {
     private String studentEmail;
     private String department;
     private String subjectOrLab;
-    private Integer rating; // 1 to 5
+    private Integer rating;
 
     @Column(columnDefinition = "TEXT")
     private String message;

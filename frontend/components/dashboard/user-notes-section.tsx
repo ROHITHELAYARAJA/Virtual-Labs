@@ -37,7 +37,6 @@ export function UserNotesSection() {
   const [notes, setNotes] = useState<UserNote[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Modal State
   const [newNoteOpen, setNewNoteOpen] = useState(false);
   const [noteTitle, setNoteTitle] = useState("");
   const [noteContent, setNoteContent] = useState("");

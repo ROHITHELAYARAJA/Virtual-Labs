@@ -46,7 +46,6 @@ export function RecursionVisualizerPanel({
   const [selectedExampleId, setSelectedExampleId] = useState<string>("factorial");
   const [language, setLanguage] = useState<"java" | "python" | "cpp" | "js">("java");
 
-  // Active code and call string
   const currentPreset = useMemo(() => {
     return RECURSION_EXAMPLES.find(ex => ex.id === selectedExampleId) || RECURSION_EXAMPLES[0];
   }, [selectedExampleId]);
@@ -63,7 +62,6 @@ export function RecursionVisualizerPanel({
   const [code, setCode] = useState<string>(initialCode || getPresetCodeForLang(currentPreset, language));
   const [callStr, setCallStr] = useState<string>(propSampleCall || currentPreset.defaultCall);
 
-  // Execution state
   const [steps, setSteps] = useState<ExecutionStep[]>([]);
   const [stepIdx, setStepIdx] = useState<number>(-1);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -73,7 +71,6 @@ export function RecursionVisualizerPanel({
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Run transpiler & AST tracer when code changes
   const runEngine = useCallback((customCode = code, customLang = language, customCall = callStr) => {
     try {
       setErrorMsg(null);
@@ -89,7 +86,6 @@ export function RecursionVisualizerPanel({
     }
   }, [code, language, callStr]);
 
-  // Initial execution on mount
   useEffect(() => {
     runEngine();
   }, []);
@@ -110,7 +106,6 @@ export function RecursionVisualizerPanel({
     runEngine(newCode, newLang, callStr);
   };
 
-  // Autoplay timer
   useEffect(() => {
     if (isPlaying) {
       timerRef.current = setInterval(() => {
@@ -128,7 +123,6 @@ export function RecursionVisualizerPanel({
     };
   }, [isPlaying, steps.length, speedMs]);
 
-  // Derive active CallStack and RecursionTree from current step index
   const { stack, treeNodes, currentNodeId, executionPhase, activeLine } = useMemo(() => {
     if (stepIdx < 0 || steps.length === 0) {
       return { stack: [], treeNodes: [], currentNodeId: null, executionPhase: null, activeLine: null };
@@ -175,7 +169,6 @@ export function RecursionVisualizerPanel({
           nodeMap[step.nodeId].phase = "returning";
         }
 
-        // Pop from stack
         const stackIdx = currentStack.findIndex(f => f.id === step.nodeId);
         if (stackIdx !== -1) {
           currentStack.splice(stackIdx, 1);
@@ -183,7 +176,6 @@ export function RecursionVisualizerPanel({
       }
     }
 
-    // Active line estimation based on current step
     let line: number | null = null;
     const currentStep = steps[stepIdx];
     const lines = code.split("\n");
@@ -196,7 +188,7 @@ export function RecursionVisualizerPanel({
       } else if (currentStep.type === "return") {
         line = lines.findIndex(l => l.includes("return"));
       }
-      if (line !== -1 && line !== null) line = line + 1; // 1-indexed
+      if (line !== -1 && line !== null) line = line + 1;
     }
 
     return {

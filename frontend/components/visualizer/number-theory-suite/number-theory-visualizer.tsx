@@ -34,7 +34,6 @@ interface Props {
 export function NumberTheoryVisualizer({ initialModule = "gcd-lcm" }: Props) {
   const [activeModule, setActiveModule] = useState<NumberTheoryModule>(initialModule);
 
-  // 1. GCD / LCM
   const [gcdA, setGcdA] = useState(48);
   const [gcdB, setGcdB] = useState(18);
 
@@ -54,7 +53,6 @@ export function NumberTheoryVisualizer({ initialModule = "gcd-lcm" }: Props) {
   };
   const gcdResult = getGcdSteps(gcdA, gcdB);
 
-  // 2. Extended GCD (ax + by = gcd(a,b))
   const [extA, setExtA] = useState(30);
   const [extB, setExtB] = useState(20);
 
@@ -69,12 +67,10 @@ export function NumberTheoryVisualizer({ initialModule = "gcd-lcm" }: Props) {
   };
   const extResult = extendedGcd(extA, extB);
 
-  // 3. Modular Arithmetic
   const [modX, setModX] = useState(14);
   const [modY, setModY] = useState(9);
   const [modM, setModM] = useState(7);
 
-  // 4. Fast Exponentiation
   const [baseVal, setBaseVal] = useState(3);
   const [expVal, setExpVal] = useState(13);
   const [modExp, setModExp] = useState(1000);
@@ -97,11 +93,9 @@ export function NumberTheoryVisualizer({ initialModule = "gcd-lcm" }: Props) {
   };
   const binExpResult = getBinaryExpSteps(baseVal, expVal, modExp);
 
-  // 5. Modular Inverse (Fermat & ExtGCD)
   const [invA, setInvA] = useState(3);
   const [invM, setInvM] = useState(11);
 
-  // 6. Sieve of Eratosthenes
   const [sieveN, setSieveN] = useState(50);
   const computeSieve = (n: number) => {
     const limit = Math.min(n, 120);
@@ -118,7 +112,6 @@ export function NumberTheoryVisualizer({ initialModule = "gcd-lcm" }: Props) {
   };
   const primesGrid = computeSieve(sieveN);
 
-  // 7. Prime Factorization
   const [factorN, setFactorN] = useState(360);
   const getPrimeFactors = (num: number) => {
     let n = Math.abs(num);
@@ -140,7 +133,6 @@ export function NumberTheoryVisualizer({ initialModule = "gcd-lcm" }: Props) {
   };
   const primeFactors = getPrimeFactors(factorN);
 
-  // 8. Euler's Totient φ(n)
   const [totientN, setTotientN] = useState(36);
   const computeTotient = (num: number) => {
     let n = num;

@@ -73,12 +73,7 @@ export interface CollegeAnnouncement {
   createdAt: string;
 }
 
-// =========================================================================
-// INITIAL SEED DATA PER TENANT (COLLEGE)
-// =========================================================================
-
 const INITIAL_MATERIALS_SEED: CollegeMaterial[] = [
-  // VSB
   {
     id: "mat_vsb_01",
     collegeSlug: "vsb",
@@ -105,7 +100,6 @@ const INITIAL_MATERIALS_SEED: CollegeMaterial[] = [
     uploadedBy: "Dr. K. Senthil",
     createdAt: new Date(Date.now() - 86400000 * 3).toISOString()
   },
-  // CIT
   {
     id: "mat_cit_01",
     collegeSlug: "cit",
@@ -119,7 +113,6 @@ const INITIAL_MATERIALS_SEED: CollegeMaterial[] = [
     uploadedBy: "CIT Lab Incharge",
     createdAt: new Date(Date.now() - 86400000 * 7).toISOString()
   },
-  // PSG
   {
     id: "mat_psg_01",
     collegeSlug: "psg",
@@ -136,7 +129,6 @@ const INITIAL_MATERIALS_SEED: CollegeMaterial[] = [
 ];
 
 const INITIAL_MANUALS_SEED: CollegeLabManual[] = [
-  // VSB
   {
     id: "man_vsb_01",
     collegeSlug: "vsb",
@@ -202,7 +194,6 @@ const INITIAL_MANUALS_SEED: CollegeLabManual[] = [
     uploadedBy: "OOPs Coordinator",
     createdAt: new Date(Date.now() - 86400000 * 3).toISOString()
   },
-  // CIT
   {
     id: "man_cit_01",
     collegeSlug: "cit",
@@ -230,7 +221,6 @@ const INITIAL_MANUALS_SEED: CollegeLabManual[] = [
 ];
 
 const INITIAL_CUSTOM_LABS_SEED: CollegeCustomLab[] = [
-  // VSB
   {
     id: "lab_vsb_01",
     collegeSlug: "vsb",
@@ -400,7 +390,6 @@ const INITIAL_CUSTOM_LABS_SEED: CollegeCustomLab[] = [
     uploadedBy: "V-Lab Studio",
     createdAt: new Date(Date.now() - 86400000 * 1).toISOString()
   },
-  // CIT
   {
     id: "lab_cit_01",
     collegeSlug: "cit",
@@ -430,7 +419,6 @@ const INITIAL_CUSTOM_LABS_SEED: CollegeCustomLab[] = [
 ];
 
 const INITIAL_VIDEOS_SEED: CollegeVideoTutorial[] = [
-  // VSB
   {
     id: "vid_vsb_01",
     collegeSlug: "vsb",
@@ -455,7 +443,6 @@ const INITIAL_VIDEOS_SEED: CollegeVideoTutorial[] = [
     uploadedBy: "VSB V-Lab Studio",
     createdAt: new Date(Date.now() - 86400000 * 5).toISOString()
   },
-  // CIT
   {
     id: "vid_cit_01",
     collegeSlug: "cit",
@@ -471,7 +458,6 @@ const INITIAL_VIDEOS_SEED: CollegeVideoTutorial[] = [
 ];
 
 const INITIAL_ANNOUNCEMENTS_SEED: CollegeAnnouncement[] = [
-  // VSB
   {
     id: "ann_vsb_01",
     collegeSlug: "vsb",
@@ -492,7 +478,6 @@ const INITIAL_ANNOUNCEMENTS_SEED: CollegeAnnouncement[] = [
     category: "Lab Schedule",
     createdAt: new Date(Date.now() - 86400000 * 3).toISOString()
   },
-  // CIT
   {
     id: "ann_cit_01",
     collegeSlug: "cit",
@@ -505,16 +490,10 @@ const INITIAL_ANNOUNCEMENTS_SEED: CollegeAnnouncement[] = [
   }
 ];
 
-// Helper to access LocalStorage partition safely
 function getLocalKey(collegeSlug: string, dataType: string): string {
   return `vlab_tenant_${collegeSlug.toLowerCase()}_${dataType}`;
 }
 
-// =========================================================================
-// TENANT DATA ACCESS METHODS (ISOLATED PER COLLEGE)
-// =========================================================================
-
-// --- 1. Materials ---
 export async function getCollegeMaterials(collegeSlug: string): Promise<CollegeMaterial[]> {
   const cleanSlug = collegeSlug.trim().toLowerCase();
   try {
@@ -540,10 +519,8 @@ export async function getCollegeMaterials(collegeSlug: string): Promise<CollegeM
       }));
     }
   } catch (e) {
-    // Database table fallback
   }
 
-  // LocalStorage / Seed fallback
   if (typeof window !== "undefined") {
     const local = localStorage.getItem(getLocalKey(cleanSlug, "materials"));
     if (local) {
@@ -571,7 +548,6 @@ export async function saveCollegeMaterial(material: CollegeMaterial): Promise<vo
     });
   } catch {}
 
-  // Update local partition
   if (typeof window !== "undefined") {
     const current = await getCollegeMaterials(cleanSlug);
     const index = current.findIndex((m) => m.id === material.id);
@@ -595,7 +571,6 @@ export async function deleteCollegeMaterial(id: string, collegeSlug: string): Pr
   }
 }
 
-// --- 2. Lab Manuals ---
 export async function getCollegeLabManuals(collegeSlug: string): Promise<CollegeLabManual[]> {
   const cleanSlug = collegeSlug.trim().toLowerCase();
   try {
@@ -627,11 +602,9 @@ export async function getCollegeLabManuals(collegeSlug: string): Promise<College
     if (local) {
       try {
         const parsed: CollegeLabManual[] = JSON.parse(local);
-        // If parsed contains broken placeholder drive links, sanitize them
         const hasBrokenLinks = parsed.some((m) => m.manualUrl && m.manualUrl.includes("drive.google.com/file/d/vsb-"));
         if (hasBrokenLinks || parsed.length < 3) {
           const defaultSeed = INITIAL_MANUALS_SEED.filter((m) => m.collegeSlug === cleanSlug);
-          // Merge user-created ones that don't have broken URLs with the rich seed
           const cleanUserItems = parsed.filter((m) => !m.manualUrl?.includes("drive.google.com/file/d/vsb-") && !defaultSeed.some((s) => s.id === m.id));
           const merged = [...defaultSeed, ...cleanUserItems];
           localStorage.setItem(getLocalKey(cleanSlug, "manuals"), JSON.stringify(merged));
@@ -685,7 +658,6 @@ export async function deleteCollegeLabManual(id: string, collegeSlug: string): P
   }
 }
 
-// --- 3. Custom Labs ---
 export async function getCollegeCustomLabs(collegeSlug: string): Promise<CollegeCustomLab[]> {
   const cleanSlug = collegeSlug.trim().toLowerCase();
   try {
@@ -772,7 +744,6 @@ export async function deleteCollegeCustomLab(id: string, collegeSlug: string): P
   }
 }
 
-// --- 4. Video Tutorials ---
 export async function getCollegeVideoTutorials(collegeSlug: string): Promise<CollegeVideoTutorial[]> {
   const cleanSlug = collegeSlug.trim().toLowerCase();
   try {
@@ -847,7 +818,6 @@ export async function deleteCollegeVideoTutorial(id: string, collegeSlug: string
   }
 }
 
-// --- 5. Announcements ---
 export async function getCollegeAnnouncements(collegeSlug: string): Promise<CollegeAnnouncement[]> {
   const cleanSlug = collegeSlug.trim().toLowerCase();
   try {
@@ -918,11 +888,9 @@ export async function deleteCollegeAnnouncement(id: string, collegeSlug: string)
   }
 }
 
-// --- 6. Tenant-Scoped Student Profiles ---
 export async function getStudentsByCollege(collegeSlug: string): Promise<StudentProfile[]> {
   const cleanSlug = (collegeSlug || "vsb").trim().toLowerCase();
   try {
-    // 1. Primary Query: Supabase profiles table
     const { data, error } = await supabase
       .from("profiles")
       .select("*")
@@ -957,7 +925,6 @@ export async function getStudentsByCollege(collegeSlug: string): Promise<Student
     console.warn("Profiles query encountered error, falling back to students table:", e);
   }
 
-  // 2. Secondary Fallback: Supabase students table
   try {
     const { data: stData, error: stErr } = await supabase
       .from("students")
@@ -993,7 +960,6 @@ export async function getStudentsByCollege(collegeSlug: string): Promise<Student
     console.warn("Students fallback table failed:", e);
   }
 
-  // 3. LocalStorage scan fallback for demo / sandbox
   if (typeof window !== "undefined") {
     const results: StudentProfile[] = [];
     for (let i = 0; i < localStorage.length; i++) {
@@ -1022,7 +988,7 @@ export async function updateStudentProgressInCloud(registerNumber: string, compl
         last_active: new Date().toISOString()
       })
       .or(`id.eq.${registerNumber},register_number.eq.${registerNumber}`);
-    
+
     if (typeof window !== "undefined") {
       const localKey = `vlab_student_${registerNumber}`;
       const local = localStorage.getItem(localKey);
@@ -1042,10 +1008,6 @@ export async function updateStudentProgressInCloud(registerNumber: string, compl
   }
 }
 
-// =========================================================================
-// 7. INSTITUTIONAL FREE DEMO BOOKINGS & ON-DEMAND COLLEGE CLONES
-// =========================================================================
-
 export interface DemoBooking {
   id: string;
   collegeName: string;
@@ -1064,7 +1026,6 @@ export interface DemoBooking {
 }
 
 export async function saveDemoBooking(booking: DemoBooking): Promise<void> {
-  // 1. Attempt to save to Supabase
   try {
     await supabase.from("college_demo_bookings").insert({
       id: booking.id,
@@ -1084,7 +1045,6 @@ export async function saveDemoBooking(booking: DemoBooking): Promise<void> {
     });
   } catch {}
 
-  // 2. Always persist locally for seamless demo/sandbox testing
   if (typeof window !== "undefined") {
     const existingKey = "vlab_all_demo_bookings";
     let bookings: DemoBooking[] = [];
@@ -1106,4 +1066,3 @@ export function getLocalDemoBookings(): DemoBooking[] {
   } catch {}
   return [];
 }
-

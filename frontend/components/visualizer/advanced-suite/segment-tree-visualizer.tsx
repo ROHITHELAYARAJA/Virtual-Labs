@@ -25,7 +25,6 @@ export function SegmentTreeVisualizer() {
   const [highlightedNodes, setHighlightedNodes] = useState<number[]>([]);
   const [logMsg, setLogMsg] = useState<string>("Built Segment Tree with 6 elements. Query or Update intervals below.");
 
-  // Build Segment Tree recursively
   const { tree, rootId } = useMemo(() => {
     const nodes: Record<number, SegNode> = {};
     let counter = 1;

@@ -34,10 +34,8 @@ interface Props {
 export function LLDPatternsVisualizer({ initialModule = "strategy-pattern" }: Props) {
   const [activeModule, setActiveModule] = useState<LLDModule>(initialModule);
 
-  // Strategy Demo State
   const [activeStrategy, setActiveStrategy] = useState<"paypal" | "credit-card" | "crypto">("credit-card");
 
-  // Chain of Responsibility Demo State
   const [activeLogRole, setActiveLogRole] = useState<"info" | "warning" | "error">("error");
 
   return (

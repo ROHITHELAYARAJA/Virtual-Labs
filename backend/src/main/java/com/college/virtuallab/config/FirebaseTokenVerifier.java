@@ -55,7 +55,6 @@ public class FirebaseTokenVerifier {
             return null;
         }
 
-        // 1. Try Firebase Admin SDK verification if FirebaseApp is active
         if (!FirebaseApp.getApps().isEmpty()) {
             try {
                 FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(idToken);
@@ -74,7 +73,6 @@ public class FirebaseTokenVerifier {
             }
         }
 
-        // 2. Resilient Firebase Token Claims Parser (for offline/local dev or fallback)
         try {
             String[] parts = idToken.split("\\.");
             if (parts.length >= 2) {

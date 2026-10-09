@@ -63,10 +63,9 @@ public class SecurityConfig {
         http
                 .cors(org.springframework.security.config.Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
-                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)) // For H2 console
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // Public endpoints
                         .requestMatchers(
                                 "/auth/**",
                                 "/departments/**",
@@ -80,9 +79,7 @@ public class SecurityConfig {
                                 "/api-docs/**",
                                 "/v3/api-docs/**"
                         ).permitAll()
-                        // Public GET requests for labs, courses, and resources
                         .requestMatchers(HttpMethod.GET, "/labs/**", "/experiments/**", "/courses/**", "/quizzes/**").permitAll()
-                        // Protected endpoints
                         .requestMatchers("/admin/**").hasRole("DEPARTMENT_ADMIN")
                         .requestMatchers("/faculty/**").hasAnyRole("FACULTY", "LAB_ADMIN", "DEPARTMENT_ADMIN")
                         .requestMatchers("/student/**", "/progress/**", "/quizzes/**/submit").authenticated()

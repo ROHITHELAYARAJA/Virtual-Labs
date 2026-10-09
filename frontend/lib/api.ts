@@ -38,7 +38,6 @@ export async function fetchApi<T>(
   }
 }
 
-// Dedicated API service methods
 export const api = {
   auth: {
     login: (body: { email: string; password: string }) =>

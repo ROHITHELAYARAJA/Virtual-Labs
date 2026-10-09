@@ -54,9 +54,6 @@ export function getYouTubeEmbedUrl(url: string): string {
 }
 
 export const RESOURCES_DATA: ResourceItem[] = [
-  // ==========================================
-  // VIDEO TUTORIALS & WALKTHROUGHS
-  // ==========================================
   {
     id: 'video-dsa-tamil-masterclass',
     subject: 'Data Structures & Algorithms',
@@ -178,9 +175,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Networks', 'TCP/IP', 'Routing', 'Tamil']
   },
 
-  // ==========================================
-  // VIRTUAL LABS & SIMULATORS (DIRECT LAUNCH)
-  // ==========================================
   {
     id: 'sim-dsa-suite',
     subject: 'Data Structures & Algorithms',
@@ -322,9 +316,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['DSA Visualizer', 'Animations', 'Sorting']
   },
 
-  // ==========================================
-  // 1. DATA STRUCTURES & ALGORITHMS (JAVA)
-  // ==========================================
   {
     id: 'dsa-complete-guide',
     subject: 'Data Structures & Algorithms',
@@ -378,9 +369,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Lab Manual', 'Java', 'Data Structures', 'VSB Engineering College']
   },
 
-  // ==========================================
-  // 2. OPERATING SYSTEMS (C)
-  // ==========================================
   {
     id: 'os-scheduling-gfg',
     subject: 'Operating Systems',
@@ -434,9 +422,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Lab Manual', 'OS', 'C Programming']
   },
 
-  // ==========================================
-  // 3. DATABASE MANAGEMENT SYSTEMS (SQL)
-  // ==========================================
   {
     id: 'dbms-sql-guide',
     subject: 'Database Management Systems',
@@ -490,9 +475,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Lab Manual', 'SQL', 'PostgreSQL', 'Oracle', 'VSB Engineering College']
   },
 
-  // ==========================================
-  // 4. MACHINE LEARNING & AI
-  // ==========================================
   {
     id: 'ml-foundations-gfg',
     subject: 'Machine Learning',
@@ -598,9 +580,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Lab Manual', 'Deep Learning', 'AI', 'CNN', 'LSTM', 'VSB Engineering College']
   },
 
-  // ==========================================
-  // 5. DATA SCIENCE & ANALYTICS
-  // ==========================================
   {
     id: 'data-science-numpy-gfg',
     subject: 'Data Science & Analytics',
@@ -667,9 +646,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Lab Manual', 'Business Analytics', 'Data Science', 'ANOVA', 'VSB Engineering College']
   },
 
-  // ==========================================
-  // 6. BIG DATA ANALYTICS
-  // ==========================================
   {
     id: 'big-data-hadoop-gfg',
     subject: 'Big Data Analytics',
@@ -723,9 +699,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Lab Manual', 'Hadoop', 'Spark', 'Hive', 'VSB Engineering College']
   },
 
-  // ==========================================
-  // 7. CLOUD SERVICE MANAGEMENT & DEVOPS
-  // ==========================================
   {
     id: 'cloud-computing-gfg',
     subject: 'Cloud Service Management',
@@ -779,9 +752,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Lab Manual', 'AWS', 'Docker', 'Kubernetes', 'VSB Engineering College']
   },
 
-  // ==========================================
-  // 8. COMPUTER NETWORKS
-  // ==========================================
   {
     id: 'networks-architecture-gfg',
     subject: 'Computer Networks',
@@ -848,9 +818,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Lab Manual', 'Networks', 'Sockets', 'Wireshark']
   },
 
-  // ==========================================
-  // 9. C PROGRAMMING
-  // ==========================================
   {
     id: 'c-programming-guide',
     subject: 'C Programming',
@@ -904,9 +871,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Lab Manual', 'C Programming', 'Pointers', 'Structures', 'VSB Engineering College']
   },
 
-  // ==========================================
-  // 10. JAVA OBJECT-ORIENTED PROGRAMMING
-  // ==========================================
   {
     id: 'java-oop-gfg',
     subject: 'Java OOP',
@@ -960,9 +924,6 @@ export const RESOURCES_DATA: ResourceItem[] = [
     tags: ['Lab Manual', 'Java', 'OOP', 'Multithreading', 'VSB Engineering College']
   },
 
-  // ==========================================
-  // 11. PYTHON PROGRAMMING
-  // ==========================================
   {
     id: 'python-basics-gfg',
     subject: 'Python Programming',

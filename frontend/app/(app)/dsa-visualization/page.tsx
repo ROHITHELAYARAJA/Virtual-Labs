@@ -32,7 +32,6 @@ export default function DSAVisualizationPage() {
   const [filterState, setFilterState] = useState<"all" | "completed" | "pending">("all");
   const [activeQuizTopic, setActiveQuizTopic] = useState<TopicItem | null>(null);
 
-  // Load persistence from localStorage & read URL query params
   useEffect(() => {
     try {
       const saved = localStorage.getItem("dsa_master_completed_topics");
@@ -64,7 +63,6 @@ export default function DSAVisualizationPage() {
     }
   };
 
-  // Save persistence to localStorage
   const toggleComplete = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
@@ -88,7 +86,6 @@ export default function DSAVisualizationPage() {
     }
   };
 
-  // Flattened total topic list
   const allTopics = useMemo(() => {
     return DSA_SECTIONS.flatMap((sec) => sec.items);
   }, []);
@@ -100,7 +97,6 @@ export default function DSAVisualizationPage() {
 
   const progressPercentage = Math.round((completedCount / (totalCount || 1)) * 100);
 
-  // Readiness Tier
   const readinessTier = useMemo(() => {
     if (progressPercentage >= 80) return { label: "DSA Master", color: "text-amber-500", bg: "bg-amber-500/10 border-amber-500/30" };
     if (progressPercentage >= 50) return { label: "Interview Ready", color: "text-emerald-500", bg: "bg-emerald-500/10 border-emerald-500/30" };
@@ -108,7 +104,6 @@ export default function DSAVisualizationPage() {
     return { label: "Novice Preparation", color: "text-slate-500", bg: "bg-muted border-border" };
   }, [progressPercentage]);
 
-  // Filtered Sections
   const filteredSections = useMemo(() => {
     return DSA_SECTIONS.map((sec) => {
       if (selectedPhase !== "all" && sec.id !== selectedPhase) {

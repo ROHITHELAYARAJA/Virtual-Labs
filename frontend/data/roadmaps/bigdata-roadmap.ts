@@ -1,9 +1,6 @@
 import { DSACategory } from "../dsa-topic-data";
 
 export const BIGDATA_ROADMAP_CATEGORIES: DSACategory[] = [
-  // ========================================================
-  // MODULE 1: HADOOP SETUP & HDFS (0/2)
-  // ========================================================
   {
     id: "bda-hadoop-hdfs",
     name: "1. Hadoop Setup & HDFS",
@@ -125,9 +122,6 @@ hdfs dfs -rm /user/aids/datasets/local_sales.csv`
     ]
   },
 
-  // ========================================================
-  // MODULE 2: MAPREDUCE PROGRAMMING (0/2)
-  // ========================================================
   {
     id: "bda-mapreduce-programming",
     name: "2. MapReduce Programming",
@@ -284,9 +278,6 @@ public class WordCount {
     ]
   },
 
-  // ========================================================
-  // MODULE 3: HADOOP ECOSYSTEM TOOLS (0/3)
-  // ========================================================
   {
     id: "bda-ecosystem-tools",
     name: "3. Hadoop Ecosystem Tools",

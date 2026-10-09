@@ -23,7 +23,6 @@ interface VideoModalProps {
 export function VideoModal({ isOpen, onClose, resource }: VideoModalProps) {
   if (!resource) return null;
 
-  // Convert youtube watch URL or playlist URL to embed format
   const getEmbedUrl = (url: string) => {
     if (!url) return "";
     if (url.includes("youtube.com/watch?v=")) {

@@ -45,26 +45,21 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
   const [mode, setMode] = useState<RecBacktrackMode>(defaultMode);
   const [factorialN, setFactorialN] = useState<number>(4);
   const [hanoiDisksCount, setHanoiDisksCount] = useState<number>(3);
-  const [subsetsLength, setSubsetsLength] = useState<number>(3); // 3 or 4
-  const [mazeSize, setMazeSize] = useState<number>(4); // 4, 5, 6
-  
+  const [subsetsLength, setSubsetsLength] = useState<number>(3);
+  const [mazeSize, setMazeSize] = useState<number>(4);
+
   const [currentStepIdx, setCurrentStepIdx] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1); // 0.5x, 1x, 2x, 4x
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // ========================================================
-  // STEP GENERATOR FOR ALL MODES
-  // ========================================================
   const steps: RecStep[] = useMemo(() => {
     const list: RecStep[] = [];
 
-    // 1. FACTORIAL CALL STACK (DYNAMIC N = 3, 4, 5, 6)
     if (mode === "factorial") {
       const n = factorialN;
       const stack: { func: string; param: number; ret?: number; status: "active" | "returning" | "waiting" }[] = [];
 
-      // Phase 1: Call Stack Expansion (Push phase)
       for (let k = n; k >= 1; k--) {
         if (k === n) {
           stack.unshift({ func: "factorial", param: k, status: "active" });
@@ -77,7 +72,6 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
             next: `Push new stack frame for factorial(${k - 1}).`
           });
         } else if (k > 1) {
-          // Mark previous active frame as waiting
           stack[0].status = "waiting";
           stack.unshift({ func: "factorial", param: k, status: "active" });
           list.push({
@@ -89,7 +83,6 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
             next: `Push new stack frame for factorial(${k - 1}).`
           });
         } else {
-          // Base Case: k = 1
           stack[0].status = "waiting";
           stack.unshift({ func: "factorial", param: 1, ret: 1, status: "returning" });
           list.push({
@@ -103,10 +96,8 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
         }
       }
 
-      // Phase 2: Call Stack Unwinding (Return phase)
       let currentVal = 1;
       for (let k = 2; k <= n; k++) {
-        // Pop the child frame
         stack.shift();
         currentVal = currentVal * k;
         stack[0].ret = currentVal;
@@ -125,10 +116,9 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
       }
     }
 
-    // 2. TOWER OF HANOI (DYNAMIC DISKS: 3, 4, 5)
     else if (mode === "hanoi") {
       const n = hanoiDisksCount;
-      const initialDisks = Array.from({ length: n }, (_, i) => n - i); // e.g. [3, 2, 1]
+      const initialDisks = Array.from({ length: n }, (_, i) => n - i);
       const pegs: { A: number[]; B: number[]; C: number[] } = {
         A: [...initialDisks],
         B: [],
@@ -195,7 +185,6 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
       });
     }
 
-    // 3. SUBSETS & COMBINATIONS (POWER SET O(2^N))
     else if (mode === "subsets") {
       const nums = subsetsLength === 4 ? [1, 2, 3, 4] : [1, 2, 3];
       const discoveredSubsets: number[][] = [];
@@ -225,7 +214,6 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
           return;
         }
 
-        // Branch A: INCLUDE
         list.push({
           subsetState: { current: [...current, nums[idx]], index: idx, action: "include", pool: nums },
           discoveredSubsets: discoveredSubsets.map(s => [...s]),
@@ -237,7 +225,6 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
         });
         traceSubsets(idx + 1, [...current, nums[idx]]);
 
-        // Branch B: EXCLUDE (Backtrack)
         list.push({
           subsetState: { current: [...current], index: idx, action: "exclude", pool: nums },
           discoveredSubsets: discoveredSubsets.map(s => [...s]),
@@ -253,10 +240,8 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
       traceSubsets(0, []);
     }
 
-    // 4. RAT IN A MAZE (DYNAMIC 4x4, 5x5, 6x6)
     else if (mode === "maze") {
       const N = mazeSize;
-      // Predefined solvable maze layouts
       const layouts: Record<number, number[][]> = {
         4: [
           [1, 0, 0, 0],
@@ -309,7 +294,6 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
         next: "Examine first step from (0, 0)."
       });
 
-      // Direction vectors: Down, Right, Up, Left
       const dr = [1, 0, -1, 0];
       const dc = [0, 1, 0, -1];
       const dName = ["DOWN", "RIGHT", "UP", "LEFT"];
@@ -335,7 +319,6 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
           const nr = r + dr[i];
           const nc = c + dc[i];
 
-          // Check boundary and wall
           if (nr >= 0 && nr < N && nc >= 0 && nc < N) {
             if (mazeLayout[nr][nc] === 1 && !visited[nr][nc]) {
               list.push({
@@ -364,7 +347,6 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
           }
         }
 
-        // Backtrack
         currentPath.pop();
         visited[r][c] = false;
         deadEnds.push({ r, c });
@@ -386,13 +368,11 @@ export function RecursionBacktrackingVisualizer({ defaultMode = "nqueens" }: { d
     return list;
   }, [mode, factorialN, hanoiDisksCount, subsetsLength, mazeSize]);
 
-  // Reset step index when mode or parameters change
   useEffect(() => {
     setCurrentStepIdx(0);
     setIsPlaying(false);
   }, [mode, factorialN, hanoiDisksCount, subsetsLength, mazeSize]);
 
-  // Playback timer
   useEffect(() => {
     if (isPlaying) {
       const delay = Math.max(80, 800 / playbackSpeed);

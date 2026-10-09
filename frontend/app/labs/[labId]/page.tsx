@@ -103,7 +103,6 @@ export default function LabDetailPage({ params }: LabDetailPageProps) {
     }
   };
 
-  // Filter experiments for this lab
   const experiments = EXPERIMENTS_DATA.filter((e) => e.labId === lab.id);
   const [selectedQuizExpId, setSelectedQuizExpId] = useState<string>(experiments[0]?.id || "");
 
@@ -113,7 +112,6 @@ export default function LabDetailPage({ params }: LabDetailPageProps) {
     setFeedbackSent(true);
   };
 
-  // 8-Week Curriculum Breakdown for AI&DS
   const C_WEEKS_DATA = [
     {
       week: 1,
@@ -329,7 +327,6 @@ export default function LabDetailPage({ params }: LabDetailPageProps) {
     }
   ];
 
-  // AI&DS Mini Projects
   const AI_DS_MINI_PROJECTS = [
     {
       id: "proj-1",

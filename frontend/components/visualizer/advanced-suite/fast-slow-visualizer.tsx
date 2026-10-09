@@ -7,9 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Play, Pause, RotateCcw, Activity, ArrowRight, Info, CheckCircle2 } from "lucide-react";
 
 export function FastSlowVisualizer() {
-  // Linked list nodes: 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> (loops back to node 3)
   const nodes = [0, 1, 2, 3, 4, 5, 6];
-  const nextPointers = [1, 2, 3, 4, 5, 6, 3]; // node 6 points back to 3
+  const nextPointers = [1, 2, 3, 4, 5, 6, 3];
 
   const [slow, setSlow] = useState<number>(0);
   const [fast, setFast] = useState<number>(0);
@@ -31,7 +30,7 @@ export function FastSlowVisualizer() {
       if (nextSlow === nextFast) {
         setPhase("find_start");
         setLog(`🎉 Meeting Point Encountered at Node ${nextSlow}! Slow and Fast collided. Cycle confirmed! Now resetting Slow to Head (0) to locate loop entrance.`);
-        setSlow(0); // reset slow to head
+        setSlow(0);
       } else {
         setLog(`Step ${stepsCount + 1}: Slow moved 1 step to Node ${nextSlow}. Fast moved 2 steps to Node ${nextFast}.`);
       }

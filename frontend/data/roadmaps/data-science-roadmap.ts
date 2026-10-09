@@ -1,9 +1,6 @@
 import { DSACategory } from "../dsa-topic-data";
 
 export const DATA_SCIENCE_ROADMAP_CATEGORIES: DSACategory[] = [
-  // ========================================================
-  // MODULE 1: EXCEL FUNDAMENTALS (0/3)
-  // ========================================================
   {
     id: "ba-excel-fundamentals",
     name: "1. Excel Fundamentals",
@@ -169,9 +166,6 @@ print("Dataset imported from CSV and exported to XLSX successfully.")`
     ]
   },
 
-  // ========================================================
-  // MODULE 2: DESCRIPTIVE & INFERENTIAL STATISTICS (0/4)
-  // ========================================================
   {
     id: "ba-statistics-hypothesis",
     name: "2. Descriptive & Inferential Statistics",
@@ -359,9 +353,6 @@ print("Dataset imported from CSV and exported to XLSX successfully.")`
     ]
   },
 
-  // ========================================================
-  // MODULE 3: DATA PREPROCESSING & DIMENSIONALITY REDUCTION (0/3)
-  // ========================================================
   {
     id: "ba-preprocessing-dim-reduction",
     name: "3. Data Preprocessing & Dimensionality Reduction",
@@ -522,9 +513,6 @@ print("Top 2 Singular Values:", S[:2])`
     ]
   },
 
-  // ========================================================
-  // MODULE 4: EXPLORATORY DATA ANALYSIS (0/3)
-  // ========================================================
   {
     id: "ba-exploratory-data-analysis",
     name: "4. Exploratory Data Analysis",
@@ -678,9 +666,6 @@ plt.show()`
     ]
   },
 
-  // ========================================================
-  // MODULE 5: POWER BI FUNDAMENTALS (0/3)
-  // ========================================================
   {
     id: "ba-power-bi-fundamentals",
     name: "5. Power BI Fundamentals",
@@ -832,9 +817,6 @@ in
     ]
   },
 
-  // ========================================================
-  // MODULE 6: POWER BI ANALYTICS & REPORTING (0/3)
-  // ========================================================
   {
     id: "ba-powerbi-analytics-reporting",
     name: "6. Power BI Analytics & Reporting",
@@ -999,9 +981,6 @@ DIVIDE(
     ]
   },
 
-  // ========================================================
-  // MODULE 7: CAPSTONE CASE STUDY (0/1)
-  // ========================================================
   {
     id: "ba-capstone-case-study",
     name: "7. Capstone Case Study",

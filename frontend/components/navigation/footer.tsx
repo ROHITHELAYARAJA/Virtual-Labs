@@ -29,7 +29,7 @@ export function Footer() {
       {/* Main Footer Directory */}
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 py-14 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-          
+
           {/* Left: Creator Profile (Cols 1-5) */}
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3.5">
@@ -47,7 +47,7 @@ export function Footer() {
                 </span>
               </div>
             </div>
-            
+
             <p className="text-slate-400 text-xs sm:text-sm font-light max-w-md leading-relaxed">
               Official Virtual Laboratory Platform — experiential learning through interactive algorithmic simulations, execution traces, and self-assessment evaluations.
             </p>
@@ -72,7 +72,7 @@ export function Footer() {
 
           {/* Columns 2-4: Links Categories (Cols 6-12) */}
           <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 text-xs">
-            
+
             {/* Column: PLATFORM */}
             <div className="space-y-3">
               <span className="font-sans text-[11px] uppercase tracking-wider text-slate-400 font-bold block">

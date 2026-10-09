@@ -106,9 +106,6 @@ export const DISCIPLINES_DATA: Discipline[] = [
 ];
 
 export const LABS_DATA: Lab[] = [
-  // ==========================================
-  // 1. BUSINESS ANALYTICS
-  // ==========================================
   {
     id: "data-science-analytics",
     code: "AD8482",
@@ -236,9 +233,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 2. COMPUTER NETWORKS
-  // ==========================================
   {
     id: "computer-networks",
     code: "AD8581",
@@ -358,9 +352,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 3. MACHINE LEARNING
-  // ==========================================
   {
     id: "ai-machine-learning",
     code: "AD8481",
@@ -480,9 +471,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 4. OPERATING SYSTEMS
-  // ==========================================
   {
     id: "operating-systems",
     code: "CS3461",
@@ -600,9 +588,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 5. OBJECT ORIENTED PROGRAMMING (JAVA)
-  // ==========================================
   {
     id: "oops-java",
     code: "AD8302",
@@ -720,9 +705,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 6. DATA STRUCTURES & ALGORITHMS
-  // ==========================================
   {
     id: "data-structures",
     code: "AD8301",
@@ -842,9 +824,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 7. DBMS (DATABASE MANAGEMENT SYSTEM)
-  // ==========================================
   {
     id: "dbms-lab",
     code: "AD8303",
@@ -956,9 +935,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 8. C PROGRAMMING
-  // ==========================================
   {
     id: "c-programming",
     code: "GE3171",
@@ -1067,9 +1043,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 9. PYTHON PROGRAMMING
-  // ==========================================
   {
     id: "python-programming",
     code: "GE3171",
@@ -1182,9 +1155,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 10. ARTIFICIAL INTELLIGENCE
-  // ==========================================
   {
     id: "artificial-intelligence",
     code: "AI1-IIITH",
@@ -1290,9 +1260,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 11. BIG DATA ANALYTICS
-  // ==========================================
   {
     id: "big-data-analytics",
     code: "CS8711",
@@ -1397,9 +1364,6 @@ export const LABS_DATA: Lab[] = [
     ]
   },
 
-  // ==========================================
-  // 12. CLOUD SERVICE MANAGEMENT
-  // ==========================================
   {
     id: "cloud-service-management",
     code: "CS8811",

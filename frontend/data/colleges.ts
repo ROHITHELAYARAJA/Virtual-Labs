@@ -308,11 +308,9 @@ export function getCollegeBySlug(slug: string): CollegeData | undefined {
   if (!slug) return undefined;
   const clean = slug.trim().toLowerCase();
 
-  // 1. Check statically registered colleges
   const staticMatch = COLLEGES_REGISTRY.find((c) => c.slug.toLowerCase() === clean);
   if (staticMatch) return staticMatch;
 
-  // 2. Check dynamically created / booked college clones from localStorage
   if (typeof window !== "undefined") {
     try {
       const customRaw = localStorage.getItem("vlab_custom_colleges");
@@ -324,7 +322,6 @@ export function getCollegeBySlug(slug: string): CollegeData | undefined {
     } catch {}
   }
 
-  // 3. Graceful fallback for any on-demand institutional slug
   const formattedName = clean
     .split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -376,4 +373,3 @@ export function getCollegeBySlug(slug: string): CollegeData | undefined {
     status: "trial"
   };
 }
-

@@ -7,7 +7,6 @@ import { LABS_DATA } from "@/data/labs";
 import { QUIZZES_DATA, getQuizForExperiment } from "@/data/quizzes";
 import { useStudentProgress } from "@/hooks/use-student-progress";
 
-// Visualizer imports
 import { StackVisualizer } from "@/components/visualizer/stack/stack-visualizer";
 import { QueueVisualizer } from "@/components/visualizer/queue/queue-visualizer";
 import { LinkedListVisualizer } from "@/components/visualizer/linked-list/linked-list-visualizer";
@@ -19,7 +18,6 @@ import { MultiLangCodeViewer } from "@/components/visualizer/code/multi-lang-cod
 import { VideoTimeline, TamilVideoTimeline } from "@/components/vlab/tamil-video-timeline";
 import { PolicyIterationVisualizer } from "@/components/visualizer/ai/policy-iteration-visualizer";
 
-// Sub-components for 9 authentic sections
 import { LabHeaderBanner } from "@/components/vlab/lab-header-banner";
 import {
   ExperimentNavigationSidebar,
@@ -29,7 +27,6 @@ import { ExperimentAssessmentView } from "@/components/vlab/experiment-assessmen
 import { ExperimentContributors } from "@/components/vlab/experiment-contributors";
 import { ExperimentReferences } from "@/components/vlab/experiment-references";
 
-// UI Components
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -105,7 +102,6 @@ export function ExperimentWorkspace({ experiment }: ExperimentWorkspaceProps) {
   const [simOutput, setSimOutput] = useState<string | null>(null);
   const [isShareModalOpen, setIsShareModalOpen] = useState<boolean>(false);
 
-  // Official Instruction Studio State (Screenshot 112701)
   const [pipelineInstructions, setPipelineInstructions] = useState<PipelineInstruction[]>(DEFAULT_PIPELINE_INSTRUCTIONS);
   const [currOp, setCurrOp] = useState<string>("ADD");
   const [currRd, setCurrRd] = useState<string>("R1");
@@ -161,7 +157,6 @@ export function ExperimentWorkspace({ experiment }: ExperimentWorkspaceProps) {
     }, 600);
   };
 
-  // Video language state
   const [expVideoLang, setExpVideoLang] = useState<"english" | "tamil">("english");
   const [expTamilVideoTime, setExpTamilVideoTime] = useState<number>(0);
   const [activeExpTamilTimestampIdx, setActiveExpTamilTimestampIdx] = useState<number | null>(null);
@@ -185,7 +180,6 @@ export function ExperimentWorkspace({ experiment }: ExperimentWorkspaceProps) {
     getQuizForExperiment(experiment.slug, experiment.title);
   const isCompleted = progress.completedExperiments.includes(experiment.id);
 
-  // Find prev and next experiments
   const currentIndex = EXPERIMENTS_DATA.findIndex((e) => e.id === experiment.id);
   const prevExp = currentIndex > 0 ? EXPERIMENTS_DATA[currentIndex - 1] : null;
   const nextExp =

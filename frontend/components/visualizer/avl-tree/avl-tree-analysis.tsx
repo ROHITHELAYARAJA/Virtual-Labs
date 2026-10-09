@@ -38,18 +38,15 @@ function analyzeAVLTree(tree: AVLTreeNode | null): TreeAnalysis {
 
   if (!tree) return analysis
 
-  // Helper function to get height
   function getHeight(node: AVLTreeNode | null): number {
     if (!node) return 0
     return node.height
   }
 
-  // Helper function to get balance factor
   function getBalanceFactor(node: AVLTreeNode): number {
     return getHeight(node.left) - getHeight(node.right)
   }
 
-  // Traverse tree to collect data
   function traverse(node: AVLTreeNode): number {
     analysis.nodeCount++
 
@@ -66,16 +63,13 @@ function analyzeAVLTree(tree: AVLTreeNode | null): TreeAnalysis {
       analysis.maxValue = node.value
     }
 
-    // Calculate and store balance factor
     const balanceFactor = getBalanceFactor(node)
     analysis.balanceFactors[node.value] = balanceFactor
 
-    // Check if tree violates AVL property
     if (Math.abs(balanceFactor) > 1) {
       analysis.isBalanced = false
     }
 
-    // Check if tree is perfectly balanced
     if (Math.abs(balanceFactor) !== 0) {
       analysis.perfectlyBalanced = false
     }

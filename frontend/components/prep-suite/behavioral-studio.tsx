@@ -67,7 +67,6 @@ export function BehavioralStudio() {
   const [activeTab, setActiveTab] = useState<"star-builder" | "principles-matrix" | "evaluator">("star-builder");
   const [selectedCompany, setSelectedCompany] = useState<"Amazon" | "Google" | "Meta">("Amazon");
 
-  // STAR Form State
   const [storyTitle, setStoryTitle] = useState<string>("Scaling Auth Service Latency from 850ms to 45ms");
   const [storyTag, setStoryTag] = useState<string>("Customer Obsession");
   const [situation, setSituation] = useState<string>("During Black Friday traffic spikes, our identity authentication service experienced p99 latency spikes exceeding 850ms, causing 4.2% of checkout attempts to timeout.");

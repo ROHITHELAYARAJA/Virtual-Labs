@@ -10,7 +10,6 @@ export function GridBacktrackingVisualizer() {
   const [activeTab, setActiveTab] = useState<"maze" | "sudoku">("maze");
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // 4x4 Rat in a Maze
   const mazeSteps = [
     { r: 0, c: 0, val: "RAT", desc: "Start at (0, 0). Exploring paths towards Destination (3, 3)." },
     { r: 1, c: 0, val: "•", desc: "Move DOWN to (1, 0): Valid open cell." },
@@ -22,7 +21,6 @@ export function GridBacktrackingVisualizer() {
     { r: 3, c: 3, val: "GOAL", desc: "🎉 Reached Destination (3, 3)! Valid escape path discovered." }
   ];
 
-  // 4x4 Mini Sudoku
   const sudokuSteps = [
     { desc: "Initial 4x4 Mini-Sudoku puzzle with empty cells at (0,1), (1,0), (2,3), (3,2).", grid: [
       [1, 0, 3, 4],

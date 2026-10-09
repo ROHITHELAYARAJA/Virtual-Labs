@@ -10,7 +10,6 @@ export function ConcurrencyVisualizer() {
   const [topic, setTopic] = useState<"mutex" | "philosophers">("mutex");
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // Mutex Lock Steps
   const mutexSteps = [
     { desc: "Threads T1 and T2 spawned. Mutex is UNLOCKED (0). Shared balance = $100.", t1State: "Idle", t2State: "Idle", isLocked: false, lockedBy: "None", balance: 100 },
     { desc: "T1 calls mutex.lock(): Lock acquired! T1 enters Critical Section.", t1State: "Running", t2State: "Idle", isLocked: true, lockedBy: "Thread 1", balance: 100 },
@@ -20,7 +19,6 @@ export function ConcurrencyVisualizer() {
     { desc: "🎉 T2 acquires lock and enters Critical Section! Mutex prevented dirty reads & race conditions.", t1State: "Idle", t2State: "Running", isLocked: true, lockedBy: "Thread 2", balance: 150 }
   ];
 
-  // Dining Philosophers Steps
   const philoSteps = [
     { desc: "5 Philosophers seated at round table with 5 chopsticks. All currently THINKING.", states: ["Thinking", "Thinking", "Thinking", "Thinking", "Thinking"] },
     { desc: "Philosopher 0 and Philosopher 2 pick up both adjacent chopsticks. States: EATING!", states: ["Eating", "Thinking", "Eating", "Thinking", "Thinking"] },

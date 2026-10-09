@@ -29,7 +29,6 @@ export function LabHeaderBanner({
   const [rateSuccess, setRateSuccess] = useState(false);
   const [bugSuccess, setBugSuccess] = useState(false);
 
-  // Form states
   const [feedbackText, setFeedbackText] = useState("");
   const [bugReport, setBugReport] = useState({ title: "", description: "", email: "" });
 

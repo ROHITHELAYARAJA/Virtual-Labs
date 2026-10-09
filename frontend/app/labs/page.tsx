@@ -46,7 +46,6 @@ export default function LabsCataloguePage() {
   const [isDisciplineBooksOpen, setIsDisciplineBooksOpen] = useState(false);
   const [isDisciplineSyllabusOpen, setIsDisciplineSyllabusOpen] = useState(false);
 
-  // Automatically select semester based on authenticated student's year/cohort
   useEffect(() => {
     if (studentProfile) {
       const reg = studentProfile.registerNumber || "";
@@ -65,10 +64,8 @@ export default function LabsCataloguePage() {
     }
   }, [studentProfile]);
 
-  // Filter labs according to semester selection & search query
   const filteredLabs = useMemo(() => {
     return LABS_DATA.filter((lab) => {
-      // 1. Semester matching
       if (selectedSemester === "sem1") {
         if (lab.semester !== "Semester 1") return false;
       } else if (selectedSemester === "sem2") {
@@ -81,7 +78,6 @@ export default function LabsCataloguePage() {
         if (lab.semester !== "Semester 5") return false;
       }
 
-      // 2. Search matching
       if (!searchQuery.trim()) return true;
       const query = searchQuery.toLowerCase();
       return (
@@ -101,7 +97,7 @@ export default function LabsCataloguePage() {
       {/* Main container with ample top padding to avoid any navbar overlap */}
       <main className="flex-1 pt-36 sm:pt-40 pb-16 bg-muted/20">
         <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          
+
           {/* Top Discipline Constellation Banner */}
           <div className="relative overflow-hidden bg-gradient-to-r from-[#002b49] via-[#003e6b] to-[#00223a] text-white p-6 sm:p-8 rounded-none border border-[#004b80] shadow-md space-y-4">
             <ConstellationBackground />
@@ -210,7 +206,7 @@ export default function LabsCataloguePage() {
           {/* SEMESTER AWARENESS & YEAR FILTER BAR                                      */}
           {/* ========================================================================= */}
           <div className="bg-white dark:bg-card border border-border/80 p-4 sm:p-5 shadow-xs space-y-4">
-            
+
             {/* Student Awareness Alert */}
             <div className="p-3.5 rounded-xl bg-gradient-to-r from-teal-500/10 via-sky-500/10 to-transparent border border-teal-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div className="flex items-start gap-3">
@@ -347,7 +343,7 @@ export default function LabsCataloguePage() {
           {/* MAIN 2-COLUMN CATALOGUE LAYOUT                                            */}
           {/* ========================================================================= */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            
+
             {/* Left Column: Filtered Labs List (8 Cols) */}
             <div className="lg:col-span-8 space-y-4">
 
@@ -400,7 +396,7 @@ export default function LabsCataloguePage() {
 
             {/* Right Column: Curriculum Guide, Announcements & Credits (4 Cols) */}
             <div className="lg:col-span-4 space-y-5">
-              
+
               {/* Year-Wise Curriculum Mapping Card */}
               <Card className="border-border bg-card shadow-2xs overflow-hidden rounded-none">
                 <CardHeader className="bg-primary/5 pb-3 border-b border-border/60">

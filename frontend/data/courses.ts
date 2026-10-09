@@ -12,9 +12,6 @@ export interface CourseItem {
 }
 
 export const COURSES_DATA: CourseItem[] = [
-  // ==========================================
-  // SEMESTER 1: C PROGRAMMING
-  // ==========================================
   {
     code: 'CS101',
     name: 'Programming in C',
@@ -39,9 +36,6 @@ export const COURSES_DATA: CourseItem[] = [
     labUrl: '/labs/c-programming',
   },
 
-  // ==========================================
-  // SEMESTER 2: PYTHON PROGRAMMING
-  // ==========================================
   {
     code: 'CS201',
     name: 'Problem Solving and Python Programming',
@@ -66,9 +60,6 @@ export const COURSES_DATA: CourseItem[] = [
     labUrl: '/labs/python-programming',
   },
 
-  // ==========================================
-  // SEMESTER 3: OOPS, DSA, DBMS
-  // ==========================================
   {
     code: 'CS301',
     name: 'Object Oriented Programming with Java',
@@ -139,9 +130,6 @@ export const COURSES_DATA: CourseItem[] = [
     labUrl: '/labs/dbms-lab',
   },
 
-  // ==========================================
-  // SEMESTER 4: MACHINE LEARNING, FDSA, COMPUTER NETWORKS, OPERATING SYSTEM
-  // ==========================================
   {
     code: 'CS401',
     name: 'Machine Learning Techniques',
@@ -235,9 +223,6 @@ export const COURSES_DATA: CourseItem[] = [
     labUrl: '/labs/operating-systems',
   },
 
-  // ==========================================
-  // SEMESTER 5: DEEP LEARNING, BIG DATA ANALYTICS, CLOUD COMPUTING
-  // ==========================================
   {
     code: 'CS501',
     name: 'Deep Learning & Artificial Intelligence',

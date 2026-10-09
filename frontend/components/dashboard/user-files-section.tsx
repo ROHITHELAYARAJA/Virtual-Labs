@@ -48,7 +48,6 @@ export function UserFilesSection() {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedFolderId, setSelectedFolderId] = useState<string>("all");
 
-  // Modals state
   const [newFolderOpen, setNewFolderOpen] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [folderSubmitting, setFolderSubmitting] = useState(false);

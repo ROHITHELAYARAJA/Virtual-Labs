@@ -75,7 +75,7 @@ export function AVLTreeDisplay({ tree, highlightedNodes }: AVLTreeDisplayProps) 
           id: node.id,
           value: node.value,
           highlighted: highlightedNodes.includes(node.id),
-          label: `h=${node.height}` // Show height for AVL tree
+          label: `h=${node.height}`
         },
       })
 

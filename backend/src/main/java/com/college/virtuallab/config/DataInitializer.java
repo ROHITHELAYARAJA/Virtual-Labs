@@ -62,15 +62,12 @@ public class DataInitializer implements CommandLineRunner {
 
     private void seedUsers() {
         if (userRepository.count() == 0) {
-            // Admin
             User admin = new User("admin@vsb.ac.in", passwordEncoder.encode("admin123"), "Dr. S. K. Narayanan", "FAC001", "Artificial Intelligence & Data Science", null, Role.ROLE_DEPARTMENT_ADMIN);
             userRepository.save(admin);
 
-            // Faculty
             User faculty = new User("faculty@vsb.ac.in", passwordEncoder.encode("faculty123"), "Prof. M. Rajesh Kumar", "FAC012", "Artificial Intelligence & Data Science", null, Role.ROLE_FACULTY);
             userRepository.save(faculty);
 
-            // Student
             User student = new User("student@vsb.ac.in", passwordEncoder.encode("student123"), "Anish V.", "922521104001", "Artificial Intelligence & Data Science", 3, Role.ROLE_STUDENT);
             userRepository.save(student);
         }
@@ -113,9 +110,6 @@ public class DataInitializer implements CommandLineRunner {
 
     private void seedLabsAndExperiments() {
         if (labRepository.count() == 0) {
-            // ==========================================
-            // LAB 1: DATA STRUCTURES & ALGORITHMS LAB
-            // ==========================================
             Lab dsaLab = new Lab(
                     "data-structures",
                     "Data Structures & Algorithms Lab",
@@ -130,7 +124,6 @@ public class DataInitializer implements CommandLineRunner {
             dsaLab.setTags(Arrays.asList("Java", "Recursion", "Stacks & Queues", "Sorting", "LeetCode"));
             Lab savedDsaLab = labRepository.save(dsaLab);
 
-            // Exp 1: Bubble Sort
             createExperimentWithQuiz(
                     savedDsaLab,
                     "bubble-sort",
@@ -150,7 +143,6 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            // Exp 2: Selection Sort
             createExperimentWithQuiz(
                     savedDsaLab,
                     "selection-sort",
@@ -170,7 +162,6 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            // Exp 3: Insertion Sort
             createExperimentWithQuiz(
                     savedDsaLab,
                     "insertion-sort",
@@ -189,7 +180,6 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            // Exp 4: Stack Operations
             createExperimentWithQuiz(
                     savedDsaLab,
                     "stack-operations",
@@ -209,7 +199,6 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            // Exp 5: Queue Operations
             createExperimentWithQuiz(
                     savedDsaLab,
                     "queue-operations",
@@ -228,7 +217,6 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            // Exp 6: Singly Linked List
             createExperimentWithQuiz(
                     savedDsaLab,
                     "singly-linked-list",
@@ -247,9 +235,6 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            // ==========================================
-            // LAB 2: MACHINE LEARNING & DEEP LEARNING LAB
-            // ==========================================
             Lab mlLab = new Lab(
                     "ai-machine-learning",
                     "Machine Learning & Deep Learning Lab",
@@ -264,7 +249,6 @@ public class DataInitializer implements CommandLineRunner {
             mlLab.setTags(Arrays.asList("NumPy", "Pandas", "Scikit-Learn", "Neural Networks", "Gradient Descent"));
             Lab savedMlLab = labRepository.save(mlLab);
 
-            // Exp 1: Linear Regression
             createExperimentWithQuiz(
                     savedMlLab,
                     "linear-regression",
@@ -284,7 +268,6 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            // Exp 2: Logistic Regression
             createExperimentWithQuiz(
                     savedMlLab,
                     "logistic-regression",
@@ -303,9 +286,6 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            // ==========================================
-            // LAB 3: DATABASE MANAGEMENT SYSTEMS LAB
-            // ==========================================
             Lab dbmsLab = new Lab(
                     "dbms-lab",
                     "Database Management Systems Lab",
@@ -320,7 +300,6 @@ public class DataInitializer implements CommandLineRunner {
             dbmsLab.setTags(Arrays.asList("SQL", "Normalization", "B+ Trees", "Transactions", "Query Optimization"));
             Lab savedDbmsLab = labRepository.save(dbmsLab);
 
-            // Exp 1: SQL DDL & DML
             createExperimentWithQuiz(
                     savedDbmsLab,
                     "sql-ddl-dml",
@@ -339,9 +318,6 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            // ==========================================
-            // LAB 4: COMPUTER NETWORKS & PROTOCOLS LAB
-            // ==========================================
             Lab netLab = new Lab(
                     "computer-networks",
                     "Computer Networks & Protocols Lab",
@@ -356,7 +332,6 @@ public class DataInitializer implements CommandLineRunner {
             netLab.setTags(Arrays.asList("TCP/IP", "Dijkstra Routing", "ARQ Protocols", "Sockets", "Wireshark"));
             Lab savedNetLab = labRepository.save(netLab);
 
-            // Exp 1: Sliding Window ARQ
             createExperimentWithQuiz(
                     savedNetLab,
                     "sliding-window-arq",

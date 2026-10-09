@@ -39,7 +39,6 @@ interface MaterialPageProps {
 export default function MaterialDetailPage({ params }: MaterialPageProps) {
   const { materialId } = use(params);
 
-  // 1. Locate material directly or from resource
   const directMaterial = MATERIAL_CONTENTS[materialId];
 
   const initialResource: ResourceItem =
@@ -70,7 +69,6 @@ export default function MaterialDetailPage({ params }: MaterialPageProps) {
   const [expandedVivaIdx, setExpandedVivaIdx] = useState<number | null>(0);
 
   useEffect(() => {
-    // Check static resources or localStorage for dynamic tenant uploads
     let found = RESOURCES_DATA.find(
       (r) => getResourceId(r) === materialId || r.id === materialId
     );
@@ -120,12 +118,10 @@ export default function MaterialDetailPage({ params }: MaterialPageProps) {
     }
   }, [materialId]);
 
-  // Load study material content
   const material: MaterialContent =
     MATERIAL_CONTENTS[materialId] ||
     (resource ? getMaterialForResource(resource) : MATERIAL_CONTENTS["dsa-complete-guide"]);
 
-  // Local storage notes
   useEffect(() => {
     if (materialId) {
       const savedNotes = localStorage.getItem(`vlab_page_notes_${materialId}`);
@@ -167,7 +163,6 @@ export default function MaterialDetailPage({ params }: MaterialPageProps) {
     );
   }
 
-  // Available code languages for this material
   const codeLanguages = Object.keys(material.codeSnippets) as (keyof typeof material.codeSnippets)[];
   const currentLang = codeLanguages.includes(activeCodeLang as any)
     ? (activeCodeLang as keyof typeof material.codeSnippets)

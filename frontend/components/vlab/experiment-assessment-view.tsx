@@ -18,7 +18,6 @@ export function ExperimentAssessmentView({
   experimentTitle,
   onComplete,
 }: ExperimentAssessmentViewProps) {
-  // Difficulty checkbox states matching Screenshot 112615 & 112742
   const [selectedDifficulties, setSelectedDifficulties] = useState<{
     beginner: boolean;
     intermediate: boolean;
@@ -32,7 +31,6 @@ export function ExperimentAssessmentView({
   const [selectedAnswers, setSelectedAnswers] = useState<Record<number, number>>({});
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  // Default fallback questions if experiment quiz questions are fewer
   const defaultQuestions = quiz?.questions || [
     {
       id: 1,
@@ -75,7 +73,6 @@ export function ExperimentAssessmentView({
   const handleDifficultyToggle = (diff: "beginner" | "intermediate" | "advanced") => {
     setSelectedDifficulties((prev) => {
       const updated = { ...prev, [diff]: !prev[diff] };
-      // Ensure at least one is selected
       if (!updated.beginner && !updated.intermediate && !updated.advanced) {
         return prev;
       }
@@ -170,7 +167,7 @@ export function ExperimentAssessmentView({
               {/* Options */}
               <div className="space-y-2 pl-4">
                 {q.options.map((opt, optIdx) => {
-                  const letter = String.fromCharCode(97 + optIdx); // a, b, c, d
+                  const letter = String.fromCharCode(97 + optIdx);
                   const isOptSelected = selected === optIdx;
                   const isOptAnswer = isSubmitted && optIdx === correctIdx;
 

@@ -1,4 +1,3 @@
-// Web Audio API Synthesizer for DSA Visualizer Sound FX
 class SoundFxEngine {
   private ctx: AudioContext | null = null;
   public enabled: boolean = true;
@@ -31,7 +30,6 @@ class SoundFxEngine {
       osc.start();
       osc.stop(this.ctx.currentTime + durationMs / 1000);
     } catch {
-      // Audio context silenced or browser gesture policy
     }
   }
 

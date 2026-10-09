@@ -86,9 +86,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [studentProfile, setStudentProfile] = useState<StudentProfile | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Synchronize Supabase Auth state
   useEffect(() => {
-    // Initial session check
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
         handleUserSession(session.user);
@@ -98,7 +96,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     });
 
-    // Listen to Supabase auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session?.user) {
         await handleUserSession(session.user);
@@ -107,7 +104,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     });
 
-    // Listen to storage events for student form submissions
     const handleStorageChange = () => {
       checkLocalFallback();
     };
@@ -141,7 +137,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         existing = await getStudentProfileFromDb(regNo);
       }
     } catch {
-      // fallback
     }
 
     if (existing) {
@@ -372,7 +367,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       let authenticatedStudent: any = null;
 
-      // 1. Try Supabase Auth signInWithPassword
       try {
         const { data: authData, error: authErr } = await supabase.auth.signInWithPassword({
           email,
@@ -383,10 +377,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           return { email, emailVerified: true };
         }
       } catch (authErr) {
-        // Fall through to RPC verification
       }
 
-      // 2. Try authenticate_student RPC in Supabase Postgres
       try {
         const { data: rpcData, error: rpcErr } = await supabase.rpc("authenticate_student", {
           p_reg_no: cleanReg,
@@ -396,10 +388,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           authenticatedStudent = rpcData.student;
         }
       } catch (rpcErr) {
-        // Fall through to table query
       }
 
-      // 3. Fallback direct query to public.students table
       if (!authenticatedStudent) {
         const { data: stRow } = await supabase
           .from("students")
@@ -432,7 +422,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         throw new Error("Invalid Register Number or Password. Password must be your Name in CAPITAL LETTERS.");
       }
 
-      // Set user session and profile from verified student
       const userObj: User = {
         id: authenticatedStudent.registerNumber,
         uid: authenticatedStudent.registerNumber,
@@ -449,7 +438,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         created_at: new Date().toISOString()
       };
 
-      // Map year and semester accurately based on cohort/reg
       const reg = authenticatedStudent.registerNumber;
       const rawCohort = authenticatedStudent.cohort || "";
       const rawYear = authenticatedStudent.year || "";

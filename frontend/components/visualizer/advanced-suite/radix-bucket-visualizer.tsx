@@ -9,7 +9,7 @@ import { Boxes, Play, RotateCcw, ChevronRight, ChevronLeft, Info, CheckCircle2 }
 export function RadixBucketVisualizer() {
   const initialArray = [170, 45, 75, 90, 802, 24, 2, 66];
   const [array, setArray] = useState<number[]>(initialArray);
-  const [currentExp, setCurrentExp] = useState<number>(1); // 1 = 1s place, 10 = 10s place, 100 = 100s place
+  const [currentExp, setCurrentExp] = useState<number>(1);
   const [stepPhase, setStepPhase] = useState<"distribute" | "gather">("distribute");
   const [buckets, setBuckets] = useState<number[][]>(Array.from({ length: 10 }, () => []));
   const [log, setLog] = useState<string>("Radix Sort: Start with 1s place (Least Significant Digit - LSD).");
@@ -19,7 +19,6 @@ export function RadixBucketVisualizer() {
     if (isSorted) return;
 
     if (stepPhase === "distribute") {
-      // Distribute array into buckets based on digit (num / exp) % 10
       const b: number[][] = Array.from({ length: 10 }, () => []);
       array.forEach(num => {
         const digit = Math.floor(num / currentExp) % 10;
@@ -29,7 +28,6 @@ export function RadixBucketVisualizer() {
       setStepPhase("gather");
       setLog(`Distributed elements into buckets 0-9 based on digit at 10^${Math.log10(currentExp)} place.`);
     } else {
-      // Gather elements from buckets
       const gathered: number[] = [];
       buckets.forEach(b => {
         b.forEach(num => gathered.push(num));

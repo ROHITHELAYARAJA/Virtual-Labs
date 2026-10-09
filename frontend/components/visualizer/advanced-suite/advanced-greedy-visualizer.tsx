@@ -10,7 +10,6 @@ export function AdvancedGreedyVisualizer() {
   const [topic, setTopic] = useState<"intervals" | "jump">("intervals");
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // Merge Intervals: Input = [[1, 3], [2, 6], [8, 10], [15, 18]]
   const intervalSteps = [
     { desc: "Sort intervals by start time: [[1, 3], [2, 6], [8, 10], [15, 18]]. Initialize merged list with [1, 3].", merged: [[1, 3]] },
     { desc: "Inspect [2, 6]: start (2) <= lastEnd (3) -> OVERLAP! Merge: lastEnd = max(3, 6) = 6. Active: [[1, 6]].", merged: [[1, 6]] },
@@ -19,7 +18,6 @@ export function AdvancedGreedyVisualizer() {
     { desc: "🎉 Greedy Interval Merging Complete! Output: [[1, 6], [8, 10], [15, 18]] in O(n log n) time.", merged: [[1, 6], [8, 10], [15, 18]] }
   ];
 
-  // Jump Game (LeetCode 55): nums = [2, 3, 1, 1, 4]
   const jumpSteps = [
     { idx: 0, maxReach: 2, desc: "Index 0 (val 2): Can jump up to 2 steps. maxReach = max(0, 0 + 2) = 2." },
     { idx: 1, maxReach: 4, desc: "Index 1 (val 3): Can jump up to 3 steps. maxReach = max(2, 1 + 3) = 4 (Target reached!)." },

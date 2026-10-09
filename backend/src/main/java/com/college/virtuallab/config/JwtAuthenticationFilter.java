@@ -42,7 +42,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = getJwtFromRequest(request);
 
             if (StringUtils.hasText(token)) {
-                // 1. Check if token is a Firebase ID Token
                 FirebaseUserPrincipal firebaseUser = firebaseTokenVerifier.verifyToken(token);
                 if (firebaseUser != null && firebaseUser.getEmail() != null) {
                     User user = userRepository.findByEmail(firebaseUser.getEmail())
@@ -67,7 +66,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
-                // 2. Otherwise check if token is a local Spring Security JWT
                 else if (tokenProvider.validateToken(token)) {
                     String username = tokenProvider.getUsernameFromJwt(token);
 

@@ -32,17 +32,13 @@ interface Props {
 export function AdvancedTreesVisualizer({ initialModule = "lca-standard" }: Props) {
   const [activeModule, setActiveModule] = useState<AdvancedTreeModule>(initialModule);
 
-  // 1. LCA Standard & Binary Lifting Tree
   const [nodeU, setNodeU] = useState(4);
   const [nodeV, setNodeV] = useState(7);
 
-  // 2. Heavy Light Decomposition chains
   const [highlightChain, setHighlightChain] = useState<number | null>(1);
 
-  // 3. Splay Tree Step
   const [splayKey, setSplayKey] = useState(5);
 
-  // 4. Persistent Segment Tree Versions
   const [activeVersion, setActiveVersion] = useState<number>(2);
 
   return (

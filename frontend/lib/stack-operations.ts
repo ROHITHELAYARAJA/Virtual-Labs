@@ -18,7 +18,7 @@ export function isOperator(char: string): char is Operator {
 export function hasHigherPrecedence(op1: Operator, op2: Operator): boolean {
   const p1 = operators[op1].precedence
   const p2 = operators[op2].precedence
-  
+
   if (operators[op1].associativity === 'left') {
     return p1 >= p2
   }
@@ -27,14 +27,14 @@ export function hasHigherPrecedence(op1: Operator, op2: Operator): boolean {
 
 export function evaluatePostfix(tokens: Token[]): number {
   const stack: number[] = []
-  
+
   for (const token of tokens) {
     if (token.type === 'operand') {
       stack.push(Number(token.value))
     } else if (token.type === 'operator' && isOperator(token.value)) {
       const b = stack.pop()!
       const a = stack.pop()!
-      
+
       switch (token.value) {
         case '+': stack.push(a + b); break
         case '-': stack.push(a - b); break
@@ -44,6 +44,6 @@ export function evaluatePostfix(tokens: Token[]): number {
       }
     }
   }
-  
+
   return stack[0]
 } 

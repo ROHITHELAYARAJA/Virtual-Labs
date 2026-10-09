@@ -8,13 +8,11 @@ import { Play, Pause, RotateCcw, Search, Code2, Info, CheckCircle2, SkipForward,
 export function StringSuiteVisualizer({ defaultMode = "trie" }: { defaultMode?: "kmp" | "trie" } = {}) {
   const [mode, setMode] = useState<"kmp" | "trie">(defaultMode);
 
-  // --- TRIE STATE ---
   const [trieSearchPrefix, setTrieSearchPrefix] = useState<string>("ca");
   const [trieMatches, setTrieMatches] = useState<string[]>(["cat", "car", "can"]);
   const [trieMessage, setTrieMessage] = useState<string>("Trie Prefix Tree: words 'cat', 'car', 'can' share path 'c' ──> 'a'. Instant O(L) prefix autocomplete.");
   const [isPlayingTrieDemo, setIsPlayingTrieDemo] = useState<boolean>(false);
 
-  // --- KMP STATE ---
   const pattern = "ABABAC";
   const lps = [0, 0, 1, 2, 3, 0];
   const kmpText = "ABABDABABACD";
@@ -46,7 +44,6 @@ export function StringSuiteVisualizer({ defaultMode = "trie" }: { defaultMode?: 
     });
   };
 
-  // KMP Step Simulation
   const handleKmpStep = () => {
     if (kmpIndex >= kmpText.length) {
       setKmpMessage("KMP search scan completed through end of string!");

@@ -35,19 +35,14 @@ export type NetworksModule =
 export function NetworksVisualizer({ initialModule = "http" }: { initialModule?: NetworksModule }) {
   const [activeModule, setActiveModule] = useState<NetworksModule>(initialModule);
 
-  // 1. HTTP Protocol State
   const [httpVersion, setHttpVersion] = useState<"1.1" | "2" | "3">("2");
 
-  // 2. TLS Handshake Step
   const [tlsStep, setTlsStep] = useState<number>(0);
 
-  // 3. TCP 3-Way Handshake Step
   const [tcpStep, setTcpStep] = useState<number>(0);
 
-  // 4. DNS Query Trace Step
   const [dnsStep, setDnsStep] = useState<number>(0);
 
-  // 5. Real-Time Comms
   const [realtimeProto, setRealtimeProto] = useState<"ws" | "sse" | "polling">("ws");
 
   return (

@@ -7,7 +7,6 @@
 
 import { createClient, User as SupabaseUser, Session } from "@supabase/supabase-js";
 
-// Supabase environment credentials with safe fallbacks
 export const supabaseUrl = 
   process.env.NEXT_PUBLIC_SUPABASE_URL || "https://nibqxgygjzilojvvsayc.supabase.co";
 export const supabaseAnonKey = 
@@ -15,7 +14,6 @@ export const supabaseAnonKey =
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pYnF4Z3lnanppbG9qdnZzYXljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzOTg4MDcsImV4cCI6MjEwNTk3NDgwN30.KQpaLb0aXqMs07ZSDFYRx_7mQxHE8V04-FzmwbKNYt4";
 
-// Initialize Supabase Client
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     persistSession: true,
@@ -24,15 +22,10 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   }
 });
 
-// Re-export User type
 export type User = SupabaseUser & {
   uid: string;
   displayName: string | null;
 };
-
-// ========================================================
-// DATA SCHEMAS & INTERFACES
-// ========================================================
 
 export interface StudentProfile {
   uid: string;
@@ -119,10 +112,6 @@ export interface CloudReadinessProfile {
   phaseScores: Record<string, number>;
   updatedAt: string;
 }
-
-// ========================================================
-// STUDENT PROFILE DATABASE METHODS
-// ========================================================
 
 export async function saveStudentProfileToDb(profile: StudentProfile): Promise<void> {
   try {
@@ -236,7 +225,6 @@ export async function getStudentProfileFromDb(uid: string): Promise<StudentProfi
       };
     }
   } catch (e) {
-    // Fallback to localStorage
   }
 
   if (typeof window !== "undefined") {
@@ -250,7 +238,6 @@ export async function deleteStudentAccountFromDb(uid: string): Promise<void> {
   try {
     await supabase.from("profiles").delete().eq("id", uid);
   } catch (e) {
-    // ignore
   }
   if (typeof window !== "undefined") {
     localStorage.removeItem(`vlab_student_${uid}`);
@@ -314,10 +301,6 @@ export async function saveProblemNoteInDb(uid: string, problemId: string, note: 
   profile.problemNotes[problemId] = { note, timestamp: new Date().toISOString() };
   await saveStudentProfileToDb(profile);
 }
-
-// ========================================================
-// USER NOTES, FOLDERS, FILES & TEAM
-// ========================================================
 
 export async function getUserNotes(uid: string): Promise<UserNote[]> {
   try {
@@ -597,10 +580,6 @@ export async function deleteUserTeamMember(uid: string, memberId: string): Promi
   }
 }
 
-// ========================================================
-// INTERVIEW PREP: CLOUD PERSISTENCE & SYNC
-// ========================================================
-
 export async function saveUserStarStory(uid: string, story: Omit<CloudStarStory, "updatedAt">): Promise<CloudStarStory> {
   const payload: CloudStarStory = {
     ...story,
@@ -779,7 +758,6 @@ export async function getAllStudentProfilesFromDb(): Promise<StudentProfile[]> {
     console.warn("Could not load profiles from Supabase, loading fallback student cohort data:", e);
   }
 
-  // Fallback demo cohort data for instant faculty & admin analytics
   return [
     {
       uid: "stu-101",
@@ -886,4 +864,3 @@ export async function getAllStudentProfilesFromDb(): Promise<StudentProfile[]> {
     }
   ];
 }
-

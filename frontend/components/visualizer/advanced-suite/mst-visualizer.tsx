@@ -10,8 +10,6 @@ export function MSTVisualizer() {
   const [algo, setAlgo] = useState<"kruskal" | "prim">("kruskal");
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // 4 vertices (0, 1, 2, 3), edges sorted by weight:
-  // (0,1): 1, (1,2): 2, (0,2): 4, (1,3): 5, (2,3): 7
   const kruskalSteps = [
     { desc: "Edges sorted by weight: (0-1: 1), (1-2: 2), (0-2: 4), (1-3: 5), (2-3: 7). Disjoint Set initialized.", accepted: [], cost: 0 },
     { desc: "Consider Edge (0-1, wt: 1): Find(0) ≠ Find(1). ACCEPT edge! Union(0, 1).", accepted: ["(0-1, wt: 1)"], cost: 1 },

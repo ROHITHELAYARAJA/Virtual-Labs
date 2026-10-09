@@ -34,7 +34,7 @@ export default function GraphNode({ data }: { data: GraphNodeData }) {
         position={Position.Bottom} 
         style={{ background: '#555' }}
       />
-      
+
       <motion.div 
         className={`
           w-16 h-16 rounded-full

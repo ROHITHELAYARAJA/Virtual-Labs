@@ -45,7 +45,7 @@ export function InfixPostfixVisualizer({ content }: InfixPostfixVisualizerProps)
           <TabsTrigger value="evaluation">Evaluation</TabsTrigger>
           <TabsTrigger value="explanation">Explanation</TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="conversion" className="space-y-6">
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
             <div className="xl:col-span-1 space-y-6">
@@ -111,7 +111,7 @@ export function InfixPostfixVisualizer({ content }: InfixPostfixVisualizerProps)
             </Card>
           )}
         </TabsContent>
-        
+
         <TabsContent value="explanation" className="prose prose-invert max-w-none">
           <MarkdownContent content={content} />
         </TabsContent>

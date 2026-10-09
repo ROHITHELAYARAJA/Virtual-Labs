@@ -188,7 +188,7 @@ export function DijkstraVisualizer({ content }: DijkstraVisualizerProps) {
           <TabsTrigger value="code">Multi-Lang Code</TabsTrigger>
           <TabsTrigger value="explanation">Explanation</TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="visualization" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
             <div className="lg:col-span-2">
@@ -226,7 +226,7 @@ export function DijkstraVisualizer({ content }: DijkstraVisualizerProps) {
             </div>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="analysis" className="space-y-6">
           <DijkstraAnalysis
             distances={distances}
@@ -244,7 +244,7 @@ export function DijkstraVisualizer({ content }: DijkstraVisualizerProps) {
             snippets={DIJKSTRA_CODE_SNIPPETS}
           />
         </TabsContent>
-        
+
         <TabsContent value="explanation" className="prose prose-invert max-w-none">
           <MarkdownContent content={content} />
         </TabsContent>

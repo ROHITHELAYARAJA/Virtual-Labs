@@ -9,7 +9,6 @@ import { Play, Pause, RotateCcw, ChevronRight, ChevronLeft, Share2, Info, CheckC
 
 export function UnionFindVisualizer() {
   const [numElements, setNumElements] = useState<number>(7);
-  // Union by Rank & Path Compression parent array
   const [parent, setParent] = useState<number[]>([0, 1, 2, 3, 4, 5, 6]);
   const [rank, setRank] = useState<number[]>([0, 0, 0, 0, 0, 0, 0]);
   const [unionU, setUnionU] = useState<number>(0);
@@ -157,7 +156,6 @@ export function UnionFindVisualizer() {
     setHistory(["Reset Disjoint Set structure."]);
   };
 
-  // Group into connected components
   const components: Record<number, number[]> = {};
   for (let i = 0; i < numElements; i++) {
     const root = findRoot(i).root;

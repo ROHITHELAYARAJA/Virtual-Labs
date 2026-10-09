@@ -1,9 +1,6 @@
 import { DSACategory } from "../dsa-topic-data";
 
 export const ML_ROADMAP_CATEGORIES: DSACategory[] = [
-  // ========================================================
-  // MODULE 1: FOUNDATIONAL NEURAL NETWORKS (0/1)
-  // ========================================================
   {
     id: "dl-foundations",
     name: "1. Foundational Neural Networks",
@@ -94,9 +91,6 @@ for inp, pred in zip(X, model(X)):
     ]
   },
 
-  // ========================================================
-  // MODULE 2: CONVOLUTIONAL NEURAL NETWORKS FOR VISION (0/2)
-  // ========================================================
   {
     id: "dl-cnn-vision",
     name: "2. Convolutional Neural Networks for Vision",
@@ -260,9 +254,6 @@ print("DeepFaceNet initialized with 3 conv blocks and dual dropout.")`
     ]
   },
 
-  // ========================================================
-  // MODULE 3: RECURRENT NETWORKS & SEQUENCE MODELING (0/3)
-  // ========================================================
   {
     id: "dl-recurrent-nlp",
     name: "3. Recurrent Networks & Sequence Modeling",
@@ -451,7 +442,7 @@ class Seq2SeqPOSTagger(nn.Module):
         super().__init__()
         self.encoder_embed = nn.Embedding(src_vocab, embed_dim)
         self.encoder = nn.LSTM(embed_dim, hidden_dim, batch_first=True)
-        
+
         self.decoder_embed = nn.Embedding(tag_vocab, embed_dim)
         self.decoder = nn.LSTM(embed_dim, hidden_dim, batch_first=True)
         self.fc_out = nn.Linear(hidden_dim, tag_vocab)
@@ -459,7 +450,7 @@ class Seq2SeqPOSTagger(nn.Module):
     def forward(self, src, trg_tags):
         src_emb = self.encoder_embed(src)
         _, (hn, cn) = self.encoder(src_emb) # Context state
-        
+
         trg_emb = self.decoder_embed(trg_tags)
         out, _ = self.decoder(trg_emb, (hn, cn))
         return self.fc_out(out)
@@ -484,9 +475,6 @@ print("Tagged Output Shape (Batch, Seq, NumTags):", output_tags.shape)`
     ]
   },
 
-  // ========================================================
-  // MODULE 4: GENERATIVE MODELS & REAL-WORLD APPLICATIONS (0/2)
-  // ========================================================
   {
     id: "dl-generative-apps",
     name: "4. Generative Models & Real-World Applications",
@@ -542,7 +530,7 @@ class NMTModel(nn.Module):
         # 1. Encode source text
         src_emb = self.src_embed(src_seq)
         _, (hn, cn) = self.encoder(src_emb)
-        
+
         # 2. Decode with teacher forcing
         trg_emb = self.trg_embed(trg_seq)
         dec_out, _ = self.decoder(trg_emb, (hn, cn))

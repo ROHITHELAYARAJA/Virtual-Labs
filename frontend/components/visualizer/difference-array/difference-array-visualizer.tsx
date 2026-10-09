@@ -40,18 +40,18 @@ const JAVA_CODE = `// Difference Array - Efficient O(1) Range Updates
 public int[] applyRangeUpdates(int[] arr, int[][] queries) {
     int n = arr.length;
     int[] D = new int[n + 1];
-    
+
     // 1. Build Difference Array
     D[0] = arr[0];
     for (int i = 1; i < n; i++) D[i] = arr[i] - arr[i - 1];
-    
+
     // 2. Process O(1) Range Updates [L, R, val]
     for (int[] q : queries) {
         int L = q[0], R = q[1], val = q[2];
         D[L] += val;
         if (R + 1 < n) D[R + 1] -= val;
     }
-    
+
     // 3. Prefix Sum Reconstruction
     int[] result = new int[n];
     result[0] = D[0];
@@ -108,7 +108,6 @@ export function DifferenceArrayVisualizer() {
 
     const generated: ExecutionStep[] = [];
 
-    // Step 0: Init Difference Array
     generated.push({
       stepType: "init",
       array: [...arr],
@@ -117,7 +116,6 @@ export function DifferenceArrayVisualizer() {
       codeLine: 1
     });
 
-    // Step 1..Q: Apply Queries
     activeQueries.forEach((q, qIdx) => {
       const L = Math.max(0, Math.min(n - 1, q.L));
       const R = Math.max(L, Math.min(n - 1, q.R));
@@ -138,7 +136,6 @@ export function DifferenceArrayVisualizer() {
       });
     });
 
-    // Step Final: Prefix Sum Scan to Reconstruct
     const reconstructed: number[] = new Array(n).fill(0);
     reconstructed[0] = diff[0];
     for (let i = 1; i < n; i++) {

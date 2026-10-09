@@ -28,7 +28,6 @@ export function QuizEngine({ quiz, onCompleted }: QuizEngineProps) {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
 
-  // Check if previously attempted
   const pastAttempt = progress.quizAttempts[quiz.experimentId];
 
   const handleSelectOption = (questionIndex: number, optionIndex: number) => {
@@ -55,10 +54,8 @@ export function QuizEngine({ quiz, onCompleted }: QuizEngineProps) {
     setScore(calculatedScore);
     setIsSubmitted(true);
 
-    // Save to localStorage
     saveQuiz(quiz.experimentId, calculatedScore, quiz.questions.length, quiz.passingScore);
 
-    // Also persist to Supabase if authenticated
     if (auth && typeof auth.saveQuizScore === "function") {
       try {
         auth.saveQuizScore(quiz.experimentId, calculatedScore, quiz.questions.length);
@@ -67,7 +64,6 @@ export function QuizEngine({ quiz, onCompleted }: QuizEngineProps) {
       }
     }
 
-    // Celebrate if passed
     if (calculatedScore >= quiz.passingScore) {
       try {
         confetti({
@@ -76,7 +72,6 @@ export function QuizEngine({ quiz, onCompleted }: QuizEngineProps) {
           origin: { y: 0.6 }
         });
       } catch {
-        // Fallback if canvas is unavailable
       }
     }
 

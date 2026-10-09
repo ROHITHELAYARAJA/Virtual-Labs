@@ -115,7 +115,6 @@ export const REFERENCE_BOOKS_DATA: ReferenceBook[] = [
 ];
 
 export const SYLLABUS_MAPPINGS_DATA: UniversitySyllabus[] = [
-  // 1. DATA SCIENCE AND ANALYTICS LABORATORY
   {
     university: "Anna University (Regulation 2021)",
     courseCode: "AD8482",
@@ -153,7 +152,6 @@ export const SYLLABUS_MAPPINGS_DATA: UniversitySyllabus[] = [
     ]
   },
 
-  // 2. COMPUTER NETWORKS LABORATORY
   {
     university: "Anna University (Regulation 2021)",
     courseCode: "AD8581",
@@ -192,7 +190,6 @@ export const SYLLABUS_MAPPINGS_DATA: UniversitySyllabus[] = [
     ]
   },
 
-  // 3. MACHINE LEARNING LABORATORY
   {
     university: "Anna University (Regulation 2021)",
     courseCode: "AD8481",
@@ -230,7 +227,6 @@ export const SYLLABUS_MAPPINGS_DATA: UniversitySyllabus[] = [
     ]
   },
 
-  // 4. OPERATING SYSTEMS LABORATORY
   {
     university: "Anna University (Regulation 2021)",
     courseCode: "CS3461",
@@ -270,7 +266,6 @@ export const SYLLABUS_MAPPINGS_DATA: UniversitySyllabus[] = [
     ]
   },
 
-  // 5. OBJECT ORIENTED PROGRAMMING SYSTEM (JAVA)
   {
     university: "Anna University (Regulation 2021)",
     courseCode: "CS3351",
@@ -312,7 +307,6 @@ export const SYLLABUS_MAPPINGS_DATA: UniversitySyllabus[] = [
     ]
   },
 
-  // 6. DATA STRUCTURES AND ALGORITHMS LABORATORY
   {
     university: "Anna University (Regulation 2021)",
     courseCode: "AD8381",
@@ -354,7 +348,6 @@ export const SYLLABUS_MAPPINGS_DATA: UniversitySyllabus[] = [
     ]
   },
 
-  // 7. DATABASE MANAGEMENT SYSTEM
   {
     university: "Anna University (Regulation 2021)",
     courseCode: "AD8382",
@@ -393,7 +386,6 @@ export const SYLLABUS_MAPPINGS_DATA: UniversitySyllabus[] = [
     ]
   },
 
-  // 8. C PROGRAMMING LABORATORY
   {
     university: "V.S.B. Engineering College (Autonomous) & Anna University (Regulation 2021/2023)",
     courseCode: "GE3171 / CS3151",
@@ -432,7 +424,6 @@ export const SYLLABUS_MAPPINGS_DATA: UniversitySyllabus[] = [
     ]
   },
 
-  // 9. PYTHON PROGRAMMING LABORATORY
   {
     university: "Anna University (Regulation 2021)",
     courseCode: "GE3171",

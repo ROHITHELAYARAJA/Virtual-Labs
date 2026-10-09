@@ -11,7 +11,6 @@ export function SubsetsPermutationsVisualizer() {
   const [elements, setElements] = useState<number[]>([1, 2, 3]);
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // Generate steps for Subsets (Include / Exclude)
   const subsetSteps = [
     { desc: "Root: Empty subset candidate [] at Index 0", current: [], index: 0, type: "branch" },
     { desc: "Element 1: INCLUDE -> Subset becomes [1]", current: [1], index: 1, type: "include" },
@@ -31,7 +30,6 @@ export function SubsetsPermutationsVisualizer() {
     { desc: "🎉 Complete Power Set Generated: 2³ = 8 total subsets!", current: [], index: 3, type: "done" }
   ];
 
-  // Generate steps for Permutations (Swapping)
   const permSteps = [
     { desc: "Root: Start with array [1, 2, 3] at index 0", current: [1, 2, 3], type: "branch" },
     { desc: "Fix Index 0 (Swap 1 with 1) -> [1, 2, 3]. Move to index 1", current: [1, 2, 3], type: "branch" },

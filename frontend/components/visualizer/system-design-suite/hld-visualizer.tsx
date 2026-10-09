@@ -35,37 +35,29 @@ export type HldModule =
 export function HLDVisualizer({ initialModule = "load-balancer" }: { initialModule?: HldModule }) {
   const [activeModule, setActiveModule] = useState<HldModule>(initialModule);
 
-  // 1. Consistent Hashing Ring State
   const [nodes, setNodes] = useState<string[]>(["Node A (0°)", "Node B (90°)", "Node C (180°)", "Node D (270°)"]);
   const [requestKey, setRequestKey] = useState<string>("user_1084");
   const [assignedNode, setAssignedNode] = useState<string>("Node B (90°)");
 
-  // 2. Caching Strategy
   const [cachePattern, setCachePattern] = useState<"aside" | "through" | "back">("aside");
   const [cacheStep, setCacheStep] = useState<number>(0);
 
-  // 3. Database Sharding
   const [shardsCount, setShardsCount] = useState<number>(4);
   const [testId, setTestId] = useState<number>(42);
 
-  // 4. Kafka Topic Partitions
   const [partitionOffset, setPartitionOffset] = useState<number[]>([14, 18, 11]);
 
-  // 5. Raft Consensus State
   const [raftLeader, setRaftLeader] = useState<number>(1);
   const [term, setTerm] = useState<number>(3);
   const [heartbeatActive, setHeartbeatActive] = useState<boolean>(true);
 
-  // 6. Snowflake ID State
   const [snowflakeTs, setSnowflakeTs] = useState<number>(Date.now());
   const [datacenterId, setDatacenterId] = useState<number>(3);
   const [workerId, setWorkerId] = useState<number>(7);
   const [sequence, setSequence] = useState<number>(142);
 
-  // Handler for Consistent Hashing
   const handleRouteRequest = (key: string) => {
     setRequestKey(key);
-    // Simple hash simulation
     let hash = 0;
     for (let i = 0; i < key.length; i++) hash = (hash * 31 + key.charCodeAt(i)) % 360;
     if (hash <= 90) setAssignedNode(nodes[1] || nodes[0]);

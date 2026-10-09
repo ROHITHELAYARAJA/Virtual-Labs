@@ -79,13 +79,13 @@ export const NETWORKS_MATERIALS: Record<string, MaterialContent> = {
     n = len(generator)
     # Append n-1 zeros to data
     padded_data = list(data + '0' * (n - 1))
-    
+
     for i in range(len(data)):
         if padded_data[i] == '1':
             for j in range(n):
                 # XOR operation
                 padded_data[i + j] = '0' if padded_data[i + j] == generator[j] else '1'
-                
+
     return "".join(padded_data[-(n - 1):])
 
 # Test CRC Implementation
@@ -232,7 +232,7 @@ def start_tcp_server(host='127.0.0.1', port=65432):
     server.bind((host, port))
     server.listen(5)
     print(f"[LISTENING] Server is listening on {host}:{port}")
-    
+
     while True:
         conn, addr = server.accept()
         thread = threading.Thread(target=handle_client, args=(conn, addr))
@@ -366,20 +366,20 @@ def dijkstra_routing(graph, start_node):
     previous = {node: None for node in graph}
     distances[start_node] = 0
     pq = [(0, start_node)]
-    
+
     while pq:
         current_dist, u = heapq.heappop(pq)
-        
+
         if current_dist > distances[u]:
             continue
-            
+
         for neighbor, weight in graph[u]:
             distance = current_dist + weight
             if distance < distances[neighbor]:
                 distances[neighbor] = distance
                 previous[neighbor] = u
                 heapq.heappush(pq, (distance, neighbor))
-                
+
     return distances, previous
 
 # Example Router Topology

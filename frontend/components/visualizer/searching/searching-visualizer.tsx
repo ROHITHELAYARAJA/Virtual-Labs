@@ -80,7 +80,6 @@ export function SearchingVisualizer({ type }: SearchingVisualizerProps) {
         });
       }
     } else {
-      // Binary Search (Requires sorted array)
       const sortedArr = [...arr].sort((a, b) => a - b);
       newSteps.push({
         array: sortedArr,

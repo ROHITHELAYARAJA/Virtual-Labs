@@ -193,7 +193,7 @@ collection = db['student_experiments']
 pipeline = [
     # Stage 1: Filter completed submissions
     {"$match": {"status": "COMPLETED"}},
-    
+
     # Stage 2: Group by Lab and compute metrics
     {"$group": {
         "_id": "$lab_id",
@@ -201,10 +201,10 @@ pipeline = [
         "avg_score": {"$avg": "$score"},
         "highest_score": {"$max": "$score"}
     }},
-    
+
     # Stage 3: Sort by average score descending
     {"$sort": {"avg_score": -1}},
-    
+
     # Stage 4: Reshape output
     {"$project": {
         "lab_code": "$_id",
@@ -681,13 +681,13 @@ def lambda_handler(event, context):
     # Extract bucket and file key from S3 Event Trigger
     bucket = event['Records'][0]['s3']['bucket']['name']
     key = event['Records'][0]['s3']['object']['key']
-    
+
     print(f"Serverless Lambda triggered! Processing s3://{bucket}/{key}")
-    
+
     # Fetch object metadata
     response = s3.head_object(Bucket=bucket, Key=key)
     file_size = response['ContentLength']
-    
+
     return {
         'statusCode': 200,
         'body': json.dumps({

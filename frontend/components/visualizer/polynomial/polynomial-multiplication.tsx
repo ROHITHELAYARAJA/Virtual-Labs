@@ -9,7 +9,6 @@ import { LinkedListDisplay } from "../linked-list/linked-list-display"
 import { ListNode, LinkedList } from "../linked-list/types"
 import { AnimatePresence, motion } from "framer-motion"
 
-// Update ListNode type to include term
 interface ExtendedListNode extends ListNode {
   term?: Term
 }
@@ -19,7 +18,7 @@ function adaptPolynomialToLinkedList(
   nodes: Map<string, PolynomialNode>
 ): LinkedList {
   const adaptedNodes = new Map<string, ExtendedListNode>()
-  
+
   nodes.forEach((node, id) => {
     adaptedNodes.set(id, {
       id,
@@ -84,14 +83,12 @@ export function PolynomialMultiplication() {
     return nodeId.toString()
   }
 
-  // Add animation variants
   const nodeVariants = {
     initial: { scale: 0.8, opacity: 0 },
     animate: { scale: 1, opacity: 1 },
     exit: { scale: 0.8, opacity: 0 }
   }
 
-  // Add step animation controls
   const [isAutoPlaying, setIsAutoPlaying] = useState(false)
 
   useEffect(() => {

@@ -32,7 +32,7 @@ interface ExecutionStep {
 const JAVA_CODE = `// Dutch National Flag (3-Way Partitioning - Sort Colors)
 public void sortColors(int[] nums) {
     int low = 0, mid = 0, high = nums.length - 1;
-    
+
     while (mid <= high) {
         if (nums[mid] == 0) {
             swap(nums, low, mid);
@@ -79,7 +79,6 @@ export function DNFVisualizer() {
     let mid = 0;
     let high = arr.length - 1;
 
-    // Initial Step
     generated.push({
       low,
       mid,
@@ -93,7 +92,6 @@ export function DNFVisualizer() {
       const val = arr[mid];
 
       if (val === 0) {
-        // Swap low and mid
         const temp = arr[low];
         arr[low] = arr[mid];
         arr[mid] = temp;
@@ -122,7 +120,6 @@ export function DNFVisualizer() {
           codeLine: 4
         });
       } else {
-        // val === 2 -> Swap mid and high
         const temp = arr[mid];
         arr[mid] = arr[high];
         arr[high] = temp;
@@ -142,7 +139,6 @@ export function DNFVisualizer() {
       }
     }
 
-    // Completion Step
     generated.push({
       low,
       mid,

@@ -93,7 +93,6 @@ export default function CollegePortalPage({ params }: CollegePortalPageProps) {
   const auth = useAuth();
   const { user, studentProfile, isProfileComplete, completeStudentProfile } = auth || {};
 
-  // College-scoped data states
   const [materials, setMaterials] = useState<CollegeMaterial[]>([]);
   const [manuals, setManuals] = useState<CollegeLabManual[]>([]);
   const [customLabs, setCustomLabs] = useState<CollegeCustomLab[]>([]);
@@ -101,7 +100,6 @@ export default function CollegePortalPage({ params }: CollegePortalPageProps) {
   const [announcements, setAnnouncements] = useState<CollegeAnnouncement[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Student Activation Form State
   const [studentName, setStudentName] = useState("");
   const [registerNo, setRegisterNo] = useState("");
   const [selectedDept, setSelectedDept] = useState(college.departments[0]?.name || "Artificial Intelligence & Data Science");
@@ -111,7 +109,6 @@ export default function CollegePortalPage({ params }: CollegePortalPageProps) {
   const [profileSuccessMsg, setProfileSuccessMsg] = useState("");
   const [profileErrorMsg, setProfileErrorMsg] = useState("");
 
-  // Load tenant-isolated data
   useEffect(() => {
     async function loadTenantData() {
       setIsLoading(true);
@@ -137,7 +134,6 @@ export default function CollegePortalPage({ params }: CollegePortalPageProps) {
     loadTenantData();
   }, [collegeSlug]);
 
-  // Pre-fill student info if already logged in for this college
   useEffect(() => {
     if (studentProfile) {
       if (studentProfile.name) setStudentName(studentProfile.name);
@@ -206,8 +202,7 @@ export default function CollegePortalPage({ params }: CollegePortalPageProps) {
       }
 
       setProfileSuccessMsg(`Profile successfully activated for ${college.shortName}! Full laboratory access unlocked.`);
-      
-      // Auto-redirect to labs after brief delay
+
       setTimeout(() => {
         router.push("/labs");
       }, 1200);
@@ -290,10 +285,10 @@ export default function CollegePortalPage({ params }: CollegePortalPageProps) {
       {/* Main Content Area */}
       <main className="flex-1 py-10">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          
+
           {/* Top Row: Academic Integration Info + Student Activation Card */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
+
             {/* Left: How Virtual Lab is Tailored for this College */}
             <div className="lg:col-span-7 space-y-6">
               <Card className="rounded-none border border-border/80 bg-card/70 backdrop-blur-md shadow-sm">
@@ -392,7 +387,7 @@ export default function CollegePortalPage({ params }: CollegePortalPageProps) {
             <div className="lg:col-span-5">
               <Card className="border-2 border-primary/40 bg-card shadow-xl rounded-none overflow-hidden relative">
                 <div className="h-2 w-full bg-gradient-to-r from-rose-600 via-pink-600 to-amber-600" />
-                
+
                 <CardHeader className="p-5 pb-3">
                   <Badge variant="outline" className="rounded-none w-fit text-[10px] font-mono uppercase bg-primary/10 text-primary border-primary/25">
                     Student Portal Activation

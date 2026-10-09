@@ -28,30 +28,26 @@ interface Props {
 export function CryptographyVisualizer({ initialModule = "rsa-algorithm" }: Props) {
   const [activeModule, setActiveModule] = useState<CryptoModule>(initialModule);
 
-  // RSA state
   const [rsaP, setRsaP] = useState(61);
   const [rsaQ, setRsaQ] = useState(53);
   const rsaN = rsaP * rsaQ;
   const rsaPhi = (rsaP - 1) * (rsaQ - 1);
   const rsaE = 17;
-  const rsaD = 2753; // modular inverse of 17 mod 3120
+  const rsaD = 2753;
 
   const [rsaPlaintext, setRsaPlaintext] = useState(65);
-  // (65^17) mod 3233 = 2790
   const rsaCiphertext = 2790;
 
-  // Diffie-Hellman state
   const [dhPrime, setDhPrime] = useState(23);
   const [dhGen, setDhGen] = useState(5);
   const [dhAlicePriv, setDhAlicePriv] = useState(6);
   const [dhBobPriv, setDhBobPriv] = useState(15);
 
-  const dhAlicePub = Math.pow(dhGen, dhAlicePriv) % dhPrime; // 5^6 mod 23 = 8
-  const dhBobPub = Math.pow(dhGen, dhBobPriv) % dhPrime; // 5^15 mod 23 = 19
-  const dhSharedAlice = Math.pow(dhBobPub, dhAlicePriv) % dhPrime; // 19^6 mod 23 = 2
-  const dhSharedBob = Math.pow(dhAlicePub, dhBobPriv) % dhPrime; // 8^15 mod 23 = 2
+  const dhAlicePub = Math.pow(dhGen, dhAlicePriv) % dhPrime;
+  const dhBobPub = Math.pow(dhGen, dhBobPriv) % dhPrime;
+  const dhSharedAlice = Math.pow(dhBobPub, dhAlicePriv) % dhPrime;
+  const dhSharedBob = Math.pow(dhAlicePub, dhBobPriv) % dhPrime;
 
-  // SHA-256 string demo
   const [hashInput, setHashInput] = useState("antigravity");
 
   return (

@@ -18,7 +18,7 @@ public class Course extends BaseEntity {
 
     private Double credits;
 
-    private String type; // Foundation, Core, Advanced, Elective
+    private String type;
 
     @Column(columnDefinition = "TEXT")
     private String description;

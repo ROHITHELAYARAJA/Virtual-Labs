@@ -12,7 +12,6 @@ import {
   ArrowRight
 } from "lucide-react";
 
-// Modular Interactive Lab Simulators
 import { BasicDSVisualizer } from "./basic-ds-visualizer";
 import { SearchingSuiteVisualizer } from "./searching-suite-visualizer";
 import { SortingSuiteVisualizer } from "./sorting-suite-visualizer";
@@ -24,7 +23,6 @@ import { HashingSuiteVisualizer } from "./hashing-suite-visualizer";
 import { StringSuiteVisualizer } from "./string-suite-visualizer";
 import { ComplexityComparator } from "./complexity-comparator";
 
-// Dedicated visualizers
 import { StackVisualizer } from "@/components/visualizer/stack/stack-visualizer";
 import { QueueVisualizer } from "@/components/visualizer/queue/queue-visualizer";
 import { LinkedListVisualizer } from "@/components/visualizer/linked-list/linked-list-visualizer";
@@ -50,7 +48,6 @@ export function DSATopicVisualizer({ topic }: DSATopicVisualizerProps) {
   const [sortingSubAlgo, setSortingSubAlgo] = useState<"bubble" | "selection" | "insertion" | "merge" | "quick">("bubble");
   const [treeSubMode, setTreeSubMode] = useState<"bst" | "avl" | "heap">("bst");
 
-  // Mapping topic to dedicated standalone studio route if available
   const getDedicatedStudioUrl = () => {
     switch (topic.id) {
       case "comparison-sorts":
@@ -99,7 +96,6 @@ export function DSATopicVisualizer({ topic }: DSATopicVisualizerProps) {
   const dedicatedStudio = getDedicatedStudioUrl();
 
   const renderVisualizerContent = () => {
-    // 1. Basic Data Structures
     if (topic.categoryId === "basic-data-structures") {
       if (topic.id === "stack-queue-all") {
         return (
@@ -130,11 +126,9 @@ export function DSATopicVisualizer({ topic }: DSATopicVisualizerProps) {
       if (topic.id === "linked-list-all") {
         return <LinkedListVisualizer />;
       }
-      // Array / Matrix fallback to rich BasicDSVisualizer
       return <BasicDSVisualizer initialMode={topic.id === "matrix-ds" ? "matrix" : "array"} />;
     }
 
-    // 2. Searching Algorithms
     if (topic.categoryId === "searching-algorithms") {
       return (
         <div className="space-y-4">
@@ -143,7 +137,6 @@ export function DSATopicVisualizer({ topic }: DSATopicVisualizerProps) {
       );
     }
 
-    // 3. Sorting Algorithms
     if (topic.categoryId === "sorting-algorithms") {
       return (
         <div className="space-y-4">
@@ -171,26 +164,22 @@ export function DSATopicVisualizer({ topic }: DSATopicVisualizerProps) {
       );
     }
 
-    // 4. Recursion & Backtracking
     if (topic.categoryId === "recursion-backtracking") {
       return <RecursionBacktrackingVisualizer defaultMode={topic.id === "backtracking-nqueens" ? "nqueens" : "factorial"} />;
     }
 
-    // 5. Trees & Balanced Trees
     if (topic.categoryId === "trees-balanced") {
       if (topic.id === "avl-rotations") return <TreeSuiteVisualizer defaultMode="avl" />;
       if (topic.id === "binary-heap-pq") return <TreeSuiteVisualizer defaultMode="heap" />;
       return <TreeSuiteVisualizer defaultMode="bst" />;
     }
 
-    // 6. Graphs & Networks
     if (topic.categoryId === "graphs-networks") {
       if (topic.id === "bfs-dfs-traversal") return <GraphSuiteVisualizer defaultMode="bfs" />;
       if (topic.id === "mst-union-find") return <GraphSuiteVisualizer defaultMode="union-find" />;
       return <DijkstraVisualizer />;
     }
 
-    // 7. Greedy & DP
     if (topic.categoryId === "greedy-algorithms") {
       return <GreedyDpVisualizer defaultMode="activity" />;
     }
@@ -199,17 +188,14 @@ export function DSATopicVisualizer({ topic }: DSATopicVisualizerProps) {
       return <GreedyDpVisualizer defaultMode="dp-knapsack-2d" />;
     }
 
-    // 8. Hashing
     if (topic.categoryId === "hashing-collisions") {
       return <HashingSuiteVisualizer defaultMode="chaining" />;
     }
 
-    // 9. Strings
     if (topic.categoryId === "string-algorithms") {
       return <StringSuiteVisualizer defaultMode="trie" />;
     }
 
-    // 10. Divide & Conquer / Algorithmic Patterns
     if (topic.id === "two-pointers") return <TwoPointersVisualizer />;
     if (topic.id === "sliding-window") return <SlidingWindowVisualizer />;
     if (topic.id === "kadanes-algorithm") return <KadanesVisualizer />;
@@ -223,7 +209,6 @@ export function DSATopicVisualizer({ topic }: DSATopicVisualizerProps) {
       return <SortingSuiteVisualizer defaultAlgo="merge" />;
     }
 
-    // C Programming Weekly Foundations
     if (topic.categoryId === "c-prog-week-1" || topic.categoryId === "c-prog-week-2") {
       return <BasicDSVisualizer initialMode="array" />;
     }
@@ -246,7 +231,6 @@ export function DSATopicVisualizer({ topic }: DSATopicVisualizerProps) {
       return <ComplexityComparator />;
     }
 
-    // Fallback
     return <SortingVisualizer algorithm="bubble" title="Bubble Sort" description="Adjacent comparison visualizer." />;
   };
 

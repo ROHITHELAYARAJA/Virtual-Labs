@@ -31,7 +31,6 @@ interface Props {
 export function SystemDesignComponentsVisualizer({ initialModule = "consistent-hashing-deep" }: Props) {
   const [activeModule, setActiveModule] = useState<SystemDesignModule>(initialModule);
 
-  // Rate Limiting Demo State
   const [tokensAvailable, setTokensAvailable] = useState(7);
 
   return (

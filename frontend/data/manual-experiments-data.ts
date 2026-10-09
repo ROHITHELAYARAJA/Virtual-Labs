@@ -1,8 +1,3 @@
-// =======================================================================
-// V.S.B. ENGINEERING COLLEGE, KARUR (An Autonomous Institution)
-// DEPARTMENT OF ARTIFICIAL INTELLIGENCE AND DATA SCIENCE
-// OFFICIAL LABORATORY MANUAL EXPERIMENTS DATA (AIM, ALGORITHM, CODE, VIVA)
-// =======================================================================
 
 export interface ManualExperimentItem {
   expNo: number;
@@ -10,18 +5,15 @@ export interface ManualExperimentItem {
   aim: string;
   algorithm: string[];
   codeSnippet?: string;
-  code?: string;          // alias used by lab-manual-experiments-browser
+  code?: string;
   outputSnippet?: string;
-  sampleInput?: string;   // used by lab-manual-experiments-browser
-  sampleOutput?: string;  // used by lab-manual-experiments-browser
+  sampleInput?: string;
+  sampleOutput?: string;
   vivaVoce: { question: string; answer: string }[];
-  vivaQuestions?: { question: string; answer: string }[]; // alias used by lab-manual-experiments-browser
+  vivaQuestions?: { question: string; answer: string }[];
 }
 
 export const MANUAL_EXPERIMENTS_DATA: Record<string, ManualExperimentItem[]> = {
-  // =======================================================================
-  // 1. DATABASE MANAGEMENT SYSTEMS (DBMS) - MD/AIDS_DBMS LAB MANUAL.md
-  // =======================================================================
   "dbms-lab": [
     {
       expNo: 1,
@@ -275,7 +267,7 @@ CREATE PROCEDURE TransferFunds(
 BEGIN
     DECLARE v_bal DECIMAL(10,2);
     SELECT balance INTO v_bal FROM Account WHERE account_no = p_from;
-    
+
     IF v_bal >= p_amount THEN
         START TRANSACTION;
         UPDATE Account SET balance = balance - p_amount WHERE account_no = p_from;
@@ -309,9 +301,6 @@ Logged 2 automated audit rows via trigger.`,
     }
   ],
 
-  // =======================================================================
-  // 2. CLOUD SERVICE MANAGEMENT (CSM) - MD/CSM LAb manual updated.md
-  // =======================================================================
   "cloud-service-management": [
     {
       expNo: 1,
@@ -514,9 +503,6 @@ Verdict: GCP delivers a 6.9% cost advantage for dynamic compute via committed us
     }
   ],
 
-  // =======================================================================
-  // 3. DATA STRUCTURES & ALGORITHMS (DSA) - MD/AIDS_DSA LAB MANUAL.md
-  // =======================================================================
   "data-structures": [
     {
       expNo: 1,
@@ -755,9 +741,6 @@ Shortest Distances:
     }
   ],
 
-  // =======================================================================
-  // 4. OBJECT ORIENTED PROGRAMMING (OOP JAVA) - MD/AIDS_OOP_final lab manual 02072026.md
-  // =======================================================================
   "oops-java": [
     {
       expNo: 1,
@@ -998,9 +981,6 @@ Thread synchronization verified without race conditions or deadlock.`,
     }
   ],
 
-  // =======================================================================
-  // 5. BIG DATA ANALYTICS (BDA) - MD/BDA AIDS LAB  MANUAL.md
-  // =======================================================================
   "big-data-analytics": [
     {
       expNo: 1,
@@ -1181,9 +1161,6 @@ COLUMN                          CELL
     }
   ],
 
-  // =======================================================================
-  // 6. BUSINESS ANALYTICS - MD/Business Analytics Record.md
-  // =======================================================================
   "data-science-analytics": [
     {
       expNo: 1,
@@ -1381,9 +1358,6 @@ Interactive Visuals Rendered:
     }
   ],
 
-  // =======================================================================
-  // 7. DEEP LEARNING (DL) - MD/DL LAB MANUAL FINAL.md
-  // =======================================================================
   "ai-machine-learning": [
     {
       expNo: 1,
@@ -1565,9 +1539,6 @@ Synthetic 28x28 grayscale digits generated successfully with clear stroke contou
     }
   ],
 
-  // =======================================================================
-  // 8. PROGRAMMING IN C - MD/PROGRAMMING IN C LAB MANUAL.md
-  // =======================================================================
   "c-programming": [
     {
       expNo: 1,

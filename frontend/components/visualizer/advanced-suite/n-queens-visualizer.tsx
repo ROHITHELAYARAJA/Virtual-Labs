@@ -21,24 +21,20 @@ import {
   ListOrdered
 } from "lucide-react";
 
-// ==========================================
-// TYPES & DATA STRUCTURES
-// ==========================================
-
 export type BoardSize = 4 | 5 | 6;
 
 export interface NQueensStep {
   stepIndex: number;
-  callNumber: number; // 1-based call index in state-space tree
-  row: number; // recursion depth (0 to N)
-  col: number; // placed col (-1 if none)
-  queens: number[]; // row -> col (-1 if unplaced)
-  board: number[][]; // 0: empty, 1: placed queen, -1: conflict cell, 2: solution queen
+  callNumber: number;
+  row: number;
+  col: number;
+  queens: number[];
+  board: number[][];
   actionType: "root" | "call" | "place" | "conflict" | "backtrack" | "solution";
   conflictCell: { r: number; c: number } | null;
   conflictLines: { r: number; c: number }[];
   conflictReason: string;
-  solutionNumber: number | null; // 1, 2, ... if this state found a solution
+  solutionNumber: number | null;
   callStack: { row: number; col: number; depth: number }[];
   levelCountsSoFar: number[];
   title: string;
@@ -56,7 +52,7 @@ export interface BoardConfigInfo {
   size: BoardSize;
   totalSolutions: number;
   totalCalls: number;
-  unoptimizedPermutations: number; // N!
+  unoptimizedPermutations: number;
   levelBreakdown: { level: number; label: string; count: number; desc: string }[];
 }
 
@@ -104,10 +100,6 @@ export const BOARD_CONFIGS: Record<BoardSize, BoardConfigInfo> = {
     ]
   }
 };
-
-// ==========================================
-// STEP GENERATOR ENGINE
-// ==========================================
 
 function generateNQueensSteps(N: BoardSize, mode: "calls" | "detailed"): {
   steps: NQueensStep[];
@@ -157,21 +149,18 @@ function generateNQueensSteps(N: BoardSize, mode: "calls" | "detailed"): {
     return lines;
   };
 
-  // BACKTRACKING RECURSIVE ENGINE
   function solve(row: number) {
     callCounter++;
     levelCounts[row]++;
     const currentCallNum = callCounter;
 
-    // Push Step for Call Entry (State in State-Space Tree)
     if (row === N) {
       solutionCounter++;
       const currentSolNum = solutionCounter;
 
-      // Mark solution board
       const solBoard = cloneBoard();
       for (let r = 0; r < N; r++) {
-        solBoard[r][queens[r]] = 2; // special solution styling
+        solBoard[r][queens[r]] = 2;
       }
 
       const step: NQueensStep = {
@@ -228,7 +217,6 @@ function generateNQueensSteps(N: BoardSize, mode: "calls" | "detailed"): {
       const check = isSafe(row, col);
 
       if (check.safe) {
-        // Place Queen
         queens[row] = col;
         board[row][col] = 1;
         stack.push({ row, col, depth: row });
@@ -255,7 +243,6 @@ function generateNQueensSteps(N: BoardSize, mode: "calls" | "detailed"): {
 
         solve(row + 1);
 
-        // Backtrack
         board[row][col] = 0;
         queens[row] = -1;
         stack.pop();
@@ -315,36 +302,28 @@ function generateNQueensSteps(N: BoardSize, mode: "calls" | "detailed"): {
   return { steps, solutions };
 }
 
-// ==========================================
-// COMPONENT IMPLEMENTATION
-// ==========================================
-
 export function NQueensVisualizer() {
   const [boardSize, setBoardSize] = useState<BoardSize>(4);
   const [viewGranularity, setViewGranularity] = useState<"calls" | "detailed">("calls");
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1); // 0.5x, 1x, 2x, 4x
+  const [playbackSpeed, setPlaybackSpeed] = useState<number>(1);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Generate steps whenever board size or granularity changes
   const { steps, solutions } = useMemo(() => {
     return generateNQueensSteps(boardSize, viewGranularity);
   }, [boardSize, viewGranularity]);
 
   const config = BOARD_CONFIGS[boardSize];
 
-  // Clamp step index
   useEffect(() => {
     setCurrentStepIndex(0);
     setIsPlaying(false);
   }, [boardSize, viewGranularity]);
 
-  // Current active step
   const currentStep = steps[currentStepIndex] || steps[0];
 
-  // Playback timer
   useEffect(() => {
     if (isPlaying) {
       const delay = Math.max(80, 800 / playbackSpeed);
@@ -365,7 +344,6 @@ export function NQueensVisualizer() {
     };
   }, [isPlaying, playbackSpeed, steps.length]);
 
-  // Navigation handlers
   const handlePlayPause = () => {
     if (currentStepIndex >= steps.length - 1) {
       setCurrentStepIndex(0);
@@ -400,17 +378,14 @@ export function NQueensVisualizer() {
     if (nextSol) {
       setCurrentStepIndex(nextSol.stepIndex);
     } else if (solutions.length > 0) {
-      // wrap to first solution
       setCurrentStepIndex(solutions[0].stepIndex);
     }
   };
 
-  // Solutions found so far
   const solutionsFoundSoFar = useMemo(() => {
     return solutions.filter((s) => s.stepIndex <= currentStepIndex);
   }, [solutions, currentStepIndex]);
 
-  // Dynamic board cell sizing
   const cellSizeClass =
     boardSize === 4
       ? "h-16 w-16 sm:h-20 sm:w-20"

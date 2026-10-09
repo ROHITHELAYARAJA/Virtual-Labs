@@ -33,12 +33,10 @@ interface Props {
 export function StringAlgosVisualizer({ initialModule = "z-algorithm" }: Props) {
   const [activeModule, setActiveModule] = useState<StringAlgoModule>(initialModule);
 
-  // 1. Z-Algorithm State
   const [zText, setZText] = useState("aabzaabzaabc");
   const [zPattern, setZPattern] = useState("aab");
   const concatStr = `${zPattern}$${zText}`;
 
-  // Compute Z-Array for concatStr
   const computeZArray = (s: string) => {
     const n = s.length;
     const z = new Array(n).fill(0);
@@ -59,11 +57,9 @@ export function StringAlgosVisualizer({ initialModule = "z-algorithm" }: Props) 
   };
   const zArray = computeZArray(concatStr);
 
-  // 2. Aho-Corasick State
   const [acText, setAcText] = useState("ushers");
   const acKeywords = ["he", "she", "his", "hers"];
 
-  // 3. Manacher's Algorithm State
   const [manacherInput, setManacherInput] = useState("babad");
   const transformedManacher = `#${manacherInput.split("").join("#")}#`;
 
@@ -88,7 +84,6 @@ export function StringAlgosVisualizer({ initialModule = "z-algorithm" }: Props) 
   };
   const manacherRadii = computeManacherRadius(transformedManacher);
 
-  // 4. Suffix Array & LCP State
   const [saInput, setSaInput] = useState("banana");
   const suffixes = saInput
     .split("")
@@ -106,7 +101,6 @@ export function StringAlgosVisualizer({ initialModule = "z-algorithm" }: Props) 
     lcpArray.push(common);
   }
 
-  // 5. Suffix Tree State
   const [stWord, setStWord] = useState("cacao$");
 
   return (

@@ -35,7 +35,7 @@ export interface SubmittedLabRecord {
   fileName: string;
   fileSizeBytes: number;
   fileSizeFormatted: string;
-  fileUrl?: string; // Data URL or object URL
+  fileUrl?: string;
   cloudStoragePath: string;
   submittedAt: string;
   status: "Stored in Cloud" | "Verified" | "Graded";
@@ -59,7 +59,6 @@ export function LabRecordUploadPanel({ lab }: LabRecordUploadPanelProps) {
   const [activePreviewRecord, setActivePreviewRecord] = useState<SubmittedLabRecord | null>(null);
   const [showReceiptRecord, setShowReceiptRecord] = useState<SubmittedLabRecord | null>(null);
 
-  // Form inputs
   const [studentName, setStudentName] = useState<string>("");
   const [registerNumber, setRegisterNumber] = useState<string>("");
   const [experimentNumber, setExperimentNumber] = useState<string>("Exp 1");
@@ -69,14 +68,12 @@ export function LabRecordUploadPanel({ lab }: LabRecordUploadPanelProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const storageKey = `vlab_cloud_records_${lab.id}`;
 
-  // Load submissions from localStorage on mount
   useEffect(() => {
     try {
       const saved = localStorage.getItem(storageKey);
       if (saved) {
         setSubmissions(JSON.parse(saved));
       } else {
-        // Pre-populate with sample verified template record
         const sampleRecord: SubmittedLabRecord = {
           id: `REC-${lab.code}-2026-001`,
           studentName: "Nishanth .A",
@@ -101,7 +98,6 @@ export function LabRecordUploadPanel({ lab }: LabRecordUploadPanelProps) {
     }
   }, [lab.id, lab.code, lab.shortTitle, storageKey]);
 
-  // Save to localStorage
   const saveSubmissionsToStorage = (updated: SubmittedLabRecord[]) => {
     setSubmissions(updated);
     try {
@@ -164,7 +160,6 @@ export function LabRecordUploadPanel({ lab }: LabRecordUploadPanelProps) {
     setUploading(true);
     setUploadProgress(10);
 
-    // Simulate multi-chunk cloud upload
     const interval = setInterval(() => {
       setUploadProgress((prev) => {
         if (prev >= 90) {

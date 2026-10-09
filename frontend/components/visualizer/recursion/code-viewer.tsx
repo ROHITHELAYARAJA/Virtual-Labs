@@ -7,7 +7,7 @@ import { Code2, Copy, Check } from "lucide-react";
 interface CodeViewerProps {
   code: string;
   language: string;
-  activeLine?: number | null; // 1-indexed
+  activeLine?: number | null;
   onCodeChange?: (newCode: string) => void;
   readOnly?: boolean;
 }

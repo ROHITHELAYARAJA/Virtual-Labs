@@ -18,7 +18,6 @@ export default function AuthCallbackPage() {
         const code = searchParams.get("code");
         const next = searchParams.get("next") || "/dashboard";
 
-        // 1. If code param is present (PKCE flow), exchange it
         if (code) {
           const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
           if (exchangeError) {
@@ -26,14 +25,12 @@ export default function AuthCallbackPage() {
           }
         }
 
-        // 2. Check session (handles both PKCE and hash fragment #access_token auto-parsed by supabase)
         const { data: { session } } = await supabase.auth.getSession();
         if (session && isMounted) {
           router.replace(next);
           return;
         }
 
-        // 3. Fallback listener for auth state change
         const { data: { subscription } } = supabase.auth.onAuthStateChange((event, newSession) => {
           if (newSession && isMounted) {
             subscription.unsubscribe();
@@ -41,7 +38,6 @@ export default function AuthCallbackPage() {
           }
         });
 
-        // Safety fallback timer
         setTimeout(() => {
           if (isMounted) {
             router.replace("/dashboard");

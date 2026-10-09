@@ -131,7 +131,6 @@ const ROLLING_CARDS = [
 export function HeroObjectives() {
   const [statementIdx, setStatementIdx] = useState(0);
 
-  // 8-Second Synchronized Slow-Motion Cycle matching the 8-second video
   useEffect(() => {
     const timer = setInterval(() => {
       setStatementIdx((prev) => (prev + 1) % VIRTUAL_LAB_STATEMENTS.length);

@@ -78,36 +78,32 @@ export function Breadcrumbs({
   action?: React.ReactNode 
 }) {
   const pathname = usePathname()
-  
+
   const getBreadcrumbs = () => {
     const segments = pathname.split('/').filter(Boolean)
     const items = []
     let currentPath = ""
-    
-    // Always add home
+
     items.push(
       <BreadcrumbItem key="home">
         <BreadcrumbLink href="/">Home</BreadcrumbLink>
       </BreadcrumbItem>
     )
 
-    // Add intermediate segments
     segments.forEach((segment, index) => {
       currentPath += `/${segment}`
       const route = routes[currentPath as keyof typeof routes]
-      
+
       if (route) {
         items.push(<BreadcrumbSeparator key={`separator-${index}`} />)
-        
+
         if (index === segments.length - 1) {
-          // Last segment - show as current page
           items.push(
             <BreadcrumbItem key={currentPath}>
               <BreadcrumbPage>{route.name}</BreadcrumbPage>
             </BreadcrumbItem>
           )
         } else {
-          // Intermediate segment - show as link
           items.push(
             <BreadcrumbItem key={currentPath}>
               <BreadcrumbLink href={route.path}>{route.name}</BreadcrumbLink>

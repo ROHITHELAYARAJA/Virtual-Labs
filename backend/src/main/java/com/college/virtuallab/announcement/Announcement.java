@@ -14,11 +14,11 @@ public class Announcement extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private String category; // 'Notice', 'Circular', 'Workshop', 'Exam', 'Event'
+    private String category;
 
     private LocalDate publishDate;
 
-    private String targetAudience; // 'All Students', 'Faculty', 'Semester 3'
+    private String targetAudience;
 
     private String linkUrl;
 

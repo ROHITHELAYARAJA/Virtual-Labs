@@ -44,7 +44,6 @@ export function VideoTimeline({
 
   const isBlue = accentColor === "blue";
 
-  // Extract unique categories
   const categories = useMemo(() => {
     const cats = new Set<string>();
     timestamps.forEach((t) => {
@@ -53,7 +52,6 @@ export function VideoTimeline({
     return ["ALL", ...Array.from(cats)];
   }, [timestamps]);
 
-  // Filter timestamps based on search query and category
   const filteredTimestamps = useMemo(() => {
     return timestamps.filter((item) => {
       const matchesSearch =

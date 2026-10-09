@@ -59,7 +59,6 @@ export interface DSACategory {
 }
 
 export const DSA_CATEGORIES_DATA: DSACategory[] = [
-  // 1. BASIC DATA STRUCTURES
   {
     id: "basic-data-structures",
     name: "1. Basic Data Structures",
@@ -290,7 +289,6 @@ public class DequeExample {
     ]
   },
 
-  // 2. SEARCHING ALGORITHMS
   {
     id: "searching-algorithms",
     name: "2. Searching Algorithms",
@@ -403,7 +401,6 @@ Directly jumps to likely index if data is uniformly distributed!`,
     ]
   },
 
-  // 3. SORTING ALGORITHMS
   {
     id: "sorting-algorithms",
     name: "3. Sorting Algorithms",
@@ -565,7 +562,6 @@ Count[]: Index: 0 1 2 3 4 5 6 7
     ]
   },
 
-  // 4. RECURSION & BACKTRACKING
   {
     id: "recursion-backtracking",
     name: "4. Recursion & Backtracking",
@@ -675,7 +671,6 @@ VALID?
     ]
   },
 
-  // 5. TREES & BALANCED TREES
   {
     id: "trees-balanced",
     name: "5. Trees & Balanced Trees",
@@ -848,7 +843,6 @@ public class PQExample {
     ]
   },
 
-  // 6. GRAPHS & NETWORKS
   {
     id: "graphs-networks",
     name: "6. Graphs & Networks",
@@ -1030,7 +1024,6 @@ Edge (B, C) wt: 4 ──> Find(B) == Find(C) ──> REJECT (Creates Cycle!)`,
     ]
   },
 
-  // 7. GREEDY ALGORITHMS
   {
     id: "greedy-algorithms",
     name: "7. Greedy Algorithms",
@@ -1141,7 +1134,6 @@ Act C:           [ 4 ── 6 ] (Selected ✓)`,
     ]
   },
 
-  // 8. DYNAMIC PROGRAMMING
   {
     id: "dynamic-programming",
     name: "8. Dynamic Programming",
@@ -1257,7 +1249,6 @@ Item 2 (wt:3, val:4): [0, 0, 3, 4, 4, 7] ──> Take Item 2: val 4 + dp[prev][5
     ]
   },
 
-  // 9. HASHING & COLLISION RESOLUTION
   {
     id: "hashing-collisions",
     name: "9. Hashing & Collision Handling",
@@ -1318,7 +1309,6 @@ public class HashExample {
     ]
   },
 
-  // 10. STRING ALGORITHMS
   {
     id: "string-algorithms-suite",
     name: "10. String Algorithms",
@@ -1442,7 +1432,6 @@ public class Trie {
     ]
   },
 
-  // 11. DIVIDE AND CONQUER
   {
     id: "divide-and-conquer",
     name: "11. Divide and Conquer",
@@ -1505,7 +1494,6 @@ public class Trie {
     ]
   },
 
-  // 12. COMPLEXITY ANALYSIS & DS COMPARISON
   {
     id: "complexity-analysis",
     name: "12. Complexity & DS Comparison",

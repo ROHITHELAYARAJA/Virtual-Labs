@@ -80,7 +80,6 @@ export function PrefixSumVisualizer() {
     const generated: ExecutionStep[] = [];
     const pArr: (number | null)[] = new Array(arr.length).fill(null);
 
-    // Step 0: Initialize prefix[0]
     pArr[0] = arr[0];
     generated.push({
       currentIndex: 0,
@@ -101,7 +100,6 @@ export function PrefixSumVisualizer() {
       });
     }
 
-    // Completion Step
     generated.push({
       currentIndex: arr.length - 1,
       array: [...arr],

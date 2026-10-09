@@ -53,7 +53,7 @@ export const exampleGraphs: ExampleGraph[] = [
     name: "Large Network",
     description: "A large network with multiple possible paths",
     nodes: [
-      { id: "A", x: 100, y: 300 },  // Starting node
+      { id: "A", x: 100, y: 300 },
       { id: "B", x: 250, y: 200 },
       { id: "C", x: 250, y: 400 },
       { id: "D", x: 400, y: 150 },

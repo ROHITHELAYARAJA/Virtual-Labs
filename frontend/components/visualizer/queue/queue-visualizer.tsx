@@ -242,7 +242,7 @@ export function QueueVisualizer({ content }: QueueVisualizerProps) {
           <TabsTrigger value="code">Multi-Lang Code</TabsTrigger>
           <TabsTrigger value="explanation">Explanation</TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="visualization" className="space-y-6">
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
             <div className="xl:col-span-1 space-y-6">
@@ -272,7 +272,7 @@ export function QueueVisualizer({ content }: QueueVisualizerProps) {
             snippets={QUEUE_CODE_SNIPPETS}
           />
         </TabsContent>
-        
+
         <TabsContent value="explanation" className="prose prose-invert max-w-none">
           <MarkdownContent content={content} />
         </TabsContent>

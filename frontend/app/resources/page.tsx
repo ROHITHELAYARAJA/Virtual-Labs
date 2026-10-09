@@ -34,13 +34,11 @@ export default function ResourcesPage() {
   const [tenantResources, setTenantResources] = useState<ResourceItem[]>([]);
   const [selectedVideo, setSelectedVideo] = useState<ResourceItem | null>(null);
 
-  // Load any dynamically uploaded/added resources from Admin Panel
   useEffect(() => {
     try {
       const dynamicItems: ResourceItem[] = [];
       const collegeSlug = "vsb";
 
-      // 1. Dynamic Materials
       const rawMats = localStorage.getItem(`vlab_tenant_${collegeSlug}_materials`);
       if (rawMats) {
         const mats = JSON.parse(rawMats);
@@ -62,7 +60,6 @@ export default function ResourcesPage() {
         });
       }
 
-      // 2. Dynamic Manuals
       const rawMans = localStorage.getItem(`vlab_tenant_${collegeSlug}_manuals`);
       if (rawMans) {
         const mans = JSON.parse(rawMans);
@@ -84,7 +81,6 @@ export default function ResourcesPage() {
         });
       }
 
-      // 3. Dynamic Custom Labs
       const rawLabs = localStorage.getItem(`vlab_tenant_${collegeSlug}_custom_labs`);
       if (rawLabs) {
         const labs = JSON.parse(rawLabs);
@@ -107,7 +103,6 @@ export default function ResourcesPage() {
         });
       }
 
-      // 4. Dynamic Videos
       const rawVids = localStorage.getItem(`vlab_tenant_${collegeSlug}_videos`);
       if (rawVids) {
         const vids = JSON.parse(rawVids);

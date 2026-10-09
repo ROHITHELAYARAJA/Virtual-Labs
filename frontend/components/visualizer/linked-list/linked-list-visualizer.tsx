@@ -265,7 +265,7 @@ export function LinkedListVisualizer({ content }: LinkedListVisualizerProps) {
             snippets={LINKED_LIST_CODE_SNIPPETS}
           />
         </TabsContent>
-        
+
         <TabsContent value="explanation" className="prose prose-invert max-w-none">
           <MarkdownContent content={content} />
         </TabsContent>

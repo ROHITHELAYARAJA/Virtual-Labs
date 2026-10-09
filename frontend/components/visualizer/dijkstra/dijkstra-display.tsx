@@ -30,7 +30,6 @@ const nodeTypes = {
   graph: GraphNode,
 }
 
-// Default edge settings
 const defaultEdgeOptions = {
   type: 'straight',
   animated: false,
@@ -49,7 +48,6 @@ export function DijkstraDisplay({
   const { theme } = useTheme()
 
   useEffect(() => {
-    // Convert graph nodes to ReactFlow nodes
     const flowNodes: Node[] = graph.nodes.map(node => ({
       id: node.id,
       type: 'graph',
@@ -63,7 +61,6 @@ export function DijkstraDisplay({
       },
     }))
 
-    // Convert graph edges to ReactFlow edges
     const flowEdges: Edge[] = graph.edges.map(edge => {
       const isPathEdge = path.some((node, index) => {
         const nextNode = path[index + 1]

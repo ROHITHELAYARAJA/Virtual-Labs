@@ -33,7 +33,6 @@ export interface JavaCodeViewerProps {
   onSendToVisualizer?: (array: number[]) => void;
 }
 
-// VS Code Dark+ Java Tokenizer for Clean Syntax Highlighting
 function highlightJavaLine(line: string): React.ReactNode[] {
   const commentIdx = line.indexOf("//");
   if (commentIdx !== -1) {
@@ -137,30 +136,27 @@ function tokenizeJavaText(text: string): React.ReactNode[] {
   return tokens;
 }
 
-// Generate executable wrapper with main method if code only has a class without main
 function generateRunnableMainHarness(rawCode: string, defaultArray = "64, 34, 25, 12, 22, 11, 90"): string {
-  // Check if main method already exists
   if (rawCode.includes("public static void main")) {
     return rawCode;
   }
 
-  // Find the sorting or key method inside the class
   const methodMatch = rawCode.match(/public\s+static\s+void\s+([A-Za-z0-9_]+)\s*\(\s*int\s*\[\s*\]\s*([A-Za-z0-9_]+)/);
   const methodName = methodMatch ? methodMatch[1] : null;
 
   const harnessMain = `
     public static void main(String[] args) {
         int[] arr = { ${defaultArray} };
-        
+
         System.out.println("==========================================");
         System.out.println("  Java Online Compiler & Execution Suite  ");
         System.out.println("==========================================");
         System.out.println("Original Array: " + java.util.Arrays.toString(arr));
-        
+
         long startTime = System.nanoTime();
-        ${methodName ? `${methodName}(arr);` : `// Execute your custom logic here`}
+        ${methodName ? `${methodName}(arr);` : ""}
         long endTime = System.nanoTime();
-        
+
         System.out.println("Sorted Result:  " + java.util.Arrays.toString(arr));
         System.out.printf("Execution Time: %.3f ms%n", (endTime - startTime) / 1e6);
         System.out.println("Status: Program executed with exit code 0.");

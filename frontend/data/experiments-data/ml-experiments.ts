@@ -230,11 +230,11 @@ for epoch in range(10000):
     # Forward Pass
     h = sigmoid(np.dot(X, W1) + b1)
     out = sigmoid(np.dot(h, W2) + b2)
-    
+
     # Backprop
     d_out = (y - out) * d_sigmoid(out)
     d_h = d_out.dot(W2.T) * d_sigmoid(h)
-    
+
     W2 += h.T.dot(d_out) * lr
     b2 += np.sum(d_out, axis=0, keepdims=True) * lr
     W1 += X.T.dot(d_h) * lr

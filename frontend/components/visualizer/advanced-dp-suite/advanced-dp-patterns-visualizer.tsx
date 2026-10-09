@@ -30,11 +30,9 @@ interface Props {
 export function AdvancedDPPatternsVisualizer({ initialModule = "interval-dp" }: Props) {
   const [activeModule, setActiveModule] = useState<AdvancedDPModule>(initialModule);
 
-  // 1. Matrix Chain Multiplication
   const [mcmDims, setMcmDims] = useState([10, 20, 30, 40, 30]);
 
-  // 2. Bitmask TSP State
-  const [activeMask, setActiveMask] = useState(7); // Binary 111 (Cities 0, 1, 2 visited)
+  const [activeMask, setActiveMask] = useState(7);
 
   return (
     <div className="space-y-6">

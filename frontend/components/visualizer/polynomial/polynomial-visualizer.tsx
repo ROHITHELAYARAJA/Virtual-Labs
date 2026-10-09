@@ -150,7 +150,7 @@ export function PolynomialVisualizer({ content }: PolynomialVisualizerProps) {
             snippets={POLYNOMIAL_CODE_SNIPPETS}
           />
         </TabsContent>
-        
+
         <TabsContent value="explanation" className="prose dark:prose-invert max-w-none">
           <MarkdownContent content={content} />
         </TabsContent>

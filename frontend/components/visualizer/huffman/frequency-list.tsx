@@ -11,7 +11,6 @@ export function FrequencyList({ frequencies, totalChars }: FrequencyListProps) {
   const total = totalChars ?? Array.from(frequencies.values()).reduce((a, b) => a + b, 0)
   if (frequencies.size === 0) return null
 
-  // Sort frequencies by count (descending)
   const sortedFrequencies = Array.from(frequencies.entries())
     .sort((a, b) => b[1] - a[1])
 

@@ -96,9 +96,6 @@ export interface PhaseSection {
 }
 
 export const DSA_SECTIONS: PhaseSection[] = [
-  // ==========================================
-  // PHASE 1: COMPLEXITY & INTERVIEW PREP
-  // ==========================================
   {
     id: "phase-1",
     phaseNumber: "Phase 1",
@@ -147,9 +144,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 2: CORE DATA STRUCTURES
-  // ==========================================
   {
     id: "phase-2",
     phaseNumber: "Phase 2",
@@ -294,9 +288,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 3: SORTING ALGORITHMS
-  // ==========================================
   {
     id: "phase-3-sorting",
     phaseNumber: "Phase 3",
@@ -417,9 +408,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 3: SEARCHING & ALGORITHMIC PATTERNS
-  // ==========================================
   {
     id: "phase-3-patterns",
     phaseNumber: "Phase 3",
@@ -564,9 +552,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 3: RECURSION & BACKTRACKING
-  // ==========================================
   {
     id: "phase-3-recursion",
     phaseNumber: "Phase 3",
@@ -627,9 +612,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 4: GRAPH ALGORITHMS
-  // ==========================================
   {
     id: "phase-4",
     phaseNumber: "Phase 4",
@@ -726,9 +708,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 3 & 4: DYNAMIC PROGRAMMING & GREEDY
-  // ==========================================
   {
     id: "phase-dp-greedy",
     phaseNumber: "Phase 3/4",
@@ -801,9 +780,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 6: APPLIED SYSTEMS, LLD & ENGINEERING
-  // ==========================================
   {
     id: "phase-6",
     phaseNumber: "Phase 6",
@@ -900,9 +876,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 7: HIGH-LEVEL SYSTEM DESIGN (HLD)
-  // ==========================================
   {
     id: "phase-7",
     phaseNumber: "Phase 7",
@@ -987,9 +960,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 8: COMPUTER NETWORKS & PROTOCOLS
-  // ==========================================
   {
     id: "phase-8",
     phaseNumber: "Phase 8",
@@ -1062,9 +1032,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 9: ADVANCED HARD-TIER ALGORITHMS
-  // ==========================================
   {
     id: "phase-9",
     phaseNumber: "Phase 9",
@@ -1137,9 +1104,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 10: DEEP-DIVE OPERATING SYSTEMS & KERNEL
-  // ==========================================
   {
     id: "phase-10",
     phaseNumber: "Phase 10",
@@ -1188,9 +1152,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 11: STRING ALGORITHMS & AUTOMATA
-  // ==========================================
   {
     id: "phase-11",
     phaseNumber: "Phase 11",
@@ -1263,9 +1224,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 12: NUMBER THEORY & MATHEMATICS
-  // ==========================================
   {
     id: "phase-12",
     phaseNumber: "Phase 12",
@@ -1374,9 +1332,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 13: ADVANCED TREE STRUCTURES
-  // ==========================================
   {
     id: "phase-13",
     phaseNumber: "Phase 13",
@@ -1485,9 +1440,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 14: COMPUTATIONAL GEOMETRY
-  // ==========================================
   {
     id: "phase-14",
     phaseNumber: "Phase 14",
@@ -1572,9 +1524,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 15: ADVANCED DYNAMIC PROGRAMMING
-  // ==========================================
   {
     id: "phase-15",
     phaseNumber: "Phase 15",
@@ -1671,9 +1620,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 16: ADVANCED GRAPH ALGORITHMS & FLOW
-  // ==========================================
   {
     id: "phase-16",
     phaseNumber: "Phase 16",
@@ -1806,9 +1752,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 17: GREEDY ALGORITHMS EXTENSIONS
-  // ==========================================
   {
     id: "phase-17",
     phaseNumber: "Phase 17",
@@ -1881,9 +1824,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 18: RANDOMIZED & PROBABILISTIC ALGORITHMS
-  // ==========================================
   {
     id: "phase-18",
     phaseNumber: "Phase 18",
@@ -1980,9 +1920,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 19: OOP & LOW-LEVEL DESIGN PATTERNS
-  // ==========================================
   {
     id: "phase-19",
     phaseNumber: "Phase 19",
@@ -2103,9 +2040,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 20: PRACTICAL SYSTEM DESIGN COMPONENTS
-  // ==========================================
   {
     id: "phase-20",
     phaseNumber: "Phase 20",
@@ -2190,9 +2124,6 @@ export const DSA_SECTIONS: PhaseSection[] = [
     ],
   },
 
-  // ==========================================
-  // PHASE 21: CRYPTOGRAPHY & SECURITY BASICS
-  // ==========================================
   {
     id: "phase-21",
     phaseNumber: "Phase 21",

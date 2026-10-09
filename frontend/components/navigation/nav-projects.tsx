@@ -32,7 +32,6 @@ export function NavProjects({
 }: NavProjectsProps) {
   const pathname = usePathname();
 
-  // Auto-expand only if current route belongs to this section
   const hasActiveItem = projects.some((p) => pathname === p.url);
   const [isOpen, setIsOpen] = useState(defaultOpen || hasActiveItem);
 

@@ -30,7 +30,6 @@ export function ScrollSideController() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // SVG Circle calculations for progress ring
   const radius = 18;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (scrollProgress / 100) * circumference;
@@ -130,5 +129,3 @@ export function ScrollSideController() {
     </AnimatePresence>
   );
 }
-
-

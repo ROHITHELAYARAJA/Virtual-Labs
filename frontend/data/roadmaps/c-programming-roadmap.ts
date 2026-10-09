@@ -1,9 +1,6 @@
 import { DSACategory } from "../dsa-topic-data";
 
 export const C_PROGRAMMING_ROADMAP_CATEGORIES: DSACategory[] = [
-  // ========================================================
-  // MODULE 1: BASICS & CONTROL FLOW (0/4)
-  // ========================================================
   {
     id: "c-basics-control-flow",
     name: "1. Basics & Control Flow",
@@ -47,9 +44,9 @@ export const C_PROGRAMMING_ROADMAP_CATEGORIES: DSACategory[] = [
 int main() {
     float x1 = 3.0, y1 = 4.0;
     float x2 = 7.0, y2 = 1.0;
-    
+
     float distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
-    
+
     printf("Point 1: (%.2f, %.2f)\\n", x1, y1);
     printf("Point 2: (%.2f, %.2f)\\n", x2, y2);
     printf("Euclidean Distance: %.4f\\n", distance);
@@ -245,9 +242,6 @@ int main() {
     ]
   },
 
-  // ========================================================
-  // MODULE 2: FUNCTIONS & RECURSION (0/2)
-  // ========================================================
   {
     id: "c-functions-recursion",
     name: "2. Functions & Recursion",
@@ -292,11 +286,11 @@ void swapByReference(int *a, int *b) {
 
 int main() {
     int x = 10, y = 20;
-    
+
     printf("Original: x = %d, y = %d\\n", x, y);
     swapByValue(x, y);
     printf("After swapByValue: x = %d, y = %d (Unchanged!)\\n", x, y);
-    
+
     swapByReference(&x, &y);
     printf("After swapByReference: x = %d, y = %d (Swapped!)\\n", x, y);
     return 0;
@@ -371,9 +365,6 @@ int main() {
     ]
   },
 
-  // ========================================================
-  // MODULE 3: ARRAYS & MATRICES (0/2)
-  // ========================================================
   {
     id: "c-arrays-matrices",
     name: "3. Arrays & Matrices",
@@ -502,9 +493,6 @@ int main() {
     ]
   },
 
-  // ========================================================
-  // MODULE 4: STRINGS & DYNAMIC MEMORY (0/2)
-  // ========================================================
   {
     id: "c-strings-dynamic-memory",
     name: "4. Strings & Dynamic Memory",
@@ -558,7 +546,7 @@ void reverse(char str[]) {
 int main() {
     char word[50] = "madam";
     printf("Is '%s' Palindrome: %s\\n", word, isPalindrome(word) ? "YES" : "NO");
-    
+
     char name[50] = "VirtualLabs";
     int n = 4, len = strlen(name);
     printf("Last %d chars: %s\\n", n, &name[len - n]);
@@ -643,9 +631,6 @@ int main() {
     ]
   },
 
-  // ========================================================
-  // MODULE 5: STRUCTURES & FILE HANDLING (0/5)
-  // ========================================================
   {
     id: "c-structures-files",
     name: "5. Structures & File Handling",

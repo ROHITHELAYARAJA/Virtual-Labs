@@ -32,7 +32,6 @@ function analyzeTree(tree: BinaryTreeNode | null): TreeAnalysis {
 
   if (!tree) return analysis
 
-  // Helper function to check if BST
   function isBSTUtil(node: BinaryTreeNode | null, min: number, max: number): boolean {
     if (!node) return true
 
@@ -42,13 +41,11 @@ function analyzeTree(tree: BinaryTreeNode | null): TreeAnalysis {
            isBSTUtil(node.right, node.value, max)
   }
 
-  // Helper function to get height
   function getHeight(node: BinaryTreeNode | null): number {
     if (!node) return 0
     return 1 + Math.max(getHeight(node.left), getHeight(node.right))
   }
 
-  // Helper function to check balance
   function checkBalance(node: BinaryTreeNode | null): number {
     if (!node) return 0
 
@@ -63,7 +60,6 @@ function analyzeTree(tree: BinaryTreeNode | null): TreeAnalysis {
     return Math.max(leftHeight, rightHeight) + 1
   }
 
-  // Traverse tree to collect data
   function traverse(node: BinaryTreeNode) {
     analysis.nodeCount++
 

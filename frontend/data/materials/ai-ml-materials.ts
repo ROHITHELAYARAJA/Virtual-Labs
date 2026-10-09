@@ -83,7 +83,7 @@ export const AI_ML_MATERIALS: Record<string, MaterialContent> = {
     indices = [i for i, val in enumerate(general_h) if val == ['?'] * len(specific_h)]
     for i in indices:
         general_h.remove(['?'] * len(specific_h))
-        
+
     return specific_h, general_h
 
 # Sample Weather Dataset
@@ -200,7 +200,7 @@ def entropy(target_col):
 def info_gain(data, split_attribute_name, target_name="Play"):
     # Total entropy
     total_entropy = entropy(data[target_name])
-    
+
     # Calculate weighted entropy of subsets
     vals, counts = np.unique(data[split_attribute_name], return_counts=True)
     weighted_entropy = sum(
@@ -977,17 +977,17 @@ model = models.Sequential([
     layers.Conv2D(32, (3, 3), activation='relu', input_shape=(64, 64, 3)),
     layers.BatchNormalization(),
     layers.MaxPooling2D((2, 2)),
-    
+
     # Block 2
     layers.Conv2D(64, (3, 3), activation='relu'),
     layers.BatchNormalization(),
     layers.MaxPooling2D((2, 2)),
-    
+
     # Block 3
     layers.Conv2D(128, (3, 3), activation='relu'),
     layers.BatchNormalization(),
     layers.MaxPooling2D((2, 2)),
-    
+
     # Classification Head
     layers.Flatten(),
     layers.Dense(128, activation='relu'),

@@ -35,7 +35,7 @@ const JAVA_CODE = `// Kadane's Algorithm - Maximum Subarray Sum
 public int maxSubArray(int[] nums) {
     int maxSum = nums[0];
     int currentSum = nums[0];
-    
+
     for (int i = 1; i < nums.length; i++) {
         if (currentSum + nums[i] < nums[i]) {
             currentSum = nums[i]; // Start new subarray
@@ -84,7 +84,6 @@ export function KadanesVisualizer() {
     let bestStart = 0;
     let bestEnd = 0;
 
-    // Step 0: Initialization
     generated.push({
       currentIndex: 0,
       array: [...arr],
@@ -148,7 +147,6 @@ export function KadanesVisualizer() {
       }
     }
 
-    // Final Completion Step
     generated.push({
       currentIndex: arr.length - 1,
       array: [...arr],

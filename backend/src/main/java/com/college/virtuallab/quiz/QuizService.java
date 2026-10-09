@@ -66,7 +66,6 @@ public class QuizService {
         QuizAttempt attempt = new QuizAttempt(user, quiz, correctCount, total, percentage, passed);
         QuizAttempt savedAttempt = quizAttemptRepository.save(attempt);
 
-        // Update student progress record
         Experiment experiment = quiz.getExperiment();
         if (experiment != null) {
             progressService.recordQuizAttempt(user, experiment, percentage, passed);

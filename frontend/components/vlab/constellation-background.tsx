@@ -96,10 +96,8 @@ export function ConstellationBackground() {
 
       ctx.clearRect(0, 0, width, height);
 
-      // Check if dark mode is active
       const isDark = document.documentElement.classList.contains("dark");
 
-      // Draw connection lines between particles
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -125,7 +123,6 @@ export function ConstellationBackground() {
           }
         }
 
-        // Draw connections to mouse
         const dx = particles[i].x - mouse.x;
         const dy = particles[i].y - mouse.y;
         const mouseDist = Math.sqrt(dx * dx + dy * dy);
@@ -140,7 +137,6 @@ export function ConstellationBackground() {
         }
       }
 
-      // Draw particle nodes / bubbles
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.x += p.vx;
@@ -158,14 +154,12 @@ export function ConstellationBackground() {
         ctx.arc(p.x, p.y, Math.max(currentRadius, 1), 0, Math.PI * 2);
 
         if (p.isRed) {
-          // Glowing Vibrant Crimson Bubble
           ctx.fillStyle = "rgba(225, 29, 72, 0.95)";
           ctx.shadowColor = "rgba(225, 29, 72, 0.8)";
           ctx.shadowBlur = 10;
           ctx.fill();
           ctx.shadowBlur = 0;
         } else {
-          // Sleek Slate Bubble
           ctx.fillStyle = isDark
             ? "rgba(148, 163, 184, 0.65)"
             : "rgba(71, 85, 105, 0.65)";

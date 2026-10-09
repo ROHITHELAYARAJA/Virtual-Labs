@@ -64,12 +64,10 @@ export function MaterialReaderDialog({
   const [savedNoteMsg, setSavedNoteMsg] = useState(false);
   const [expandedVivaIdx, setExpandedVivaIdx] = useState<number | null>(0);
 
-  // Retrieve matching structured study material
   const material: MaterialContent = resource
     ? getMaterialForResource(resource)
     : getMaterialForResource({ title: "Data Structures" });
 
-  // Load / Save student notes in localStorage
   useEffect(() => {
     if (resource?.id || material.id) {
       const key = `vlab_study_note_${resource?.id || material.id}`;
@@ -105,7 +103,6 @@ export function MaterialReaderDialog({
 
   if (!resource) return null;
 
-  // Determine available code languages for this material
   const codeLanguages = Object.keys(material.codeSnippets) as (keyof typeof material.codeSnippets)[];
   const currentLang = codeLanguages.includes(activeCodeLang as any)
     ? (activeCodeLang as keyof typeof material.codeSnippets)

@@ -27,19 +27,16 @@ export type DeepOsModule =
 export function DeepOSVisualizer({ initialModule = "virtual-memory" }: { initialModule?: DeepOsModule }) {
   const [activeModule, setActiveModule] = useState<DeepOsModule>(initialModule);
 
-  // 1. Virtual Memory State
   const [virtualAddr, setVirtualAddr] = useState<string>("0x7FFF1234");
   const [tlbState, setTlbState] = useState<"hit" | "miss" | "fault">("hit");
 
-  // 2. CFS Scheduler Tasks
   const [tasks, setTasks] = useState([
     { pid: 101, name: "nginx-worker", vruntime: 120, nice: 0, priority: "Normal" },
     { pid: 102, name: "postgres-query", vruntime: 85, nice: -5, priority: "High" },
     { pid: 103, name: "cron-job", vruntime: 240, nice: 10, priority: "Low" },
   ]);
 
-  // 3. Inode FS State
-  const [inodeFileSize, setInodeFileSize] = useState<number>(64); // KB
+  const [inodeFileSize, setInodeFileSize] = useState<number>(64);
 
   return (
     <div className="space-y-6">

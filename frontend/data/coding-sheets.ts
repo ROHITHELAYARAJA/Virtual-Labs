@@ -18,7 +18,7 @@ export interface CodingProblem {
   sheet: SheetType[];
   category: string;
   difficulty: DifficultyLevel;
-  importanceRating: number; // out of 10
+  importanceRating: number;
   leetcodeUrl: string;
   gfgUrl?: string;
   hackerrankUrl?: string;
@@ -31,9 +31,6 @@ export interface CodingProblem {
 }
 
 export const CODING_PROBLEMS: CodingProblem[] = [
-  // ==========================================
-  // TWO POINTERS ALGORITHM PATTERN
-  // ==========================================
   {
     id: "two-sum-ii-input-array-is-sorted",
     problemNumber: 167,
@@ -308,9 +305,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["Accenture"]
   },
 
-  // ==========================================
-  // TWO POINTERS
-  // ==========================================
   {
     id: "is-subsequence",
     problemNumber: 392,
@@ -325,9 +319,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS", "Infosys", "Wipro"]
   },
 
-  // ==========================================
-  // SLIDING WINDOW
-  // ==========================================
   {
     id: "minimum-size-subarray-sum",
     problemNumber: 209,
@@ -384,9 +375,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS Digital", "Cognizant"]
   },
 
-  // ==========================================
-  // MATRIX
-  // ==========================================
   {
     id: "valid-sudoku",
     problemNumber: 36,
@@ -459,9 +447,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["Infosys", "Cognizant"]
   },
 
-  // ==========================================
-  // HASHMAP / SET
-  // ==========================================
   {
     id: "ransom-note",
     problemNumber: 383,
@@ -586,9 +571,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS Digital", "Infosys", "Cognizant", "Accenture"]
   },
 
-  // ==========================================
-  // INTERVALS
-  // ==========================================
   {
     id: "summary-ranges",
     problemNumber: 228,
@@ -644,9 +626,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["Cognizant", "Accenture"]
   },
 
-  // ==========================================
-  // STACK
-  // ==========================================
   {
     id: "valid-parentheses",
     problemNumber: 20,
@@ -716,9 +695,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["Accenture"]
   },
 
-  // ==========================================
-  // LINKED LIST
-  // ==========================================
   {
     id: "linked-list-cycle",
     problemNumber: 141,
@@ -871,9 +847,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS Digital", "Infosys DSE", "Cognizant", "Accenture"]
   },
 
-  // ==========================================
-  // BINARY TREE GENERAL & BFS
-  // ==========================================
   {
     id: "maximum-depth-of-binary-tree",
     problemNumber: 104,
@@ -1122,9 +1095,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS Digital", "Infosys", "Cognizant"]
   },
 
-  // ==========================================
-  // BINARY SEARCH TREE (BST)
-  // ==========================================
   {
     id: "minimum-absolute-difference-in-bst",
     problemNumber: 530,
@@ -1167,9 +1137,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS", "Infosys", "Wipro", "Cognizant", "Accenture"]
   },
 
-  // ==========================================
-  // GRAPH GENERAL & BFS
-  // ==========================================
   {
     id: "number-of-islands",
     problemNumber: 200,
@@ -1293,9 +1260,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS Digital", "Accenture"]
   },
 
-  // ==========================================
-  // TRIE
-  // ==========================================
   {
     id: "implement-trie-prefix-tree",
     problemNumber: 208,
@@ -1337,9 +1301,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS Digital", "Accenture"]
   },
 
-  // ==========================================
-  // BACKTRACKING
-  // ==========================================
   {
     id: "letter-combinations-of-a-phone-number",
     problemNumber: 17,
@@ -1437,9 +1398,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS", "Infosys", "Cognizant", "Accenture"]
   },
 
-  // ==========================================
-  // DIVIDE & CONQUER / KADANE'S / BINARY SEARCH
-  // ==========================================
   {
     id: "convert-sorted-array-to-binary-search-tree",
     problemNumber: 108,
@@ -1620,9 +1578,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS Digital", "Accenture"]
   },
 
-  // ==========================================
-  // HEAP / BIT MANIPULATION / MATH
-  // ==========================================
   {
     id: "kth-largest-element-in-an-array",
     problemNumber: 215,
@@ -1838,9 +1793,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["Accenture"]
   },
 
-  // ==========================================
-  // 1D DP & MULTIDIMENSIONAL DP
-  // ==========================================
   {
     id: "climbing-stairs",
     problemNumber: 70,
@@ -2035,9 +1987,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS", "Infosys", "Cognizant"]
   },
 
-  // ==========================================
-  // LEETCODE 75 SPECIFIC PROBLEMS
-  // ==========================================
   {
     id: "merge-strings-alternately",
     problemNumber: 1768,
@@ -2821,9 +2770,6 @@ export const CODING_PROBLEMS: CodingProblem[] = [
     serviceCompanies: ["TCS", "Infosys", "Cognizant"]
   },
 
-  // ==========================================
-  // TOP SQL 50 INTERVIEW PROBLEMS
-  // ==========================================
   {
     id: "recyclable-and-low-fat-products",
     problemNumber: 1757,

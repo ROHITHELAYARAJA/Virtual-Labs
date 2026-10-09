@@ -196,7 +196,6 @@ export default function StudentDashboardPage() {
                 <LogOut className="h-3.5 w-3.5" /> Sign Out
               </Button>
 
-
             </motion.div>
           </div>
 

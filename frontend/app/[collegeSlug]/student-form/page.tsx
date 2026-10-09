@@ -66,7 +66,6 @@ export default function StudentFormPage({ params }: StudentFormProps) {
       window.dispatchEvent(new Event("storage"));
     }
 
-    // Redirect directly to the Virtual Labs Workspace
     router.push("/labs");
   };
 

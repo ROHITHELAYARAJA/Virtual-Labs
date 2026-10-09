@@ -38,10 +38,10 @@ const JAVA_CODE_TWO_SUM = `// Two Pointers - Two Sum II (Sorted Array)
 public int[] twoSum(int[] numbers, int target) {
     int left = 0;
     int right = numbers.length - 1;
-    
+
     while (left < right) {
         int currentSum = numbers[left] + numbers[right];
-        
+
         if (currentSum == target) {
             return new int[]{left + 1, right + 1}; // 1-based indices
         } else if (currentSum < target) {
@@ -58,11 +58,11 @@ public int maxArea(int[] height) {
     int left = 0;
     int right = height.length - 1;
     int maxArea = 0;
-    
+
     while (left < right) {
         int currentArea = (right - left) * Math.min(height[left], height[right]);
         maxArea = Math.max(maxArea, currentArea);
-        
+
         if (height[left] < height[right]) {
             left++;  // Move shorter line inward
         } else {
@@ -104,7 +104,6 @@ export function TwoPointersVisualizer() {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [speedMs, setSpeedMs] = useState<number>(1000);
 
-  // Generate simulation steps based on mode and inputs
   const generateSteps = (selectedMode: TwoPointersMode, rawArrStr: string, rawTargetStr: string) => {
     let arr = rawArrStr
       .split(",")
@@ -118,7 +117,6 @@ export function TwoPointersVisualizer() {
     const generated: ExecutionStep[] = [];
 
     if (selectedMode === "two-sum-ii") {
-      // Sort array for Two Sum II
       arr.sort((a, b) => a - b);
       const target = parseInt(rawTargetStr) || 26;
 
@@ -249,12 +247,10 @@ export function TwoPointersVisualizer() {
     setIsPlaying(false);
   };
 
-  // Run steps generation whenever inputs change
   useEffect(() => {
     generateSteps(mode, inputArrayStr, targetInputStr);
   }, [mode, inputArrayStr, targetInputStr]);
 
-  // Handle Play/Pause Auto-Timer
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isPlaying) {

@@ -27,7 +27,6 @@ export default function CustomRecursionVisualizerPage() {
   const [activeCall, setActiveCall] = useState("factorial(4)");
   const [key, setKey] = useState(0);
 
-  // Load saved recursion state from localStorage safely
   useEffect(() => {
     try {
       const saved = localStorage.getItem("dsa_custom_recursion_state");
@@ -68,7 +67,6 @@ export default function CustomRecursionVisualizerPage() {
     setActiveCall(functionCall);
     setKey((prev) => prev + 1);
 
-    // Persist to localStorage
     try {
       localStorage.setItem("dsa_custom_recursion_state", JSON.stringify({
         ret: returnType,

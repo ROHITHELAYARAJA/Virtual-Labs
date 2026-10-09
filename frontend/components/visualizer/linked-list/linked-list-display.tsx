@@ -16,7 +16,6 @@ interface LinkedListDisplayProps {
 }
 
 function getNodeAddress(id: string): string {
-  // Generate a realistic hexadecimal simulated memory address from the node ID
   const num = parseInt(id.replace(/\D/g, "") || "1", 10)
   const hex = (0x1000 + num * 0x18).toString(16).toUpperCase()
   return `0x${hex}`
@@ -38,14 +37,14 @@ export function LinkedListDisplay({
     while (current) {
       const node = list.nodes.get(current)
       if (!node) break
-      
+
       chain.push(current)
       visited.add(current)
-      
+
       if (node.next && visited.has(node.next)) {
         break
       }
-      
+
       current = node.next
     }
 

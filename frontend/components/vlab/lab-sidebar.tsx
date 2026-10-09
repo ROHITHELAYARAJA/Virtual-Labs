@@ -46,7 +46,6 @@ interface LabSidebarProps {
   className?: string;
 }
 
-// Fixed 10-Tab Structure specified in Virtual Labs Prompts
 const DEFAULT_TABS: { id: LabTab; label: string; icon: React.ElementType }[] = [
   { id: "introduction", label: "Introduction", icon: BookOpen },
   { id: "objective", label: "Objective", icon: Target },
@@ -60,7 +59,6 @@ const DEFAULT_TABS: { id: LabTab; label: string; icon: React.ElementType }[] = [
   { id: "feedback", label: "Feedback", icon: MessageSquareHeart },
 ];
 
-// Official Tabs for Artificial Intelligence Lab (IIIT Hyderabad / MoE Virtual Labs)
 const AI_LAB_TABS: { id: LabTab; label: string; icon: React.ElementType }[] = [
   { id: "introduction", label: "Introduction", icon: BookOpen },
   { id: "objective", label: "Objective", icon: Target },
@@ -84,7 +82,6 @@ export function LabSidebar({
 }: LabSidebarProps) {
   const { progress } = useStudentProgress();
 
-  // Compute real progress: completed experiments that belong to this lab
   const computedProgress = useMemo(() => {
     if (progressPercent !== undefined) return progressPercent;
     if (!labId) return 0;

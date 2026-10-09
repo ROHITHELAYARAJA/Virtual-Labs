@@ -37,7 +37,7 @@ export function PolicyIterationVisualizer() {
   const [gridSize, setGridSize] = useState<number>(3);
   const [discountFactor, setDiscountFactor] = useState<number>(0.9);
   const [defaultReward, setDefaultReward] = useState<number>(0.0);
-  const [speed, setSpeed] = useState<number>(50); // slider: 10 to 100
+  const [speed, setSpeed] = useState<number>(50);
   const [iterations, setIterations] = useState<number>(0);
   const [subIterations, setSubIterations] = useState<number>(0);
   const [showInstructions, setShowInstructions] = useState<boolean>(false);
@@ -48,7 +48,6 @@ export function PolicyIterationVisualizer() {
     "Calculation of value function of a state appears here"
   );
 
-  // Initialize standard 3x3 grid matching Screenshot 104625
   const createInitialGrid = useCallback((size: number): GridCell[][] => {
     const grid: GridCell[][] = [];
     for (let r = 0; r < size; r++) {
@@ -60,10 +59,6 @@ export function PolicyIterationVisualizer() {
         let value = 0;
 
         if (size === 3) {
-          // Exactly matching Screenshot 2026-09-30 104625.png:
-          // Top row: [0,0]=LEFT, [0,1]=RIGHT, [0,2]=GOAL (+1.000 green)
-          // Middle row: [1,0]=BLOCKED (black), [1,1]=LEFT, [1,2]=TRAP (-1.000 red)
-          // Bottom row: [2,0]=LEFT, [2,1]=LEFT, [2,2]=LEFT
           if (r === 0 && c === 1) policy = "RIGHT";
           if (r === 0 && c === 2) {
             type = "goal";
@@ -81,7 +76,6 @@ export function PolicyIterationVisualizer() {
             value = -1.0;
           }
         } else {
-          // 4x4 default grid setup
           if (r === 0 && c === size - 1) {
             type = "goal";
             reward = 1.0;
@@ -104,7 +98,6 @@ export function PolicyIterationVisualizer() {
 
   const [grid, setGrid] = useState<GridCell[][]>(() => createInitialGrid(3));
 
-  // Reset grid whenever size changes
   const handleGridSizeChange = (newSize: number) => {
     setGridSize(newSize);
     setGrid(createInitialGrid(newSize));
@@ -126,22 +119,19 @@ export function PolicyIterationVisualizer() {
     setCalculationLog("Calculation of value function of a state appears here");
   };
 
-  // Helper to determine next state given an action (with boundary & obstacle check)
   const getNextState = (r: number, c: number, action: ActionDirection, currentGrid: GridCell[][]) => {
     const { dr, dc } = ACTION_VECTORS[action];
     const nr = r + dr;
     const nc = c + dc;
     if (nr < 0 || nr >= gridSize || nc < 0 || nc >= gridSize) {
-      return { r, c }; // hit outer wall, stays in place
+      return { r, c };
     }
     if (currentGrid[nr][nc].type === "blocked") {
-      return { r, c }; // hit obstacle, stays in place
+      return { r, c };
     }
     return { r: nr, c: nc };
   };
 
-  // Calculate expected return for a state given an action
-  // Uses standard Gridworld transition dynamics: 0.8 intended action, 0.1 drift right, 0.1 drift left
   const getQValue = (r: number, c: number, action: ActionDirection, currentGrid: GridCell[][]) => {
     const perpendiculars: Record<ActionDirection, [ActionDirection, ActionDirection]> = {
       UP: ["LEFT", "RIGHT"],
@@ -166,12 +156,10 @@ export function PolicyIterationVisualizer() {
     return reward + discountFactor * expectedFutureVal;
   };
 
-  // Single step evaluation for a cell ("Next Value")
   const stepNextValue = useCallback(() => {
     if (isOptimal) return;
 
     setGrid((prevGrid) => {
-      // Find non-terminal, non-blocked cells in order
       const cellsToEval: { r: number; c: number }[] = [];
       for (let r = 0; r < gridSize; r++) {
         for (let c = 0; c < gridSize; c++) {
@@ -183,7 +171,6 @@ export function PolicyIterationVisualizer() {
 
       if (cellsToEval.length === 0) return prevGrid;
 
-      // Determine which cell to update based on subIterations
       const cellIdx = subIterations % cellsToEval.length;
       const target = cellsToEval[cellIdx];
       setCurrentEvalCell(target);
@@ -192,7 +179,6 @@ export function PolicyIterationVisualizer() {
       const qVal = getQValue(target.r, target.c, cell.policy, prevGrid);
       const roundedVal = Math.round(qVal * 1000) / 1000;
 
-      // Update calculation display string matching screenshot
       setCalculationLog(
         `V(${target.r + 1},${target.c + 1}) = R + γ ∑ P(s'|s,π) V(s') = ${defaultReward.toFixed(1)} + (${discountFactor.toFixed(1)} × ${((qVal - defaultReward) / (discountFactor || 1)).toFixed(3)}) = ${roundedVal.toFixed(3)} [Action: ${cell.policy}]`
       );
@@ -202,7 +188,6 @@ export function PolicyIterationVisualizer() {
 
       setSubIterations((prev) => prev + 1);
 
-      // If we reached the end of all cells, increment iteration count
       if ((subIterations + 1) % cellsToEval.length === 0) {
         setIterations((prev) => prev + 1);
       }
@@ -211,14 +196,12 @@ export function PolicyIterationVisualizer() {
     });
   }, [discountFactor, defaultReward, gridSize, isOptimal, subIterations]);
 
-  // Full Policy Iteration Cycle (Evaluation to convergence + Policy Improvement)
   const stepNextIteration = useCallback(() => {
     if (isOptimal) return;
 
     setGrid((prevGrid) => {
       const nextGrid = prevGrid.map((row) => row.map((c) => ({ ...c })));
 
-      // 1. Policy Evaluation (iterate until max difference < 0.001)
       let delta = 1;
       let evalPasses = 0;
       while (delta > 0.001 && evalPasses < 100) {
@@ -236,7 +219,6 @@ export function PolicyIterationVisualizer() {
         }
       }
 
-      // 2. Policy Improvement (greedy action selection)
       let policyChanged = false;
       for (let r = 0; r < gridSize; r++) {
         for (let c = 0; c < gridSize; c++) {
@@ -276,7 +258,6 @@ export function PolicyIterationVisualizer() {
     });
   }, [discountFactor, defaultReward, gridSize, isOptimal, iterations]);
 
-  // Handle cell click to cycle through cell types
   const handleCellClick = (r: number, c: number) => {
     if (isRunning) return;
 
@@ -304,7 +285,6 @@ export function PolicyIterationVisualizer() {
     setIsOptimal(false);
   };
 
-  // Timer loop for Auto Run
   useEffect(() => {
     let timer: NodeJS.Timeout | null = null;
     if (isRunning && !isOptimal) {

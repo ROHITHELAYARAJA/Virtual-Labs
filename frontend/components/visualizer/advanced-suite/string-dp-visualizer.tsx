@@ -10,11 +10,9 @@ export function StringDPVisualizer() {
   const [algo, setAlgo] = useState<"lcs" | "edit">("lcs");
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // String 1 = "ABCDE", String 2 = "ACE"
   const s1 = "ABCDE";
   const s2 = "ACE";
 
-  // LCS 2D DP matrix steps
   const lcsSteps = [
     { r: 0, c: 0, val: 0, desc: "Initialize (M+1)×(N+1) DP table with zeros for empty string prefixes." },
     { r: 1, c: 1, val: 1, desc: "Match 'A' == 'A'! dp[1][1] = 1 + dp[0][0] = 1." },
@@ -24,7 +22,6 @@ export function StringDPVisualizer() {
     { r: 5, c: 3, val: 3, desc: "🎉 Match 'E' == 'E'! dp[5][3] = 1 + dp[4][2] = 3. Longest Common Subsequence length = 3 ('ACE')!" }
   ];
 
-  // Levenshtein Edit Distance steps: "HORSE" to "ROS"
   const editSteps = [
     { desc: "Transform 'HORSE' into 'ROS'. Initialize base insertion/deletion cost margins." },
     { desc: "Match 'R' with 'R': Cost = 0 (carry diagonal cost)." },

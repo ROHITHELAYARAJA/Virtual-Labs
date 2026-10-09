@@ -31,7 +31,6 @@ export function AVLTreeControls({
     setIsPlayingDemo(true);
     onClear();
 
-    // Sequence designed to trigger LL, RR, and LR rotations
     const sequence = [30, 20, 10, 25, 40, 50, 45];
     sequence.forEach((num, idx) => {
       setTimeout(() => {

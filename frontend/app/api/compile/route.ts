@@ -28,13 +28,9 @@ export async function POST(req: NextRequest) {
 
     const lang = String(language).toLowerCase();
 
-    // -------------------------------------------------------------------------
-    // 1. JAVA COMPILATION & EXECUTION (Local OpenJDK 21)
-    // -------------------------------------------------------------------------
     if (lang === "java") {
       const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "vlab_java_"));
       try {
-        // Extract public class name or first declared class
         const publicClassMatch = code.match(/public\s+class\s+([A-Za-z0-9_]+)/);
         const anyClassMatch = code.match(/class\s+([A-Za-z0-9_]+)/);
         const className = publicClassMatch ? publicClassMatch[1] : (anyClassMatch ? anyClassMatch[1] : "Solution");
@@ -43,7 +39,6 @@ export async function POST(req: NextRequest) {
 
         fs.writeFileSync(filePath, code, "utf8");
 
-        // Step 1: javac compilation
         const javac = spawnSync("javac", ["-encoding", "UTF-8", fileName], {
           cwd: tmpDir,
           encoding: "utf8",
@@ -63,7 +58,6 @@ export async function POST(req: NextRequest) {
           });
         }
 
-        // Step 2: java execution
         const java = spawnSync("java", ["-cp", ".", className], {
           cwd: tmpDir,
           input: stdin,
@@ -105,9 +99,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // -------------------------------------------------------------------------
-    // 2. PYTHON EXECUTION (Local Python 3.14)
-    // -------------------------------------------------------------------------
     if (lang === "python" || lang === "py") {
       const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "vlab_py_"));
       try {
@@ -149,9 +140,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // -------------------------------------------------------------------------
-    // 3. C++ EXECUTION (GCC-head via Wandbox API with syntax validation fallback)
-    // -------------------------------------------------------------------------
     if (lang === "cpp" || lang === "c++" || lang === "c") {
       try {
         const wandboxRes = await fetch("https://wandbox.org/api/compile.json", {
@@ -195,7 +183,6 @@ export async function POST(req: NextRequest) {
         console.warn("Wandbox API unreachable, running syntax check fallback", wandboxErr);
       }
 
-      // Fallback C++ syntax validation
       const syntaxErrors = validateCppSyntax(code);
       const durationMs = Date.now() - startTime;
 
@@ -250,14 +237,12 @@ function validateCppSyntax(code: string): string[] {
     const lineNum = i + 1;
     const trimmed = line.trim();
 
-    // Check class or struct missing opening brace
     if (/^(?:class|struct)\s+[A-Za-z0-9_]+$/.test(trimmed)) {
       errors.push(`solution.cpp:${lineNum}: error: expected '{' after class definition`);
       errors.push(line);
       errors.push(" ".repeat(line.length) + "^");
     }
 
-    // Check missing semicolon after statements
     if (
       trimmed.length > 0 &&
       !trimmed.startsWith("//") &&

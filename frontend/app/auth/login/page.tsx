@@ -80,9 +80,6 @@ export default function AuthLoginPage() {
     loading: authLoading
   } = useAuth();
 
-  // 1. Ordered cohorts: 2nd year, 3rd year, 4th year
-  // 2. Background Shading / Placeholder: 92252423172
-  // 3. Background Shading / Placeholder: ROHITH E
   const [selectedCohort, setSelectedCohort] = useState<CohortType>("III AIDS");
   const [registerNumber, setRegisterNumber] = useState("");
   const [password, setPassword] = useState("");
@@ -92,7 +89,6 @@ export default function AuthLoginPage() {
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
 
-  // Auto-detect cohort as student types register number
   useEffect(() => {
     const clean = registerNumber.trim();
     if (clean.startsWith("922525")) {
@@ -104,7 +100,6 @@ export default function AuthLoginPage() {
     }
   }, [registerNumber]);
 
-  // Check caps lock status on keydown
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.getModifierState && e.getModifierState("CapsLock")) {
       setCapsLockActive(true);
@@ -121,7 +116,6 @@ export default function AuthLoginPage() {
     const defaultReg = COHORT_CONFIG[selectedCohort].sampleReg;
     const defaultPass = COHORT_CONFIG[selectedCohort].sampleName;
 
-    // Use typed value or fallback to shaded placeholder default
     const cleanReg = (registerNumber.trim() || defaultReg).toUpperCase();
     const cleanPass = (password.trim() || defaultPass).toUpperCase();
 
@@ -158,7 +152,7 @@ export default function AuthLoginPage() {
       {/* Main container with generous top spacing to prevent navbar overlap (fixes edge case in Image 1) */}
       <main className="flex-1 flex flex-col items-center justify-start pt-44 sm:pt-48 pb-20 px-4">
         <div className="w-full max-w-md p-6 sm:p-8 bg-white dark:bg-card border border-border shadow-2xl rounded-2xl space-y-6">
-          
+
           {/* Header Brand */}
           <div className="text-center space-y-2">
             <div className="inline-flex items-center justify-center w-14 h-14 mb-1">
@@ -255,7 +249,7 @@ export default function AuthLoginPage() {
             /* 2. REGISTER NUMBER & PASSWORD (CAPS LOCK) LOGIN FORM     */
             /* ======================================================== */
             <div className="space-y-5 pt-1">
-              
+
               {/* Cohort Tabs: Ordered 2nd year, 3rd year, 4th year */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between px-0.5">
@@ -308,7 +302,7 @@ export default function AuthLoginPage() {
 
               {/* Login Form */}
               <form onSubmit={handleLogin} className="space-y-4">
-                
+
                 {/* 1. Register Number Input (Default: 92252423172) */}
                 <div className="space-y-1.5 text-left">
                   <div className="flex items-center justify-between">
@@ -372,7 +366,7 @@ export default function AuthLoginPage() {
                       )}
                     </button>
                   </div>
-                  
+
                   {/* Caps Lock Indicator */}
                   {capsLockActive && (
                     <p className="text-[11px] text-amber-600 dark:text-amber-400 flex items-center gap-1 font-mono pt-0.5">

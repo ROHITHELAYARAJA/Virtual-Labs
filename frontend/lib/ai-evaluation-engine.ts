@@ -6,12 +6,12 @@
  */
 
 export interface CodeReviewResult {
-  score: number; // 0 - 100
+  score: number;
   grade: "A+" | "A" | "B+" | "B" | "C" | "Needs Work";
   summary: string;
   solidAudit: {
     principle: string;
-    score: number; // 0 - 100
+    score: number;
     status: "Pass" | "Warning" | "Critical";
     feedback: string;
   }[];
@@ -21,9 +21,9 @@ export interface CodeReviewResult {
 }
 
 export interface StarEvaluationResult {
-  score: number; // 0 - 100
-  ownershipRatio: number; // percentage of "I" vs "We"
-  actionDensity: number; // percentage of content focused on Action
+  score: number;
+  ownershipRatio: number;
+  actionDensity: number;
   quantifiableMetricsCount: number;
   rubricScores: {
     category: string;
@@ -47,7 +47,6 @@ export function evaluateMachineCodingCode(
   const strengths: string[] = [];
   const improvements: string[] = [];
 
-  // 1. Check Interface / Abstraction usage (DIP & ISP)
   const hasInterface = 
     codeLower.includes("interface ") || 
     codeLower.includes("abstract class ") || 
@@ -62,7 +61,6 @@ export function evaluateMachineCodingCode(
     improvements.push("Introduce explicit interfaces (e.g. FeeStrategy, PricingPolicy) to decouple components.");
   }
 
-  // 2. Check for Strategy / Polymorphism (OCP)
   const hasStrategy = 
     codeLower.includes("strategy") || 
     codeLower.includes("switch (") || 
@@ -76,7 +74,6 @@ export function evaluateMachineCodingCode(
     improvements.push("Consider Strategy pattern for business rules (pricing, dispatching) to avoid large conditional statements.");
   }
 
-  // 3. Check for Enums / Type Safety
   const hasEnums = 
     codeLower.includes("enum ") || 
     codeLower.includes("type ") || 
@@ -89,7 +86,6 @@ export function evaluateMachineCodingCode(
     improvements.push("Use domain Enums for vehicle types, spots, or statuses instead of raw strings or integers.");
   }
 
-  // 4. Check Thread-Safety & Concurrency
   const hasConcurrency = 
     codeLower.includes("synchronized") || 
     codeLower.includes("lock") || 
@@ -104,7 +100,6 @@ export function evaluateMachineCodingCode(
     improvements.push("Add concurrency guards (e.g. ReentrantLock, synchronized blocks) for shared state mutations.");
   }
 
-  // 5. Exception Handling
   const hasExceptionHandling = 
     codeLower.includes("throw ") || 
     codeLower.includes("exception") || 
@@ -180,7 +175,6 @@ export function evaluateStarStory(
   const fullText = `${situation} ${task} ${action} ${result}`;
   const words = fullText.toLowerCase().split(/\s+/).filter(Boolean);
 
-  // 1. Calculate "I" vs "We" Ownership Ratio
   let iCount = 0;
   let weCount = 0;
   words.forEach(w => {
@@ -190,16 +184,13 @@ export function evaluateStarStory(
   const totalOwnershipPronouns = iCount + weCount;
   const ownershipRatio = totalOwnershipPronouns === 0 ? 80 : Math.round((iCount / totalOwnershipPronouns) * 100);
 
-  // 2. Action Density (% of story in Action section)
   const totalLength = (situation.length + task.length + action.length + result.length) || 1;
   const actionDensity = Math.round((action.length / totalLength) * 100);
 
-  // 3. Detect Quantifiable Metrics (numbers, %, $, ms, qps, etc.)
   const metricsRegex = /(\d+(\.\d+)?%?|\$\d+|\d+\s?(ms|sec|s|qps|tb|gb|users|k|m|million|billion))/gi;
   const matches = fullText.match(metricsRegex) || [];
   const metricsCount = matches.length;
 
-  // Compute Rubric Scores
   const ownershipScore = ownershipRatio >= 70 ? 95 : ownershipRatio >= 50 ? 80 : 60;
   const actionScore = (actionDensity >= 50 && actionDensity <= 70) ? 95 : actionDensity >= 40 ? 82 : 65;
   const metricsScore = metricsCount >= 3 ? 95 : metricsCount >= 1 ? 80 : 55;

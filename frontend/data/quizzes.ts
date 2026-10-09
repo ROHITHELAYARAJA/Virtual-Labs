@@ -17,9 +17,6 @@ export interface Quiz {
 }
 
 export const QUIZZES_DATA: Record<string, Quiz> = {
-  // ========================================================
-  // 1. DATA STRUCTURES (JAVA) EXPERIMENTS & VISUALIZERS
-  // ========================================================
   "stack-quiz": {
     id: "stack-quiz",
     experimentId: "stack-operations",
@@ -387,9 +384,6 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
     ]
   },
 
-  // ========================================================
-  // 2. OPERATING SYSTEMS (C) EXPERIMENTS
-  // ========================================================
   "cpu-scheduling-quiz": {
     id: "cpu-scheduling-quiz",
     experimentId: "cpu-scheduling-fcfs-sjf",
@@ -619,9 +613,6 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
     ]
   },
 
-  // ========================================================
-  // 3. ARTIFICIAL INTELLIGENCE EXPERIMENTS
-  // ========================================================
   "astar-search-quiz": {
     id: "astar-search-quiz",
     experimentId: "astar-search-8puzzle",
@@ -739,9 +730,6 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
     ]
   },
 
-  // ========================================================
-  // 4. DATABASE MANAGEMENT SYSTEMS EXPERIMENTS
-  // ========================================================
   "sql-ddl-dml-quiz": {
     id: "sql-ddl-dml-quiz",
     experimentId: "sql-ddl-dml-operations",
@@ -793,9 +781,6 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
     ]
   },
 
-  // ========================================================
-  // 5. MACHINE LEARNING EXPERIMENTS
-  // ========================================================
   "ml-regression-quiz": {
     id: "ml-regression-quiz",
     experimentId: "scikit-learn-linear-regression",
@@ -862,9 +847,6 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
     ]
   },
 
-  // ========================================================
-  // 6. BIG DATA ANALYTICS EXPERIMENTS
-  // ========================================================
   "hdfs-quiz": {
     id: "hdfs-quiz",
     experimentId: "hadoop-hdfs-cluster-management",
@@ -921,9 +903,6 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
     ]
   },
 
-  // ========================================================
-  // 7. CLOUD SERVICE MANAGEMENT EXPERIMENTS
-  // ========================================================
   "aws-ec2-quiz": {
     id: "aws-ec2-quiz",
     experimentId: "aws-ec2-vpc-infrastructure",
@@ -985,9 +964,6 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
     ]
   },
 
-  // ========================================================
-  // 8. COMPUTER NETWORKS EXPERIMENTS
-  // ========================================================
   "crc-quiz": {
     id: "crc-quiz",
     experimentId: "crc-error-detection",
@@ -1044,9 +1020,6 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
     ]
   },
 
-  // ========================================================
-  // 9. DSA VISUALIZER TOPIC QUIZZES (CORE SUITE)
-  // ========================================================
   "dsa-binary-search-quiz": {
     id: "dsa-binary-search-quiz",
     experimentId: "binary-search",
@@ -1195,9 +1168,6 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
     ]
   },
 
-  // ========================================================
-  // 10. AUTONOMOUS C PROGRAMMING 8-WEEK EVALUATION ASSESSMENTS
-  // ========================================================
   "quiz-c-1": {
     id: "quiz-c-1",
     experimentId: "c-exp-1",
@@ -1691,9 +1661,6 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
     ]
   },
 
-  // ========================================================
-  // 12. ARTIFICIAL INTELLIGENCE I (IIITH OFFICIAL QUIZZES)
-  // ========================================================
   "quiz-ai-policy-iteration": {
     id: "quiz-ai-policy-iteration",
     experimentId: "policy-iteration",
@@ -1993,7 +1960,7 @@ export const QUIZZES_DATA: Record<string, Quiz> = {
 export function getQuizForExperiment(expId: string, customTitle?: string): Quiz {
   if (QUIZZES_DATA[expId]) return QUIZZES_DATA[expId];
   if (QUIZZES_DATA[`${expId}-quiz`]) return QUIZZES_DATA[`${expId}-quiz`];
-  
+
   const found = Object.values(QUIZZES_DATA).find(
     (q) => q.experimentId === expId || q.id === expId || expId.includes(q.experimentId) || (q.experimentId && q.experimentId.includes(expId))
   );
@@ -2072,4 +2039,3 @@ export function getQuizForExperiment(expId: string, customTitle?: string): Quiz 
     ]
   };
 }
-

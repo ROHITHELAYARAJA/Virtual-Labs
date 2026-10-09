@@ -126,7 +126,7 @@ export function LinkedListControls({
                 <span className="text-[11px] text-muted-foreground font-mono">Head</span>
               </div>
             </div>
-            
+
             <div className="flex gap-2">
               <Input
                 type="number"

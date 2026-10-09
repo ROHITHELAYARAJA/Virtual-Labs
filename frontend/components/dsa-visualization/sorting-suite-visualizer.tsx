@@ -53,7 +53,6 @@ export function SortingSuiteVisualizer({ defaultAlgo = "bubble" }: { defaultAlgo
   const [speedMs, setSpeedMs] = useState<number>(600);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Generate Sorting Steps
   const generateSteps = (input: number[], type: SortingAlgorithmType) => {
     const list: SortingStep[] = [];
     const arr = [...input];
@@ -232,7 +231,6 @@ export function SortingSuiteVisualizer({ defaultAlgo = "bubble" }: { defaultAlgo
       }
       for (let i = 0; i < n; i++) sortedSet.add(i);
     } else {
-      // General Quick/Merge simulated trace
       const sortedCopy = [...arr].sort((a, b) => a - b);
       list.push({
         array: [...sortedCopy],
@@ -249,7 +247,6 @@ export function SortingSuiteVisualizer({ defaultAlgo = "bubble" }: { defaultAlgo
       });
     }
 
-    // Final completed step
     list.push({
       array: [...arr],
       comparingIndices: [],
@@ -272,7 +269,6 @@ export function SortingSuiteVisualizer({ defaultAlgo = "bubble" }: { defaultAlgo
     generateSteps(array, algo);
   }, [array, algo]);
 
-  // Autoplay
   useEffect(() => {
     if (isPlaying) {
       timerRef.current = setInterval(() => {

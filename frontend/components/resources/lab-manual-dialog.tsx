@@ -27,7 +27,6 @@ export function LabManualDialog({ isOpen, onClose, resource }: LabManualDialogPr
 
   if (!resource) return null;
 
-  // Sample experiments template for laboratory manual
   const experiments = [
     {
       id: 1,

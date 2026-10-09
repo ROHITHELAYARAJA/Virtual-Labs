@@ -1,9 +1,6 @@
 import { DSACategory } from "../dsa-topic-data";
 
 export const OOPS_JAVA_ROADMAP_CATEGORIES: DSACategory[] = [
-  // ========================================================
-  // MODULE 1: CLASSES & OBJECTS FUNDAMENTALS (0/3)
-  // ========================================================
   {
     id: "oops-classes-objects",
     name: "1. Classes & Objects Fundamentals",
@@ -250,9 +247,6 @@ export const OOPS_JAVA_ROADMAP_CATEGORIES: DSACategory[] = [
     ]
   },
 
-  // ========================================================
-  // MODULE 2: OPERATORS & CONTROL STATEMENTS (0/3)
-  // ========================================================
   {
     id: "oops-operators-control",
     name: "2. Operators & Control Statements",
@@ -476,9 +470,6 @@ public class AuthEngine {
     ]
   },
 
-  // ========================================================
-  // MODULE 3: INHERITANCE & POLYMORPHISM (0/3)
-  // ========================================================
   {
     id: "oops-inheritance-poly",
     name: "3. Inheritance & Polymorphism",
@@ -727,9 +718,6 @@ class Course {
     ]
   },
 
-  // ========================================================
-  // MODULE 4: ARRAYS & ALGORITHMIC PROBLEM SOLVING (0/3)
-  // ========================================================
   {
     id: "oops-arrays-algorithms",
     name: "4. Arrays & Algorithmic Problem Solving",
@@ -952,9 +940,6 @@ class Course {
     ]
   },
 
-  // ========================================================
-  // MODULE 5: EXCEPTIONS, COLLECTIONS & DATABASE CONNECTIVITY (0/3)
-  // ========================================================
   {
     id: "oops-exceptions-collections-jdbc",
     name: "5. Exceptions, Collections & Database Connectivity",

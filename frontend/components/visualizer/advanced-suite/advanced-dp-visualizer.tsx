@@ -9,9 +9,6 @@ import { Layers, Play, RotateCcw, ChevronRight, ChevronLeft, Info, CheckCircle2 
 export function AdvancedDPVisualizer() {
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // Stock Trading with Cooldown (State Machine DP):
-  // 3 States: HELD (holding stock), SOLD (sold today, enter cooldown), REST (idle)
-  // Prices: [1, 2, 3, 0, 2]
   const steps = [
     { day: 0, price: 1, held: -1, sold: 0, rest: 0, desc: "Day 0 (Price $1): Can buy stock (Held: -$1) or Rest ($0)." },
     { day: 1, price: 2, held: -1, sold: 1, rest: 0, desc: "Day 1 (Price $2): Selling stock gives profit $1 (Sold: $1)." },

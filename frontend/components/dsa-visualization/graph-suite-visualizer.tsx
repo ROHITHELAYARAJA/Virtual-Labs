@@ -19,13 +19,11 @@ export type GraphSuiteMode = "bfs" | "dfs" | "dijkstra" | "mst" | "union-find";
 export function GraphSuiteVisualizer({ defaultMode = "dijkstra" }: { defaultMode?: GraphSuiteMode }) {
   const [mode, setMode] = useState<GraphSuiteMode>(defaultMode);
 
-  // --- TRAVERSALS (BFS / DFS) ---
   const [activeNode, setActiveNode] = useState<string | null>(null);
   const [visitedNodes, setVisitedNodes] = useState<string[]>([]);
   const [queueOrStack, setQueueOrStack] = useState<string[]>([]);
   const [graphMessage, setGraphMessage] = useState<string>("Ready to explore graph. Select an algorithm above.");
 
-  // --- DIJKSTRA STATE ---
   const [dijkstraDistances, setDijkstraDistances] = useState<Record<string, number>>({
     A: 0,
     B: 999,
@@ -35,11 +33,9 @@ export function GraphSuiteVisualizer({ defaultMode = "dijkstra" }: { defaultMode
   const [dijkstraSettled, setDijkstraSettled] = useState<string[]>([]);
   const [dijkstraMessage, setDijkstraMessage] = useState<string>("Dijkstra: Single-source shortest paths. Initial distances: A=0, others=∞.");
 
-  // --- UNION FIND STATE ---
   const [parents, setParents] = useState<Record<number, number>>({ 1: 1, 2: 2, 3: 3, 4: 4 });
   const [ufMessage, setUfMessage] = useState<string>("Disjoint sets initialized: {1}, {2}, {3}, {4}. Each node is its own root.");
 
-  // Simulation: BFS
   const runBfs = async () => {
     setVisitedNodes([]);
     setQueueOrStack(["A"]);
@@ -47,35 +43,30 @@ export function GraphSuiteVisualizer({ defaultMode = "dijkstra" }: { defaultMode
     setGraphMessage("Enqueue Start Node 'A'. Queue = [A].");
     await new Promise((r) => setTimeout(r, 600));
 
-    // A -> B, C
     setVisitedNodes(["A"]);
     setQueueOrStack(["B", "C"]);
     setActiveNode("B");
     setGraphMessage("De-queue A, mark visited. Enqueue neighbors B, C. Queue = [B, C].");
     await new Promise((r) => setTimeout(r, 700));
 
-    // B -> D
     setVisitedNodes(["A", "B"]);
     setQueueOrStack(["C", "D"]);
     setActiveNode("C");
     setGraphMessage("De-queue B, mark visited. Enqueue neighbor D. Queue = [C, D].");
     await new Promise((r) => setTimeout(r, 700));
 
-    // C
     setVisitedNodes(["A", "B", "C"]);
     setQueueOrStack(["D"]);
     setActiveNode("D");
     setGraphMessage("De-queue C, mark visited. Queue = [D].");
     await new Promise((r) => setTimeout(r, 700));
 
-    // D
     setVisitedNodes(["A", "B", "C", "D"]);
     setQueueOrStack([]);
     setActiveNode(null);
     setGraphMessage("De-queue D. Queue is empty. BFS Wavefront traversal complete!");
   };
 
-  // Simulation: DFS
   const runDfs = async () => {
     setVisitedNodes([]);
     setQueueOrStack(["A"]);
@@ -83,7 +74,6 @@ export function GraphSuiteVisualizer({ defaultMode = "dijkstra" }: { defaultMode
     setGraphMessage("Push 'A' onto DFS Call Stack.");
     await new Promise((r) => setTimeout(r, 600));
 
-    // A -> B -> D
     setVisitedNodes(["A"]);
     setActiveNode("B");
     setQueueOrStack(["A", "B"]);
@@ -96,7 +86,6 @@ export function GraphSuiteVisualizer({ defaultMode = "dijkstra" }: { defaultMode
     setGraphMessage("DFS descends deep: visit neighbor 'D'. Stack = [A, B, D].");
     await new Promise((r) => setTimeout(r, 700));
 
-    // Backtrack to A, then visit C
     setVisitedNodes(["A", "B", "D"]);
     setQueueOrStack(["A"]);
     setGraphMessage("D has no unvisited neighbors. Backtrack to 'A'.");
@@ -114,37 +103,30 @@ export function GraphSuiteVisualizer({ defaultMode = "dijkstra" }: { defaultMode
     setGraphMessage("DFS traversal complete! Visited order: A ──> B ──> D ──> C.");
   };
 
-  // Simulation: Dijkstra
   const runDijkstra = async () => {
     setDijkstraSettled([]);
     setDijkstraDistances({ A: 0, B: 999, C: 999, D: 999 });
     setDijkstraMessage("Extract min tentative node 'A' (dist = 0).");
     await new Promise((r) => setTimeout(r, 600));
 
-    // Relax from A: edge(A, B)=4, edge(A, C)=2
     setDijkstraDistances({ A: 0, B: 4, C: 2, D: 999 });
     setDijkstraSettled(["A"]);
     setDijkstraMessage("Relax outgoing edges from A: dist[C] = 2, dist[B] = 4.");
     await new Promise((r) => setTimeout(r, 800));
 
-    // Next min node is C (dist = 2)
-    // edge(C, D)=1 -> dist[D] = 2 + 1 = 3
     setDijkstraDistances({ A: 0, B: 4, C: 2, D: 3 });
     setDijkstraSettled(["A", "C"]);
     setDijkstraMessage("Extract min node C (dist = 2). Relax edge(C, D, wt:1): dist[D] = 2 + 1 = 3.");
     await new Promise((r) => setTimeout(r, 900));
 
-    // Next min node is D (dist = 3)
     setDijkstraSettled(["A", "C", "D"]);
     setDijkstraMessage("Extract min node D (dist = 3). Next nearest is B (dist = 4).");
     await new Promise((r) => setTimeout(r, 800));
 
-    // Settle B
     setDijkstraSettled(["A", "C", "D", "B"]);
     setDijkstraMessage("All vertices settled! Optimal shortest paths found: A=0, C=2, D=3, B=4.");
   };
 
-  // Union-Find Actions
   const handleUnion = (x: number, y: number) => {
     const rootX = parents[x];
     const rootY = parents[y];

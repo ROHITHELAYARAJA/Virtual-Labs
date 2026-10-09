@@ -39,12 +39,12 @@ const JAVA_CODE_FIXED_K = `// Sliding Window - Maximum Sum Subarray of Size K
 public int maxSumSubarray(int[] arr, int k) {
     int n = arr.length;
     if (n < k) return -1;
-    
+
     int windowSum = 0;
     for (int i = 0; i < k; i++) {
         windowSum += arr[i]; // First window
     }
-    
+
     int maxSum = windowSum;
     for (int i = k; i < n; i++) {
         windowSum += arr[i] - arr[i - k]; // Slide window right
@@ -60,7 +60,7 @@ public int minSubArrayLen(int target, int[] nums) {
     int minLen = Integer.MAX_VALUE;
     int windowSum = 0;
     int windowStart = 0;
-    
+
     for (int windowEnd = 0; windowEnd < n; windowEnd++) {
         windowSum += nums[windowEnd]; // Expand window right
         while (windowSum >= target) {

@@ -24,7 +24,6 @@ export interface LabRequirement {
 }
 
 export const SEMESTER_LAB_REQUIREMENTS: Record<string, LabRequirement[]> = {
-  // Second Year (II AIDS) - Currently studying Semester III
   "Semester III": [
     {
       id: "data-structures",
@@ -95,7 +94,6 @@ export const SEMESTER_LAB_REQUIREMENTS: Record<string, LabRequirement[]> = {
     }
   ],
 
-  // Third Year (III AIDS) - Currently studying Semester V
   "Semester V": [
     {
       id: "artificial-intelligence",
@@ -157,7 +155,6 @@ export const SEMESTER_LAB_REQUIREMENTS: Record<string, LabRequirement[]> = {
     }
   ],
 
-  // Fourth Year (IV AIDS) - Currently studying Semester VII
   "Semester VII": [
     {
       id: "deep-learning",
@@ -214,7 +211,6 @@ export function getStudentSemesterKey(student: Partial<StudentProfile>): string 
   const classStr = (student.className || student.cohort || "").toLowerCase();
   const yearStr = (student.year || "").toLowerCase();
 
-  // 1. Fourth Year (Semester VII)
   if (
     semStr.includes("semester vii") ||
     semStr.includes("sem 7") ||
@@ -225,7 +221,6 @@ export function getStudentSemesterKey(student: Partial<StudentProfile>): string 
     return "Semester VII";
   }
 
-  // 2. Third Year (Semester V)
   if (
     semStr.includes("semester v") ||
     semStr.includes("sem 5") ||
@@ -238,7 +233,6 @@ export function getStudentSemesterKey(student: Partial<StudentProfile>): string 
     return "Semester V";
   }
 
-  // 3. Second Year (Semester III)
   if (
     semStr.includes("semester iii") ||
     semStr.includes("sem 3") ||
@@ -251,7 +245,6 @@ export function getStudentSemesterKey(student: Partial<StudentProfile>): string 
     return "Semester III";
   }
 
-  // Default fallback for second year (Semester III)
   return "Semester III";
 }
 
@@ -263,13 +256,10 @@ export function isLabCompleted(lab: LabRequirement, completedExperiments: string
 
   const expTokens = completedExperiments.map((e) => e.toLowerCase().trim());
 
-  // Direct match on lab id
   if (expTokens.includes(lab.id.toLowerCase())) return true;
 
-  // Direct match on lab code
   if (expTokens.includes(lab.code.toLowerCase())) return true;
 
-  // Check alias tokens
   return lab.aliasTokens.some((token) => {
     const cleanToken = token.toLowerCase();
     return expTokens.some((exp) => exp === cleanToken || exp.includes(cleanToken));

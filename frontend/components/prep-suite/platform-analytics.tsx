@@ -92,7 +92,6 @@ export function PlatformAnalytics() {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const [deck, setDeck] = useState<PatternCard[]>(SRS_DECK);
 
-  // Skill Mastery Scores across 10 phases (0 to 100)
   const skillsData = [
     { name: "Phase 1: Complexity & Math", score: 92, status: "Mastered", color: "bg-emerald-500" },
     { name: "Phase 2: Core Data Structures", score: 88, status: "Strong", color: "bg-blue-500" },
@@ -254,7 +253,6 @@ export function PlatformAnalytics() {
               }`}
             >
               {!isFlipped ? (
-                // FRONT
                 <div className="space-y-4 my-auto">
                   <Badge variant="outline" className="text-xs font-mono mx-auto">
                     CLICK TO FLIP CARD
@@ -268,7 +266,6 @@ export function PlatformAnalytics() {
                   </p>
                 </div>
               ) : (
-                // BACK
                 <div className="space-y-4 text-left">
                   <div className="flex items-center justify-between">
                     <span className="text-base font-bold font-heading text-purple-400">

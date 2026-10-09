@@ -199,7 +199,6 @@ export function SearchingSuiteVisualizer({ defaultAlgo = "binary" }: { defaultAl
         if (prev >= n) break;
       }
 
-      // Linear search inside block
       const limit = Math.min(curr, n);
       for (let i = prev; i < limit; i++) {
         comps++;
@@ -360,7 +359,6 @@ export function SearchingSuiteVisualizer({ defaultAlgo = "binary" }: { defaultAl
     generateSearchSteps(array, target, algo);
   }, [array, target, algo]);
 
-  // Autoplay loop
   useEffect(() => {
     if (isPlaying) {
       timerRef.current = setInterval(() => {

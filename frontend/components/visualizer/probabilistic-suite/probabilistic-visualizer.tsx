@@ -32,11 +32,9 @@ interface Props {
 export function ProbabilisticVisualizer({ initialModule = "bloom-filter" }: Props) {
   const [activeModule, setActiveModule] = useState<ProbabilisticModule>(initialModule);
 
-  // 1. Bloom filter state
   const [bloomBitArray, setBloomBitArray] = useState([0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1]);
   const [testItem, setTestItem] = useState("user_104");
 
-  // 2. HyperLogLog State
   const [hllUniqueEstimate, setHllUniqueEstimate] = useState(14820);
 
   return (

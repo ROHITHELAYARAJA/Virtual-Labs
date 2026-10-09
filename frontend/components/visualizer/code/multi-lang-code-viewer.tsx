@@ -62,7 +62,6 @@ export type SupportedLang = "java" | "python" | "cpp";
 export type ThemeType = "vscode-dark" | "one-dark" | "monokai" | "cyberpunk" | "light";
 export type FontSize = "12px" | "13px" | "14px" | "16px";
 
-// Theme Configuration Definitions
 interface ThemeConfig {
   id: ThemeType;
   name: string;
@@ -253,7 +252,6 @@ const THEMES: Record<ThemeType, ThemeConfig> = {
   },
 };
 
-// Language Metadata (No Emojis)
 const LANG_META: Record<SupportedLang, { name: string; file: string; ext: string; iconLabel: string }> = {
   java: {
     name: "Java",
@@ -275,7 +273,6 @@ const LANG_META: Record<SupportedLang, { name: string; file: string; ext: string
   },
 };
 
-// Language Keywords for Tokenization
 const KEYWORDS_BY_LANG: Record<SupportedLang, Set<string>> = {
   java: new Set([
     "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
@@ -304,7 +301,6 @@ const KEYWORDS_BY_LANG: Record<SupportedLang, Set<string>> = {
   ]),
 };
 
-// Syntax Tokenizer
 function highlightCodeLine(line: string, lang: SupportedLang, theme: ThemeConfig): React.ReactNode[] {
   const commentPrefix = lang === "python" ? "#" : "//";
   const commentIdx = line.indexOf(commentPrefix);
@@ -492,7 +488,7 @@ function executeUserCode(code: string, lang: SupportedLang, customInput: string,
         jsBody = jsBody.replace(/import\s+[^;]+;/g, "");
         jsBody = jsBody.replace(/#include\s+<[^>]+>/g, "");
         jsBody = jsBody.replace(/using\s+namespace\s+std;/g, "");
-        
+
         // Convert System.out.println and System.out.print to __print
         jsBody = jsBody.replace(/System\.out\.println\s*\(/g, "__print(");
         jsBody = jsBody.replace(/System\.out\.print\s*\(/g, "__print(");

@@ -27,9 +27,6 @@ import {
 export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "array" | "matrix" | "linked-list" | "stack-queue" }) {
   const [mode, setMode] = useState<"array" | "matrix" | "linked-list" | "stack-queue">(initialMode);
 
-  // ==========================================
-  // 1. ARRAY & DYNAMIC ARRAY STATE & HANDLERS
-  // ==========================================
   const [arrayElements, setArrayElements] = useState<number[]>([15, 28, 42, 67, 89]);
   const [arrayCapacity, setArrayCapacity] = useState<number>(8);
   const [arrayInputValue, setArrayInputValue] = useState<string>("");
@@ -40,7 +37,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
   const [arrayIsBusy, setArrayIsBusy] = useState<boolean>(false);
   const [arrayMessage, setArrayMessage] = useState<string>("Array initialized. Direct memory access available via index O(1).");
 
-  // Append O(1)
   const handleArrayAppend = () => {
     if (arrayIsBusy) return;
     const val = parseInt(arrayInputValue) || Math.floor(Math.random() * 90 + 10);
@@ -60,7 +56,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
     setArrayComparingIndices([]);
   };
 
-  // Insert at Index O(n)
   const handleArrayInsertAtIndex = async () => {
     if (arrayIsBusy) return;
     const val = parseInt(arrayInputValue) || Math.floor(Math.random() * 90 + 10);
@@ -71,7 +66,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
     setArrayIsBusy(true);
     setArrayMessage(`Inserting ${val} at index [${targetIdx}]. Shifting elements right from index ${arrayElements.length - 1} down to ${targetIdx} in O(n) time...`);
 
-    // Animate shift
     for (let i = arrayElements.length; i > targetIdx; i--) {
       setArrayActiveIndex(i - 1);
       await new Promise((r) => setTimeout(r, 250));
@@ -93,7 +87,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
     setArrayIndexValue("");
   };
 
-  // Delete at Index O(n)
   const handleArrayDelete = async (idx: number) => {
     if (arrayIsBusy || idx < 0 || idx >= arrayElements.length) return;
     const val = arrayElements[idx];
@@ -103,7 +96,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
 
     await new Promise((r) => setTimeout(r, 300));
 
-    // Shift left animation
     for (let i = idx + 1; i < arrayElements.length; i++) {
       setArrayComparingIndices([i]);
       await new Promise((r) => setTimeout(r, 200));
@@ -117,7 +109,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
     setArrayMessage(`Deleted ${val} at index [${idx}]. Elements shifted left in O(n) time.`);
   };
 
-  // Access by Index O(1)
   const handleArrayAccess = (idx: number) => {
     if (idx < 0 || idx >= arrayElements.length) {
       setArrayMessage(`IndexOutOfBoundsException: Index ${idx} out of bounds for length ${arrayElements.length}.`);
@@ -131,7 +122,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
     setArrayMessage(`O(1) Direct Access: array[${idx}] = ${arrayElements[idx]}. Calculated RAM address = 0x${baseAddr.toString(16)} + (${idx} * 4) = 0x${cellAddr.toString(16).toUpperCase()}.`);
   };
 
-  // Linear Search O(n)
   const handleArraySearch = async () => {
     if (arrayIsBusy) return;
     const target = parseInt(arrayInputValue);
@@ -187,9 +177,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
     setArrayMessage("Array reset to default state: 5 elements, capacity 8.");
   };
 
-  // ==========================================
-  // 2. 2D MATRIX STATE & HANDLERS
-  // ==========================================
   const [matrixData, setMatrixData] = useState<number[][]>([
     [1, 2, 3, 4],
     [5, 6, 7, 8],
@@ -279,9 +266,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
     setMatrixMessage(`Cell matrix[${r}][${c}] = ${matrixData[r][c]}. Address = Base + (${r} × ${cols} + ${c}) × 4 bytes = Base + ${offset * 4} bytes.`);
   };
 
-  // ==========================================
-  // 3. LINKED LIST STATE & HANDLERS
-  // ==========================================
   const [llType, setLlType] = useState<"singly" | "doubly" | "circular">("singly");
   const [llNodes, setLlNodes] = useState<number[]>([10, 20, 30, 40]);
   const [llActiveNode, setLlActiveNode] = useState<number | null>(null);
@@ -331,22 +315,19 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
     if (llNodes.length <= 1 || llIsBusy) return;
     setLlIsBusy(true);
     setLlMessage("Reversing Linked List iteratively using 3 pointers: prev, curr, next in O(n) time and O(1) auxiliary space...");
-    
+
     for (let i = 0; i < llNodes.length; i++) {
       setLlActiveNode(i);
       setLlMessage(`Reversing pointer at Node [${i}] (value = ${llNodes[i]}): curr.next = prev.`);
       await new Promise((r) => setTimeout(r, 350));
     }
-    
+
     setLlNodes([...llNodes].reverse());
     setLlActiveNode(0);
     setLlIsBusy(false);
     setLlMessage("Linked list completely reversed! Head pointer now points to original tail.");
   };
 
-  // ==========================================
-  // 4. STACK & QUEUE STATE & HANDLERS
-  // ==========================================
   const [sqMode, setSqMode] = useState<"stack" | "queue" | "circular-queue">("stack");
   const [stackItems, setStackItems] = useState<number[]>([10, 20, 30]);
   const [queueItems, setQueueItems] = useState<number[]>([100, 200, 300]);
@@ -860,7 +841,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
 
           <Card className="border-border bg-card/80 p-6 flex flex-col items-center">
             {sqMode === "stack" ? (
-              // Stack Vertical Box
               <div className="w-52 flex flex-col items-center space-y-2 border-b-4 border-x-4 border-primary/50 rounded-b-2xl p-4 bg-muted/20 min-h-[220px] justify-end">
                 {stackItems.length === 0 && (
                   <span className="text-xs font-mono text-muted-foreground/60 pb-8">Empty Stack (Underflow)</span>
@@ -880,7 +860,6 @@ export function BasicDSVisualizer({ initialMode = "array" }: { initialMode?: "ar
                 ))}
               </div>
             ) : (
-              // Queue Horizontal Pipe
               <div className="flex items-center gap-3 p-4 bg-muted/20 rounded-2xl border border-border w-full max-w-2xl overflow-x-auto justify-center">
                 <div className="text-center font-mono text-[10px] text-muted-foreground shrink-0">
                   <span className="block text-emerald-500 font-bold">FRONT</span>

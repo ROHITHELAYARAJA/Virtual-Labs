@@ -38,7 +38,6 @@ export function UserTeamSection() {
   const [members, setMembers] = useState<UserTeamMember[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // Modal State
   const [newMemberOpen, setNewMemberOpen] = useState(false);
   const [memberName, setMemberName] = useState("");
   const [memberRole, setMemberRole] = useState("Lab Partner (Batch A)");

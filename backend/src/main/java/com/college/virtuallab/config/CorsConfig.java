@@ -20,13 +20,13 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        
+
         config.setAllowCredentials(true);
         List<String> origins = Arrays.asList(allowedOrigins.split(","));
         config.setAllowedOriginPatterns(origins);
         config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization", "X-Requested-With"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
-        
+
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }

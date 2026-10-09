@@ -9,9 +9,6 @@ import { GitMerge, Play, RotateCcw, ChevronRight, ChevronLeft, Info, CheckCircle
 export function SCCVisualizer() {
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // 5 vertices directed graph:
-  // 1 -> 0, 0 -> 2, 2 -> 1 (Cycle {0, 1, 2})
-  // 0 -> 3, 3 -> 4
   const steps = [
     { desc: "Start Tarjan's Single-Pass DFS traversal at Node 0. Time counter = 0. Maintain DFS recursion stack.", scc: [], active: [0] },
     { desc: "DFS(0): discoveryTime[0]=0, low[0]=0. Push 0 to stack. Visit neighbor 2.", scc: [], active: [0, 2] },

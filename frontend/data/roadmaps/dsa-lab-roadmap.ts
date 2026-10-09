@@ -1,9 +1,6 @@
 import { DSACategory } from "../dsa-topic-data";
 
 export const DSA_LAB_ROADMAP_CATEGORIES: DSACategory[] = [
-  // ========================================================
-  // MODULE 1: LINKED LISTS (0/3)
-  // ========================================================
   {
     id: "dsa-linked-lists",
     name: "1. Linked Lists",
@@ -223,9 +220,6 @@ public class DoublyLinkedList {
     ]
   },
 
-  // ========================================================
-  // MODULE 2: STACKS & QUEUES (0/3)
-  // ========================================================
   {
     id: "dsa-stacks-queues",
     name: "2. Stacks & Queues",
@@ -427,9 +421,6 @@ public class ExpressionStack {
     ]
   },
 
-  // ========================================================
-  // MODULE 3: TREES (0/4)
-  // ========================================================
   {
     id: "dsa-trees",
     name: "3. Trees",
@@ -697,9 +688,6 @@ public class Trie {
     ]
   },
 
-  // ========================================================
-  // MODULE 4: GRAPHS (0/2)
-  // ========================================================
   {
     id: "dsa-graphs",
     name: "4. Graphs",
@@ -847,9 +835,6 @@ public class DijkstraAlgorithm {
     ]
   },
 
-  // ========================================================
-  // MODULE 5: SEARCHING, SORTING & HASHING (0/3)
-  // ========================================================
   {
     id: "dsa-searching-sorting-hashing",
     name: "5. Searching, Sorting & Hashing",

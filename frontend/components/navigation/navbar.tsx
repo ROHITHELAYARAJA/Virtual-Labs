@@ -84,7 +84,6 @@ export function Navbar() {
 
     window.addEventListener("storage", syncStudent);
 
-    // Scroll listener for morphing floating capsule
     let rafId: number | null = null;
     const handleScroll = () => {
       if (rafId !== null) return;
@@ -107,7 +106,6 @@ export function Navbar() {
     };
   }, [studentProfile, user]);
 
-  // Keyboard shortcut Ctrl+K
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === "k") {

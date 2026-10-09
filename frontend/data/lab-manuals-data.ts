@@ -1,8 +1,3 @@
-// =======================================================================
-// V.S.B. ENGINEERING COLLEGE, KARUR (An Autonomous Institution)
-// DEPARTMENT OF ARTIFICIAL INTELLIGENCE AND DATA SCIENCE
-// OFFICIAL LABORATORY MANUALS DATA (CURRICULUM, OBJECTIVES, OUTCOMES, CO-PO)
-// =======================================================================
 
 export interface CourseOutcome {
   code: string;
@@ -12,8 +7,8 @@ export interface CourseOutcome {
 
 export interface CoPoMappingRow {
   coCode: string;
-  po: (number | string)[]; // PO1 to PO12
-  pso: (number | string)[]; // PSO1 to PSO3
+  po: (number | string)[];
+  pso: (number | string)[];
 }
 
 export interface CoPoMappingData {
@@ -27,10 +22,10 @@ export interface CoPoMappingData {
 }
 
 export interface MarksRubric {
-  performance: number; // 50 Marks
-  viva: number;        // 10 Marks
-  record: number;      // 15 Marks
-  total: number;       // 75 Marks
+  performance: number;
+  viva: number;
+  record: number;
+  total: number;
   breakdown: {
     component: string;
     marks: number;
@@ -139,9 +134,6 @@ export const INSTITUTION_VISION_MISSION = {
 };
 
 export const LAB_MANUALS_DATA: Record<string, LabManualCurriculum> = {
-  // ==========================================
-  // 1. CLOUD SERVICE MANAGEMENT (CSM)
-  // ==========================================
   "cloud-service-management": {
     labId: "cloud-service-management",
     courseCode: "CS8811",
@@ -262,9 +254,6 @@ export const LAB_MANUALS_DATA: Record<string, LabManualCurriculum> = {
     psos: INSTITUTION_VISION_MISSION.psos
   },
 
-  // ==========================================
-  // 2. DEEP LEARNING (DL)
-  // ==========================================
   "ai-machine-learning": {
     labId: "ai-machine-learning",
     courseCode: "AD8481",
@@ -400,9 +389,6 @@ export const LAB_MANUALS_DATA: Record<string, LabManualCurriculum> = {
     psos: INSTITUTION_VISION_MISSION.psos
   },
 
-  // ==========================================
-  // 3. BIG DATA ANALYTICS (BDA)
-  // ==========================================
   "big-data-analytics": {
     labId: "big-data-analytics",
     courseCode: "CS8711",
@@ -539,9 +525,6 @@ export const LAB_MANUALS_DATA: Record<string, LabManualCurriculum> = {
     psos: INSTITUTION_VISION_MISSION.psos
   },
 
-  // ==========================================
-  // 4. DATABASE MANAGEMENT SYSTEMS (DBMS)
-  // ==========================================
   "dbms-lab": {
     labId: "dbms-lab",
     courseCode: "AD8301",
@@ -677,9 +660,6 @@ export const LAB_MANUALS_DATA: Record<string, LabManualCurriculum> = {
     psos: INSTITUTION_VISION_MISSION.psos
   },
 
-  // ==========================================
-  // 5. OBJECT ORIENTED PROGRAMMING (OOP JAVA)
-  // ==========================================
   "oops-java": {
     labId: "oops-java",
     courseCode: "AD8302",
@@ -813,9 +793,6 @@ export const LAB_MANUALS_DATA: Record<string, LabManualCurriculum> = {
     psos: INSTITUTION_VISION_MISSION.psos
   },
 
-  // ==========================================
-  // 6. DATA STRUCTURES AND ALGORITHMS (DSA)
-  // ==========================================
   "data-structures": {
     labId: "data-structures",
     courseCode: "AD8303",
@@ -951,9 +928,6 @@ export const LAB_MANUALS_DATA: Record<string, LabManualCurriculum> = {
     psos: INSTITUTION_VISION_MISSION.psos
   },
 
-  // ==========================================
-  // 7. C PROGRAMMING LABORATORY
-  // ==========================================
   "c-programming": {
     labId: "c-programming",
     courseCode: "GE3171",

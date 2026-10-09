@@ -353,7 +353,7 @@ export function AVLTreeVisualizer({ content }: AVLTreeVisualizerProps) {
           <TabsTrigger value="code">Multi-Lang Code</TabsTrigger>
           <TabsTrigger value="explanation">Explanation</TabsTrigger>
         </TabsList>
-        
+
         <TabsContent value="visualization" className="space-y-6">
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
             <div className="xl:col-span-1 space-y-6">
@@ -379,7 +379,7 @@ export function AVLTreeVisualizer({ content }: AVLTreeVisualizerProps) {
             </div>
           </div>
         </TabsContent>
-        
+
         <TabsContent value="analysis" className="space-y-6">
           <AVLTreeAnalysis 
             tree={tree}
@@ -395,7 +395,7 @@ export function AVLTreeVisualizer({ content }: AVLTreeVisualizerProps) {
             snippets={AVL_TREE_CODE_SNIPPETS}
           />
         </TabsContent>
-        
+
         <TabsContent value="explanation" className="prose prose-invert max-w-none">
           <MarkdownContent content={content} />
         </TabsContent>

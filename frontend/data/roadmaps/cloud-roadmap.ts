@@ -1,9 +1,6 @@
 import { DSACategory } from "../dsa-topic-data";
 
 export const CLOUD_ROADMAP_CATEGORIES: DSACategory[] = [
-  // ========================================================
-  // MODULE 1: CLOUD ORGANIZATION & ACCESS CONTROL (0/1)
-  // ========================================================
   {
     id: "cloud-org-access",
     name: "1. Cloud Organization & Access Control",
@@ -72,9 +69,6 @@ aws organizations create-policy \\
     ]
   },
 
-  // ========================================================
-  // MODULE 2: COST MODELING & RESOURCE MONITORING (0/3)
-  // ========================================================
   {
     id: "cloud-cost-monitoring",
     name: "2. Cost Modeling & Resource Monitoring",
@@ -186,11 +180,11 @@ s3 = boto3.client('s3')
 
 def lambda_handler(event, context):
     bucket_name = "vlab-enterprise-assets"
-    
+
     # 1. Calculate Bucket Object Count
     response = s3.list_objects_v2(Bucket=bucket_name)
     count = response.get('KeyCount', 0)
-    
+
     # 2. Publish Custom CloudWatch Metric
     cloudwatch.put_metric_data(
         Namespace='VLab/ResourceMonitoring',
@@ -282,9 +276,6 @@ aws budgets create-budget \\
     ]
   },
 
-  // ========================================================
-  // MODULE 3: MULTI-CLOUD COST COMPARISON (0/1)
-  // ========================================================
   {
     id: "cloud-multi-provider",
     name: "3. Multi-Cloud Cost Comparison",

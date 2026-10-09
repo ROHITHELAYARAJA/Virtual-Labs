@@ -46,10 +46,9 @@ export function SystemDesignSimulator() {
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Back-of-the-envelope Calculator State
-  const [dauMillions, setDauMillions] = useState<number>(10); // 10 Million DAU
-  const [readWriteRatio, setReadWriteRatio] = useState<number>(10); // 10:1 Read-to-Write
-  const [writePayloadKb, setWritePayloadKb] = useState<number>(2); // 2 KB per write
+  const [dauMillions, setDauMillions] = useState<number>(10);
+  const [readWriteRatio, setReadWriteRatio] = useState<number>(10);
+  const [writePayloadKb, setWritePayloadKb] = useState<number>(2);
 
   useEffect(() => {
     if (isTimerRunning) {
@@ -70,16 +69,15 @@ export function SystemDesignSimulator() {
     };
   }, [isTimerRunning]);
 
-  // Derived Capacity Metrics
   const dailySeconds = 86400;
-  const writeOpsDaily = (dauMillions * 1_000_000 * 2); // 2 writes/day/user
+  const writeOpsDaily = (dauMillions * 1_000_000 * 2);
   const readOpsDaily = writeOpsDaily * readWriteRatio;
   const writeQps = Math.round(writeOpsDaily / dailySeconds);
   const readQps = Math.round(readOpsDaily / dailySeconds);
-  const peakQps = Math.round((readQps + writeQps) * 2); // 2x peak multiplier
+  const peakQps = Math.round((readQps + writeQps) * 2);
   const dailyStorageGb = ((writeOpsDaily * writePayloadKb) / (1024 * 1024)).toFixed(2);
   const fiveYearStorageTb = (((Number(dailyStorageGb) * 365 * 5) / 1024)).toFixed(1);
-  const ramCacheGb = (((readOpsDaily * writePayloadKb * 0.2) / (1024 * 1024))).toFixed(1); // 80/20 rule: 20% of reads cached
+  const ramCacheGb = (((readOpsDaily * writePayloadKb * 0.2) / (1024 * 1024))).toFixed(1);
 
   const formatTimer = (seconds: number) => {
     const mins = Math.floor(seconds / 60);

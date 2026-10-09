@@ -31,12 +31,10 @@ export function BinaryTreeDisplay({ tree, highlightedNodes }: BinaryTreeDisplayP
   const [reactFlowInstance, setReactFlowInstance] = useState<ReactFlowInstance | null>(null)
   const { theme } = useTheme()
 
-  // Handle flow instance initialization
   const onInit = useCallback((flowInstance: ReactFlowInstance) => {
     setReactFlowInstance(flowInstance)
   }, [])
 
-  // Auto-fit view whenever nodes change
   const fitView = useCallback(() => {
     if (reactFlowInstance) {
       setTimeout(() => {

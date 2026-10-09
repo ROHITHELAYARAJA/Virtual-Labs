@@ -32,13 +32,11 @@ export function DSARoadmap({ labId = "data-structures", sidebar }: DSARoadmapPro
   const labRoadmap = LAB_ROADMAPS_DATA[labId];
   const categories = labRoadmap?.categories || DSA_CATEGORIES_DATA;
 
-  // Collect flat list of all topics across categories for prev/next calculations
   const allTopics: DSATopic[] = categories.flatMap((cat) => cat.topics);
 
   const [activeTopic, setActiveTopic] = useState<DSATopic>(allTopics[0]);
   const [completedTopicIds, setCompletedTopicIds] = useState<string[]>([]);
 
-  // Update activeTopic when labId changes
   React.useEffect(() => {
     if (allTopics.length > 0) {
       setActiveTopic(allTopics[0]);

@@ -9,7 +9,7 @@ import { TrendingUp, Plus, RotateCcw, Info, CheckCircle2 } from "lucide-react";
 export function AmortizedAnalysisVisualizer() {
   const [capacity, setCapacity] = useState<number>(2);
   const [elements, setElements] = useState<number[]>([10, 20]);
-  const [totalCost, setTotalCost] = useState<number>(3); // 1 + (1+1)
+  const [totalCost, setTotalCost] = useState<number>(3);
   const [history, setHistory] = useState<string[]>([
     "Initial array: Capacity = 2, Elements = [10, 20]."
   ]);
@@ -20,9 +20,8 @@ export function AmortizedAnalysisVisualizer() {
     let opCost = 1;
 
     if (elements.length === capacity) {
-      // Must resize: double capacity and copy existing elements
       nextCap = capacity * 2;
-      opCost = elements.length + 1; // copying old elements + 1 new insertion
+      opCost = elements.length + 1;
       setHistory(prev => [
         `Capacity Exceeded! Doubled Capacity from ${capacity} to ${nextCap}. Cost = ${elements.length} copies + 1 insert = ${opCost}.`,
         ...prev.slice(0, 5)

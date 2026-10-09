@@ -47,11 +47,10 @@ function analyzeTree(tree: HuffmanNode | null, codes: Map<string, string>): Tree
   traverse(tree)
   analysis.height = getHeight(tree)
 
-  // Calculate average code length and compression ratio
   if (codes.size > 0) {
     let totalBits = 0
     let totalFrequency = 0
-    
+
     for (const [char, code] of codes.entries()) {
       const node = findNode(tree, char)
       if (node) {

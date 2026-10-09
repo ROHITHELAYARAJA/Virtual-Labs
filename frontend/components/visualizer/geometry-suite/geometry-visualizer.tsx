@@ -29,7 +29,6 @@ interface Props {
 export function ComputationalGeometryVisualizer({ initialModule = "graham-scan" }: Props) {
   const [activeModule, setActiveModule] = useState<GeometryModule>(initialModule);
 
-  // 1. Graham Scan & Jarvis March Points
   const defaultPoints = [
     { x: 30, y: 40 },
     { x: 60, y: 120 },
@@ -41,7 +40,6 @@ export function ComputationalGeometryVisualizer({ initialModule = "graham-scan" 
     { x: 90, y: 50 },
   ];
 
-  // 2. Point in Polygon Test Point
   const [testPoint, setTestPoint] = useState({ x: 120, y: 90 });
   const polyVertices = [
     { x: 50, y: 50 },
@@ -51,7 +49,6 @@ export function ComputationalGeometryVisualizer({ initialModule = "graham-scan" 
     { x: 40, y: 130 },
   ];
 
-  // 3. Shoelace Formula
   const polygonArea = 0.5 * Math.abs(
     polyVertices.reduce((acc, curr, idx) => {
       const next = polyVertices[(idx + 1) % polyVertices.length];

@@ -10,7 +10,6 @@ export function AdvancedGraphsVisualizer() {
   const [topic, setTopic] = useState<"bipartite" | "flow">("bipartite");
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // Bipartite 2-Coloring BFS steps
   const bipartiteSteps = [
     { desc: "Start Bipartite Verification on 4 vertices: (0-1, 1-2, 2-3, 3-0). Color palette: BLUE (1) vs ORANGE (-1).", colors: [0, 0, 0, 0] },
     { desc: "Color Node 0 = BLUE. Enqueue Node 0 into BFS queue.", colors: [1, 0, 0, 0] },
@@ -19,7 +18,6 @@ export function AdvancedGraphsVisualizer() {
     { desc: "🎉 Check remaining edges: All adjacent vertices have strictly alternate colors! Graph is valid BIPARTITE (No odd-length cycle).", colors: [1, -1, 1, -1] }
   ];
 
-  // Ford-Fulkerson Network Flow steps
   const flowSteps = [
     { desc: "Source (s) to Sink (t) network. Initial Flow = 0. Capacities: s->u (10), s->v (10), u->v (2), u->t (8), v->t (9).", flow: 0, path: "None" },
     { desc: "Augmenting Path 1: s -> u -> t. Bottleneck capacity = min(10, 8) = 8. Flow increases by 8 to 8.", flow: 8, path: "s -> u -> t (+8)" },

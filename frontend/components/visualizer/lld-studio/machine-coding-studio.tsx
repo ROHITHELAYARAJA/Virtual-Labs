@@ -471,16 +471,13 @@ export function MachineCodingStudio() {
   const [selectedLang, setSelectedLang] = useState<"java" | "python" | "typescript">("java");
   const [copied, setCopied] = useState<boolean>(false);
 
-  // 60-minute timer state
   const [timeLeftSeconds, setTimeLeftSeconds] = useState<number>(60 * 60);
   const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Design Patterns Sandbox state
   const [activePattern, setActivePattern] = useState<"strategy" | "observer" | "factory" | "singleton">("strategy");
   const [strategyOption, setStrategyOption] = useState<"credit-card" | "crypto" | "upi">("credit-card");
 
-  // AI Code Review Modal state
   const [isAiModalOpen, setIsAiModalOpen] = useState<boolean>(false);
   const [codeReviewResult, setCodeReviewResult] = useState<CodeReviewResult | null>(null);
 

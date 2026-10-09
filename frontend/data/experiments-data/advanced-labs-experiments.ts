@@ -1,9 +1,6 @@
 import { Experiment } from "../experiments";
 
 export const ADVANCED_LABS_EXPERIMENTS: Experiment[] = [
-  // =========================================================================
-  // 1. POLICY ITERATION (Official IIITH Lab Experiment 1 - Screenshots 103959-104649)
-  // =========================================================================
   {
     id: "ai-exp-1",
     labId: "artificial-intelligence",
@@ -96,7 +93,7 @@ def policy_iteration(states, actions, P, R, gamma=0.9, theta=1e-4):
     # 1. Initialization
     V = {s: 0.0 for s in states}
     pi = {s: actions[0] for s in states}
-    
+
     while True:
         # 2. Policy Evaluation
         while True:
@@ -110,7 +107,7 @@ def policy_iteration(states, actions, P, R, gamma=0.9, theta=1e-4):
                 delta = max(delta, abs(v - V[s]))
             if delta < theta:
                 break
-        
+
         # 3. Policy Improvement
         policy_stable = True
         for s in states:
@@ -123,7 +120,7 @@ def policy_iteration(states, actions, P, R, gamma=0.9, theta=1e-4):
             pi[s] = best_action
             if old_action != best_action:
                 policy_stable = False
-                
+
         if policy_stable:
             return V, pi`,
       },
@@ -145,9 +142,6 @@ State (2,2): ← (V = 0.656)`,
     },
   },
 
-  // =========================================================================
-  // 2. VALUE ITERATION (Official IIITH Lab Experiment 2)
-  // =========================================================================
   {
     id: "ai-exp-2",
     labId: "artificial-intelligence",
@@ -213,9 +207,6 @@ State (2,2): ← (V = 0.656)`,
     },
   },
 
-  // =========================================================================
-  // 3. Q-LEARNING (Official IIITH Lab Experiment 3)
-  // =========================================================================
   {
     id: "ai-exp-3",
     labId: "artificial-intelligence",
@@ -266,9 +257,6 @@ State (2,2): ← (V = 0.656)`,
     },
   },
 
-  // =========================================================================
-  // 4. AI DEPTH FIRST SEARCH (Official IIITH Lab Experiment 4)
-  // =========================================================================
   {
     id: "ai-exp-4",
     labId: "artificial-intelligence",
@@ -318,9 +306,6 @@ State (2,2): ← (V = 0.656)`,
     },
   },
 
-  // =========================================================================
-  // 5. GREEDY BEST FIRST SEARCH (Official IIITH Lab Experiment 5)
-  // =========================================================================
   {
     id: "ai-exp-5",
     labId: "artificial-intelligence",
@@ -370,9 +355,6 @@ State (2,2): ← (V = 0.656)`,
     },
   },
 
-  // =========================================================================
-  // 6. MINIMAX SEARCH (Official IIITH Lab Experiment 6)
-  // =========================================================================
   {
     id: "ai-exp-6",
     labId: "artificial-intelligence",
@@ -424,9 +406,6 @@ State (2,2): ← (V = 0.656)`,
     },
   },
 
-  // =========================================================================
-  // 7. CONSTRUCTION OF BAYESIAN NETWORK (Official IIITH Lab Experiment 7)
-  // =========================================================================
   {
     id: "ai-exp-7",
     labId: "artificial-intelligence",
@@ -476,9 +455,6 @@ State (2,2): ← (V = 0.656)`,
     },
   },
 
-  // =========================================================================
-  // 8. INFERENCE FROM BAYESIAN NETWORK (Official IIITH Lab Experiment 8)
-  // =========================================================================
   {
     id: "ai-exp-8",
     labId: "artificial-intelligence",

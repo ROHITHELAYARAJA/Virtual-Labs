@@ -36,20 +36,20 @@ public int majorityElement(int[] nums) {
     // Phase 1: Find candidate
     int candidate = 0;
     int count = 0;
-    
+
     for (int num : nums) {
         if (count == 0) {
             candidate = num;
         }
         count += (num == candidate) ? 1 : -1;
     }
-    
+
     // Phase 2: Verify candidate
     int actualCount = 0;
     for (int num : nums) {
         if (num == candidate) actualCount++;
     }
-    
+
     return (actualCount > nums.length / 2) ? candidate : -1;
 }`;
 
@@ -87,7 +87,6 @@ export function BoyerMooreVisualizer() {
     let candidate: number | null = null;
     let count = 0;
 
-    // Step 0: Init
     generated.push({
       phase: "candidate-selection",
       currentIndex: 0,
@@ -98,7 +97,6 @@ export function BoyerMooreVisualizer() {
       codeLine: 1
     });
 
-    // Phase 1 Loop
     for (let i = 0; i < arr.length; i++) {
       const val = arr[i];
 
@@ -140,7 +138,6 @@ export function BoyerMooreVisualizer() {
       }
     }
 
-    // Phase 2: Verification Pass
     let actualCount = 0;
     generated.push({
       phase: "verification",

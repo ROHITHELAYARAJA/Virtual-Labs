@@ -32,17 +32,14 @@ export type AdvancedAlgoModule =
 export function AdvancedAlgosVisualizer({ initialModule = "kmp" }: { initialModule?: AdvancedAlgoModule }) {
   const [activeModule, setActiveModule] = useState<AdvancedAlgoModule>(initialModule);
 
-  // 1. KMP LPS State
   const pattern = "ABABCABAB";
   const [lpsStep, setLpsStep] = useState<number>(4);
   const lpsArray = [0, 0, 1, 2, 0, 1, 2, 3, 4];
 
-  // 2. Rabin-Karp State
   const textRK = "ABCCDABCE";
   const patternRK = "ABC";
   const [windowIdx, setWindowIdx] = useState<number>(0);
 
-  // 3. Line Sweep State
   const [sweepTime, setSweepTime] = useState<number>(3);
   const intervals = [
     { name: "Meeting A", start: 1, end: 4, rooms: 1 },
@@ -51,10 +48,8 @@ export function AdvancedAlgosVisualizer({ initialModule = "kmp" }: { initialModu
     { name: "Meeting D", start: 7, end: 9, rooms: 1 },
   ];
 
-  // 4. Minimax Alpha-Beta State
   const [pruningRevealed, setPruningRevealed] = useState<boolean>(true);
 
-  // 5. Advanced DP State
   const [dpType, setDpType] = useState<"tree" | "digit">("tree");
 
   return (

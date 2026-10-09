@@ -167,7 +167,6 @@ export function RecursionTreeEngine({
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [dragStart, setDragStart] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  // Build tree hierarchy
   const treeData = useMemo(() => {
     if (!nodes || nodes.length === 0) return null;
 
@@ -192,7 +191,6 @@ export function RecursionTreeEngine({
     return layoutTree(treeData);
   }, [treeData]);
 
-  // Auto-fit on initial load or node changes
   useEffect(() => {
     if (!containerRef.current || treeW === 0) return;
     const availW = containerRef.current.clientWidth;

@@ -7,8 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Sliders, Play, RotateCcw, Info, Binary } from "lucide-react";
 
 export function BitManipulationVisualizer() {
-  const [numA, setNumA] = useState<number>(29); // 00011101
-  const [numB, setNumB] = useState<number>(15); // 00001111
+  const [numA, setNumA] = useState<number>(29);
+  const [numB, setNumB] = useState<number>(15);
   const [op, setOp] = useState<"AND" | "OR" | "XOR" | "LSHIFT" | "RSHIFT" | "KERNIGHAN">("AND");
   const [kernighanSteps, setKernighanSteps] = useState<{ val: number; bitStr: string; msg: string }[]>([]);
 
@@ -17,7 +17,6 @@ export function BitManipulationVisualizer() {
   };
 
   const toggleBitA = (bitIndex: number) => {
-    // bitIndex 0 is LSB, 7 is MSB
     setNumA(prev => prev ^ (1 << bitIndex));
   };
 

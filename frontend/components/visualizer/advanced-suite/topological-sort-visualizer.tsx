@@ -9,8 +9,6 @@ import { Workflow, Play, RotateCcw, ChevronRight, ChevronLeft, Info, CheckCircle
 export function TopologicalSortVisualizer() {
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // DAG: 5 nodes (0 to 4)
-  // 0 -> 2, 0 -> 3, 1 -> 3, 1 -> 4, 2 -> 3, 3 -> 4
   const steps = [
     {
       desc: "Initialize In-Degree counts for all DAG vertices: InDeg[0]=0, InDeg[1]=0, InDeg[2]=1, InDeg[3]=3, InDeg[4]=2.",

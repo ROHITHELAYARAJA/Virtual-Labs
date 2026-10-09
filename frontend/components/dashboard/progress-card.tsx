@@ -15,7 +15,6 @@ interface ProgressCardProps {
 export function ProgressCard({ progress, totalExperiments = 6 }: ProgressCardProps) {
   const { user, studentProfile } = useAuth();
 
-  // Dynamically resolve student name & roll number from the authenticated user
   const studentName =
     studentProfile?.name ||
     user?.displayName ||

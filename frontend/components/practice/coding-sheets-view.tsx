@@ -57,33 +57,27 @@ export function CodingSheetsView() {
   const [selectedStatus, setSelectedStatus] = useState<string>("ALL");
   const [selectedCompany, setSelectedCompany] = useState<string>("ALL");
 
-  // Pagination state for ultra-fast rendering
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(25);
 
-  // Notes Modal state
   const [activeNoteProblem, setActiveNoteProblem] = useState<CodingProblem | null>(null);
 
   const completedSet = useMemo(() => new Set(student?.completedProblems || []), [student?.completedProblems]);
   const starredSet = useMemo(() => new Set(student?.starredProblems || []), [student?.starredProblems]);
   const notesMap = useMemo(() => student?.problemNotes || {}, [student?.problemNotes]);
 
-  // Problems for active sheet
   const sheetProblems = useMemo(() => {
     return CODING_PROBLEMS.filter((p) => p.sheet.includes(activeSheet));
   }, [activeSheet]);
 
-  // Unique categories for active sheet
   const categories = useMemo(() => {
     const set = new Set<string>();
     sheetProblems.forEach((p) => set.add(p.category));
     return ["ALL", ...Array.from(set)];
   }, [sheetProblems]);
 
-  // Filtered problems
   const filteredProblems = useMemo(() => {
     return sheetProblems.filter((p) => {
-      // Search query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const matchesTitle = p.title.toLowerCase().includes(q);
@@ -95,22 +89,18 @@ export function CodingSheetsView() {
         if (!matchesTitle && !matchesCat && !matchesNum && !matchesCompany) return false;
       }
 
-      // Category filter
       if (selectedCategory !== "ALL" && p.category !== selectedCategory) {
         return false;
       }
 
-      // Difficulty filter
       if (selectedDifficulty !== "ALL" && p.difficulty !== selectedDifficulty) {
         return false;
       }
 
-      // Status filter
       if (selectedStatus === "SOLVED" && !completedSet.has(p.id)) return false;
       if (selectedStatus === "UNSOLVED" && completedSet.has(p.id)) return false;
       if (selectedStatus === "STARRED" && !starredSet.has(p.id)) return false;
 
-      // Company filter
       if (selectedCompany !== "ALL") {
         const hasCompany = [...p.productCompanies, ...p.serviceCompanies].some((c) =>
           c.toLowerCase().includes(selectedCompany.toLowerCase())
@@ -131,12 +121,10 @@ export function CodingSheetsView() {
     starredSet
   ]);
 
-  // Pagination calculation
   const totalItems = filteredProblems.length;
   const effectivePageSize = pageSize === -1 ? totalItems : pageSize;
   const totalPages = Math.max(1, Math.ceil(totalItems / (effectivePageSize || 1)));
 
-  // Ensure current page is valid when filters change
   const validPage = Math.min(Math.max(1, currentPage), totalPages);
 
   const paginatedProblems = useMemo(() => {
@@ -145,7 +133,6 @@ export function CodingSheetsView() {
     return filteredProblems.slice(start, start + pageSize);
   }, [filteredProblems, validPage, pageSize]);
 
-  // Statistics for active sheet
   const stats = useMemo(() => {
     const total = sheetProblems.length;
     let solved = 0;

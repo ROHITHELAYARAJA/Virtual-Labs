@@ -106,7 +106,6 @@ export function recordQuizResult(
     state.completedExperiments.push(experimentId);
   }
 
-  // Check if student unlocked certificate (at least 3 experiments passed)
   if (state.completedExperiments.length >= 3) {
     state.certificateUnlocked = true;
   }

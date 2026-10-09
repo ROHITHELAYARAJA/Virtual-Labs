@@ -10,8 +10,6 @@ export function BellmanFloydVisualizer() {
   const [algo, setAlgo] = useState<"bellman" | "floyd">("bellman");
   const [stepIdx, setStepIdx] = useState<number>(0);
 
-  // Bellman-Ford 4 nodes, directed edges with negative weight:
-  // 0 -> 1 (4), 0 -> 2 (5), 1 -> 2 (-3), 2 -> 3 (3), 1 -> 3 (10)
   const bellmanSteps = [
     { desc: "Initialize distances from Source (0): dist[0]=0, dist[1..3]=∞.", dist: [0, Infinity, Infinity, Infinity] },
     { desc: "Pass 1: Relax Edge (0 -> 1, wt: 4): dist[1] updated to 4. Relax Edge (0 -> 2, wt: 5): dist[2] updated to 5.", dist: [0, 4, 5, Infinity] },
@@ -20,7 +18,6 @@ export function BellmanFloydVisualizer() {
     { desc: "Pass 4: Negative Cycle Check pass. No distances reduced. Shortest paths verified with negative edge support!", dist: [0, 4, 1, 4] }
   ];
 
-  // Floyd-Warshall 4x4 matrix
   const floydSteps = [
     { k: "-", desc: "Initial direct adjacency distance matrix D^0.", matrix: [
       [0, 3, Infinity, 7],

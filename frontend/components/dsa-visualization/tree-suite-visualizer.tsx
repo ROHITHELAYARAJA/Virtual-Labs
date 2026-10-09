@@ -25,7 +25,7 @@ interface TreeNodeData {
   val: number;
   left?: TreeNodeData;
   right?: TreeNodeData;
-  bf?: number; // balance factor
+  bf?: number;
   x: number;
   y: number;
 }
@@ -33,37 +33,26 @@ interface TreeNodeData {
 export function TreeSuiteVisualizer({ defaultMode = "bst" }: { defaultMode?: TreeSuiteMode }) {
   const [mode, setMode] = useState<TreeSuiteMode>(defaultMode);
 
-  // --- TRAVERSALS STATE ---
   const [traversalType, setTraversalType] = useState<"inorder" | "preorder" | "postorder" | "levelorder">("inorder");
   const [traversalVisited, setTraversalVisited] = useState<number[]>([]);
   const [activeNodeId, setActiveNodeId] = useState<string | null>(null);
   const [traversalMessage, setTraversalMessage] = useState<string>("Click 'Run Traversal' to watch step-by-step tree navigation.");
 
-  // --- BST STATE ---
   const [bstRoot, setBstRoot] = useState<number[]>([50, 30, 70, 20, 40, 60, 80]);
   const [bstInputVal, setBstInputVal] = useState<string>("");
   const [bstMessage, setBstMessage] = useState<string>("BST maintains sorted invariant: left < node < right.");
 
-  // --- AVL ROTATIONS STATE ---
   const [avlRotationType, setAvlRotationType] = useState<"LL" | "RR" | "LR" | "RL">("LL");
   const [avlMessage, setAvlMessage] = useState<string>("LL Imbalance detected at node 30 (Balance Factor = +2). Right rotation restores balance.");
 
-  // --- HEAP STATE ---
   const [heapArray, setHeapArray] = useState<number[]>([10, 20, 30, 40, 50, 60, 70]);
   const [heapType, setHeapType] = useState<"min" | "max">("min");
   const [heapMessage, setHeapMessage] = useState<string>("Root element at array index 0. Left child at 2i+1, Right child at 2i+2.");
 
-  // Run Traversal Simulation
   const runTraversal = async (type: "inorder" | "preorder" | "postorder" | "levelorder") => {
     setTraversalVisited([]);
     setActiveNodeId(null);
 
-    // Hardcoded demo sequence corresponding to tree:
-    //         50
-    //       /    \
-    //     30      70
-    //    /  \    /  \
-    //   20  40  60  80
     let seq: { val: number; id: string }[] = [];
     if (type === "inorder") {
       seq = [
@@ -120,7 +109,6 @@ export function TreeSuiteVisualizer({ defaultMode = "bst" }: { defaultMode?: Tre
     setActiveNodeId(null);
   };
 
-  // BST Insert
   const handleBstInsert = () => {
     const val = parseInt(bstInputVal) || Math.floor(Math.random() * 90 + 10);
     if (!bstRoot.includes(val)) {
@@ -132,7 +120,6 @@ export function TreeSuiteVisualizer({ defaultMode = "bst" }: { defaultMode?: Tre
     setBstInputVal("");
   };
 
-  // BST Search
   const handleBstSearch = () => {
     const val = parseInt(bstInputVal) || 60;
     if (bstRoot.includes(val)) {

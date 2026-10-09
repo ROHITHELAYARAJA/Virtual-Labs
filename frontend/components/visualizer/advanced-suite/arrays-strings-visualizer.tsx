@@ -26,7 +26,6 @@ interface MatrixStep {
 export function ArraysStringsVisualizer() {
   const [topic, setTopic] = useState<"matrix" | "stringbuilder">("matrix");
 
-  // --- MATRIX ROTATION STEP SYSTEM ---
   const initialMatrix: number[][] = [
     [1, 2, 3],
     [4, 5, 6],
@@ -36,7 +35,6 @@ export function ArraysStringsVisualizer() {
   const generateMatrixSteps = (initMat: number[][]): MatrixStep[] => {
     const steps: MatrixStep[] = [];
 
-    // Step 0: Initial
     steps.push({
       matrix: initMat.map(row => [...row]),
       stepName: "Initial Matrix State",
@@ -45,7 +43,6 @@ export function ArraysStringsVisualizer() {
       codeLine: "// Input matrix N×N"
     });
 
-    // Step 1: Transpose Diagonal Swap (0,1) <-> (1,0)
     const mat1 = initMat.map(row => [...row]);
     let tmp = mat1[0][1];
     mat1[0][1] = mat1[1][0];
@@ -59,7 +56,6 @@ export function ArraysStringsVisualizer() {
       codeLine: "swap(matrix[i][j], matrix[j][i]);"
     });
 
-    // Step 2: Transpose Swap (0,2) <-> (2,0)
     const mat2 = mat1.map(row => [...row]);
     tmp = mat2[0][2];
     mat2[0][2] = mat2[2][0];
@@ -73,7 +69,6 @@ export function ArraysStringsVisualizer() {
       codeLine: "swap(matrix[i][j], matrix[j][i]);"
     });
 
-    // Step 3: Transpose Swap (1,2) <-> (2,1)
     const mat3 = mat2.map(row => [...row]);
     tmp = mat3[1][2];
     mat3[1][2] = mat3[2][1];
@@ -87,7 +82,6 @@ export function ArraysStringsVisualizer() {
       codeLine: "// Matrix Transpose complete"
     });
 
-    // Step 4: Reverse Row 0
     const mat4 = mat3.map(row => [...row]);
     tmp = mat4[0][0];
     mat4[0][0] = mat4[0][2];
@@ -101,7 +95,6 @@ export function ArraysStringsVisualizer() {
       codeLine: "swap(matrix[r][c], matrix[r][n - 1 - c]);"
     });
 
-    // Step 5: Reverse Row 1
     const mat5 = mat4.map(row => [...row]);
     tmp = mat5[1][0];
     mat5[1][0] = mat5[1][2];
@@ -115,7 +108,6 @@ export function ArraysStringsVisualizer() {
       codeLine: "swap(matrix[r][c], matrix[r][n - 1 - c]);"
     });
 
-    // Step 6: Reverse Row 2
     const mat6 = mat5.map(row => [...row]);
     tmp = mat6[2][0];
     mat6[2][0] = mat6[2][2];
@@ -138,7 +130,6 @@ export function ArraysStringsVisualizer() {
   const [speedMs, setSpeedMs] = useState<number>(1000);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-play timer
   useEffect(() => {
     if (isPlaying) {
       timerRef.current = setTimeout(() => {
@@ -182,7 +173,6 @@ export function ArraysStringsVisualizer() {
     setCurrentStepIdx(0);
   };
 
-  // --- STRINGBUILDER STATE ---
   const [sbContent, setSbContent] = useState<string>("Hello");
   const [sbCapacity, setSbCapacity] = useState<number>(16);
   const [sbLog, setSbLog] = useState<string>("StringBuilder initialized with initial char[] capacity of 16.");

@@ -12,7 +12,7 @@ import java.util.List;
 public class Lab extends BaseEntity {
 
     @Column(nullable = false, unique = true)
-    private String slug; // e.g., 'data-structures', 'ml-lab', 'dbms-lab'
+    private String slug;
 
     @Column(nullable = false)
     private String name;
@@ -20,17 +20,17 @@ public class Lab extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private String broadArea; // e.g., 'Computer Science & Engineering', 'Artificial Intelligence'
+    private String broadArea;
 
-    private String category; // 'Core', 'Advanced', 'Foundation', 'Elective'
+    private String category;
 
-    private String difficulty; // 'Beginner', 'Intermediate', 'Advanced'
+    private String difficulty;
 
     private Integer estimatedHours = 6;
 
     private boolean available = true;
 
-    private String icon; // Icon identifier
+    private String icon;
 
     @ElementCollection
     @CollectionTable(name = "lab_tags", joinColumns = @JoinColumn(name = "lab_id"))

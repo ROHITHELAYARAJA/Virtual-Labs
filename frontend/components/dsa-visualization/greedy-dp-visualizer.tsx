@@ -19,7 +19,6 @@ export type GreedyDpMode = "activity" | "knapsack-fractional" | "dp-fib" | "dp-k
 export function GreedyDpVisualizer({ defaultMode = "dp-knapsack-2d" }: { defaultMode?: GreedyDpMode }) {
   const [mode, setMode] = useState<GreedyDpMode>(defaultMode);
 
-  // --- ACTIVITY SELECTION STATE ---
   const [activities] = useState([
     { name: "A1", start: 1, end: 3 },
     { name: "A2", start: 2, end: 5 },
@@ -30,13 +29,11 @@ export function GreedyDpVisualizer({ defaultMode = "dp-knapsack-2d" }: { default
   const [selectedActs, setSelectedActs] = useState<string[]>(["A1", "A3", "A4"]);
   const [actMessage, setActMessage] = useState<string>("Sorted by finish time. Greedily selected 3 non-overlapping activities: A1 [1-3], A3 [4-6], A4 [6-8].");
 
-  // --- 1D DP FIBONACCI STATE ---
   const [fibN, setFibN] = useState<number>(6);
   const [fibTable, setFibTable] = useState<number[]>([0, 1, 1, 2, 3, 5, 8]);
   const [activeFibIdx, setActiveFibIdx] = useState<number | null>(null);
   const [fibMessage, setFibMessage] = useState<string>("Tabulation fills bottom-up: dp[i] = dp[i-1] + dp[i-2]. O(n) linear time.");
 
-  // --- 2D DP 0/1 KNAPSACK STATE ---
   const weights = [2, 3, 4];
   const values = [3, 4, 5];
   const capacity = 5;

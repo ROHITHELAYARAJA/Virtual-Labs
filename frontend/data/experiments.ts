@@ -101,7 +101,6 @@ export interface MLPrerequisiteTopic {
 }
 
 export const ML_PREREQUISITES_DATA: MLPrerequisiteTopic[] = [
-  // 12 NumPy Master Modules
   {
     id: "numpy-1",
     title: "Module 1: Introduction to NumPy & ndarray Basics",
@@ -210,7 +209,6 @@ export const ML_PREREQUISITES_DATA: MLPrerequisiteTopic[] = [
     summary: "Save binary .npy / .npz tensors to disk and benchmark vectorization against standard Python loops.",
     keyFunctions: ["np.save()", "np.load()", "np.savez_compressed()"],
   },
-  // Pandas Series
   {
     id: "pandas-1",
     title: "Pandas Master: Series, DataFrames & Reading CSV/JSON",
@@ -229,7 +227,6 @@ export const ML_PREREQUISITES_DATA: MLPrerequisiteTopic[] = [
     summary: "Handle NaNs with imputation, drop duplicates, encode categorical values, and execute GroupBy aggregations.",
     keyFunctions: ["df.dropna()", "df.fillna()", "df.groupby()", "pd.get_dummies()"],
   },
-  // Matplotlib / Seaborn
   {
     id: "plot-1",
     title: "Matplotlib & Seaborn: Data Exploration & Heatmaps",

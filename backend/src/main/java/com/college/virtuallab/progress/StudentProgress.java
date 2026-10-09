@@ -26,10 +26,10 @@ public class StudentProgress extends BaseEntity {
     private LocalDateTime completedAt;
     private Integer timeSpentSeconds = 0;
     private Integer rating;
-    
+
     @Column(columnDefinition = "TEXT")
     private String feedbackComments;
-    
+
     private Integer lastQuizScorePercentage;
 
     public StudentProgress() {

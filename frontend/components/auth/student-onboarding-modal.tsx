@@ -53,7 +53,6 @@ export function StudentOnboardingModal() {
     setMounted(true);
   }, []);
 
-  // Trigger modal if user is authenticated with Google but profile is not completed
   useEffect(() => {
     if (!mounted) return;
     if (user && !loading) {
@@ -113,7 +112,6 @@ export function StudentOnboardingModal() {
           department: "Artificial Intelligence & Data Science"
         });
       } else {
-        // Resilient fallback in case React context HMR is desynced
         const currentUid = user?.uid || studentProfile?.uid || "";
         const email = user?.email || studentProfile?.email || "";
         if (!currentUid) throw new Error("No active student session. Please sign in first.");
@@ -155,7 +153,6 @@ export function StudentOnboardingModal() {
       }
 
       setOpen(false);
-      // Redirect to labs or dashboard
       router.push("/labs");
     } catch (err: any) {
       setErrorMsg(err?.message || "Failed to save profile details. Please try again.");

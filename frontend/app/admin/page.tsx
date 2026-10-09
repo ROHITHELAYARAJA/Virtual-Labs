@@ -103,11 +103,9 @@ function AdminPageContent() {
   const [loginError, setLoginError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  // Active Tenant Scope
   const [activeCollegeSlug, setActiveCollegeSlug] = useState<string>(initialCollege);
   const activeCollege = useMemo(() => getCollegeBySlug(activeCollegeSlug) || COLLEGES_REGISTRY[0], [activeCollegeSlug]);
 
-  // Tenant Data Collections
   const [students, setStudents] = useState<StudentProfile[]>([]);
   const [materials, setMaterials] = useState<CollegeMaterial[]>([]);
   const [manuals, setManuals] = useState<CollegeLabManual[]>([]);
@@ -115,18 +113,15 @@ function AdminPageContent() {
   const [videos, setVideos] = useState<CollegeVideoTutorial[]>([]);
   const [isLoadingData, setIsLoadingData] = useState<boolean>(true);
 
-  // Search & Filter
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [selectedDept, setSelectedDept] = useState<string>("all");
   const [labSearchQuery, setLabSearchQuery] = useState<string>("");
   const [labFilterDept, setLabFilterDept] = useState<string>("all");
 
-  // Modals for CRUD (Add & Edit)
   const [activeModal, setActiveModal] = useState<
     "manual" | "edit-manual" | "material" | "edit-material" | "lab" | "edit-lab" | "video" | "edit-video" | null
   >(null);
 
-  // Form states for adding items
   const [newManual, setNewManual] = useState<Partial<CollegeLabManual>>({
     labName: "", labCode: "", department: "AIDS & CSE", semester: "Semester III", manualUrl: "", observationUrl: "", description: "", uploadedBy: "Lab Incharge"
   });
@@ -140,21 +135,17 @@ function AdminPageContent() {
     title: "", topic: "Algorithm Simulation", department: "AIDS / CSE", youtubeUrl: "https://www.youtube.com", language: "Tamil", duration: "15:00 mins", uploadedBy: "V-Lab Studio"
   });
 
-  // Form states for editing items
   const [editingManual, setEditingManual] = useState<CollegeLabManual | null>(null);
   const [editingMaterial, setEditingMaterial] = useState<CollegeMaterial | null>(null);
   const [editingLab, setEditingLab] = useState<CollegeCustomLab | null>(null);
   const [editingVideo, setEditingVideo] = useState<CollegeVideoTutorial | null>(null);
 
-  // Uploaded File Helper State
   const [uploadedManualFileName, setUploadedManualFileName] = useState<string>("");
   const [uploadedMaterialFileName, setUploadedMaterialFileName] = useState<string>("");
 
-  // Student Profile Analytics Modal State
   const [selectedStudentForAnalytics, setSelectedStudentForAnalytics] = useState<StudentProfile | null>(null);
   const [isAnalyticsModalOpen, setIsAnalyticsModalOpen] = useState<boolean>(false);
 
-  // Check auth session
   useEffect(() => {
     try {
       const savedAuth = localStorage.getItem(ADMIN_STORAGE_KEY);
@@ -164,12 +155,10 @@ function AdminPageContent() {
     } catch {}
   }, []);
 
-  // Fetch data whenever active college changes
   useEffect(() => {
     loadAllTenantData(activeCollegeSlug);
   }, [activeCollegeSlug]);
 
-  // Enhanced Student Roster Filter & Pagination States
   const [selectedCohortTab, setSelectedCohortTab] = useState<"all" | "II AIDS" | "III AIDS" | "IV AIDS">("all");
   const [selectedProgressFilter, setSelectedProgressFilter] = useState<"all" | "pending" | "completed">("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -241,7 +230,6 @@ function AdminPageContent() {
     } catch {}
   };
 
-  // Cohort Counts Breakdown
   const cohortStats = useMemo(() => {
     let iiCount = 0;
     let iiiCount = 0;
@@ -279,7 +267,6 @@ function AdminPageContent() {
     };
   }, [students]);
 
-  // Filtered Students
   const filteredStudents = useMemo(() => {
     return students.filter((student) => {
       const q = searchQuery.toLowerCase().trim();
@@ -311,7 +298,6 @@ function AdminPageContent() {
     });
   }, [students, searchQuery, selectedDept, selectedCohortTab, selectedProgressFilter]);
 
-  // Paginated Students
   const paginatedStudents = useMemo(() => {
     if (pageSize === -1) return filteredStudents;
     const start = (currentPage - 1) * pageSize;
@@ -323,7 +309,6 @@ function AdminPageContent() {
     return Math.ceil(filteredStudents.length / pageSize);
   }, [filteredStudents, pageSize]);
 
-  // Bulk Gmail Action
   const handleBulkGmailReminder = () => {
     const incomplete = filteredStudents.filter((s) => !evaluateStudentProgress(s).isFullyCompleted);
     if (incomplete.length === 0) {
@@ -369,7 +354,6 @@ V.S.B. Engineering College`;
     setTimeout(() => setBulkCopied(false), 2500);
   };
 
-  // Filtered Labs
   const filteredLabs = useMemo(() => {
     return customLabs.filter((lab) => {
       const matchesSearch =
@@ -386,7 +370,6 @@ V.S.B. Engineering College`;
     });
   }, [customLabs, labSearchQuery, labFilterDept]);
 
-  // Export CSV of students
   const handleExportCSV = () => {
     if (filteredStudents.length === 0) return;
     const headers = [
@@ -430,12 +413,10 @@ V.S.B. Engineering College`;
     document.body.removeChild(link);
   };
 
-  // --- File Upload Handler for Lab Manuals ---
   const handleManualFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploadedManualFileName(file.name);
-    // Create a local blob/URL for demonstration and direct viewing
     const fileUrl = URL.createObjectURL(file);
     setNewManual((prev) => ({
       ...prev,
@@ -444,7 +425,6 @@ V.S.B. Engineering College`;
     }));
   };
 
-  // --- File Upload Handler for Lab Materials ---
   const handleMaterialFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -458,9 +438,6 @@ V.S.B. Engineering College`;
     }));
   };
 
-  // --- CRUD HANDLERS ---
-
-  // 1. Save / Upload Lab Manual
   const handleSaveManual = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newManual.labName || !newManual.manualUrl) return;
@@ -499,7 +476,6 @@ V.S.B. Engineering College`;
     setManuals(manuals.filter((m) => m.id !== id));
   };
 
-  // 2. Save / Upload Lab Material
   const handleSaveMaterial = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newMaterial.title || !newMaterial.fileUrl) return;
@@ -538,7 +514,6 @@ V.S.B. Engineering College`;
     setMaterials(materials.filter((m) => m.id !== id));
   };
 
-  // 3. Save / Insert Virtual Lab
   const handleSaveCustomLab = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newCustomLab.title || !newCustomLab.labUrl) return;
@@ -576,7 +551,6 @@ V.S.B. Engineering College`;
     setCustomLabs(customLabs.filter((l) => l.id !== id));
   };
 
-  // 4. Save / Insert Video
   const handleSaveVideo = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newVideo.title || !newVideo.youtubeUrl) return;
@@ -613,7 +587,6 @@ V.S.B. Engineering College`;
     setVideos(videos.filter((v) => v.id !== id));
   };
 
-  // --- LOGIN SCREEN IF NOT AUTHENTICATED ---
   if (!isAdminAuthenticated) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
@@ -621,7 +594,7 @@ V.S.B. Engineering College`;
         <main className="flex-1 flex items-center justify-center p-4 sm:p-6 pt-24 sm:pt-28 pb-12">
           <Card className="w-full max-w-md border-border/80 shadow-2xl bg-card/90 backdrop-blur-xl rounded-2xl overflow-hidden">
             <div className="h-2.5 w-full bg-gradient-to-r from-rose-600 via-pink-600 to-amber-600" />
-            
+
             <CardHeader className="text-center space-y-2 pt-8 pb-4">
               <div className="mx-auto w-14 h-14 rounded-2xl bg-gradient-to-tr from-rose-600 to-red-600 flex items-center justify-center text-white shadow-lg shadow-rose-600/20">
                 <ShieldCheck className="h-7 w-7" />
@@ -712,14 +685,13 @@ V.S.B. Engineering College`;
     );
   }
 
-  // --- AUTHENTICATED ADMIN DASHBOARD ---
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navbar />
 
       <main className="flex-1 pt-24 sm:pt-28 pb-14">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          
+
           {/* Top Admin Header Bar with College Switcher */}
           <div className="p-6 rounded-2xl bg-card border border-border shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="flex items-center gap-4">

@@ -7,7 +7,7 @@ export const CTA = () => (
     <div className="container mx-auto">
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-b from-muted/50 to-muted p-16">
         <div className="absolute inset-0 bg-grid-white/10 bg-[size:40px] [mask-image:radial-gradient(white,transparent_85%)]" />
-        
+
         <div className="relative flex flex-col items-center text-center gap-8">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tighter">
             Ready to Start Learning?

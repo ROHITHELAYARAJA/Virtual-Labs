@@ -49,13 +49,12 @@ interface StudentAnalyticsModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-// Helper to normalize and check if an experiment is completed
 function isExpCompleted(completedIds: string[], exp: Experiment): boolean {
   if (!completedIds || completedIds.length === 0 || !exp) return false;
-  
+
   const cleanExpId = (exp.id || "").toLowerCase();
   const cleanSlug = (exp.slug || "").toLowerCase();
-  
+
   return completedIds.some((id) => {
     if (!id) return false;
     const cleanId = id.toLowerCase();
@@ -63,7 +62,6 @@ function isExpCompleted(completedIds: string[], exp: Experiment): boolean {
     if (cleanExpId && cleanExpId.includes(cleanId)) return true;
     if (cleanSlug && cleanSlug.includes(cleanId)) return true;
 
-    // Common alias mappings
     if (cleanId === "stack-operations" && (cleanSlug.includes("stack") || cleanExpId.includes("stack"))) return true;
     if (cleanId === "queue-operations" && (cleanSlug.includes("queue") || cleanExpId.includes("queue"))) return true;
     if (cleanId === "bubble-sort" && (cleanSlug.includes("bubble") || cleanExpId.includes("bubble"))) return true;
@@ -85,7 +83,6 @@ function isExpCompleted(completedIds: string[], exp: Experiment): boolean {
   });
 }
 
-// Helper to map lab IDs between LABS_DATA and EXPERIMENTS_DATA
 function getLabExperiments(lab: Lab): Experiment[] {
   if (!lab) return [];
   const labId = (lab.id || "").toLowerCase();
@@ -114,19 +111,16 @@ export function StudentAnalyticsModal({
   open,
   onOpenChange,
 }: StudentAnalyticsModalProps) {
-  // State hooks
   const [activeTab, setActiveTab] = useState<string>("labs");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [expandedLabId, setExpandedLabId] = useState<string | null>(null);
   const [copiedReg, setCopiedReg] = useState<boolean>(false);
   const [labFilter, setLabFilter] = useState<"all" | "completed" | "pending">("all");
 
-  // Safe data extraction (runs every render, no early return!)
   const completedExps = useMemo(() => student?.completedExperiments || [], [student?.completedExperiments]);
   const completedProblems = useMemo(() => student?.completedProblems || [], [student?.completedProblems]);
   const quizScoresRaw = useMemo(() => student?.quizScores || {}, [student?.quizScores]);
 
-  // Safe quiz parser
   const parsedQuizScores = useMemo(() => {
     if (!quizScoresRaw) return [];
     return Object.entries(quizScoresRaw).map(([quizKey, val]) => {
@@ -154,12 +148,11 @@ export function StudentAnalyticsModal({
     });
   }, [quizScoresRaw]);
 
-  // Lab Calculations
   const labStats = useMemo(() => {
     return (LABS_DATA || []).map((lab) => {
       const exps = getLabExperiments(lab);
       const totalExps = exps.length > 0 ? exps.length : (lab.experimentsCount || 10);
-      
+
       const completedList = exps.filter((exp) => isExpCompleted(completedExps, exp));
       const completedCount = completedList.length;
       const percentage = Math.min(100, Math.round((completedCount / totalExps) * 100));
@@ -178,14 +171,12 @@ export function StudentAnalyticsModal({
     });
   }, [completedExps]);
 
-  // Overall Stats
   const totalCompletedExperiments = completedExps.length;
   const labsTouchedCount = labStats.filter((l) => l.completedCount > 0).length;
   const averageCompletion = Math.round(
     labStats.reduce((acc, curr) => acc + curr.percentage, 0) / (labStats.length || 1)
   );
 
-  // DSA Coding Problem Categorized Stats
   const dsaCategoryStats = useMemo(() => {
     const categoryMap: Record<
       string,
@@ -201,7 +192,6 @@ export function StudentAnalyticsModal({
       categoryMap[cat].total += 1;
       categoryMap[cat].problems.push(prob);
 
-      // Check if problem completed by student
       const isSolved = completedProblems.some(
         (id) =>
           id === prob.id ||
@@ -234,7 +224,6 @@ export function StudentAnalyticsModal({
 
   const totalDsaProblemsSolved = completedProblems.length;
 
-  // Filtered Labs based on Search & Status
   const filteredLabStats = useMemo(() => {
     return labStats.filter((stat) => {
       const q = searchQuery.toLowerCase().trim();
@@ -253,14 +242,12 @@ export function StudentAnalyticsModal({
     });
   }, [labStats, searchQuery, labFilter]);
 
-  // Quiz calculations
   const averageQuizScore = useMemo(() => {
     if (parsedQuizScores.length === 0) return 0;
     const totalPct = parsedQuizScores.reduce((acc, curr) => acc + curr.percentage, 0);
     return Math.round(totalPct / parsedQuizScores.length);
   }, [parsedQuizScores]);
 
-  // Copy register number safely
   const handleCopyReg = () => {
     if (student?.registerNumber && typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(student.registerNumber).catch(() => {});
@@ -269,7 +256,6 @@ export function StudentAnalyticsModal({
     }
   };
 
-  // Export Individual Student CIE Record
   const handleExportStudentReport = () => {
     if (!student) return;
     const headers = [
@@ -610,7 +596,6 @@ export function StudentAnalyticsModal({
                     const isExpanded = expandedLabId === item.lab.id;
                     const hasProgress = item.percentage > 0;
 
-                    // Color determination
                     let badgeColor = "bg-muted text-muted-foreground border-border";
                     let progressColor = "bg-primary";
                     if (item.percentage >= 75) {

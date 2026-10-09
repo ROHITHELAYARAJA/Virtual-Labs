@@ -1,9 +1,6 @@
 import { DSACategory } from "../dsa-topic-data";
 
 export const DBMS_LAB_ROADMAP_CATEGORIES: DSACategory[] = [
-  // ========================================================
-  // MODULE 1: ER MODELING & NORMALIZATION (0/2)
-  // ========================================================
   {
     id: "dbms-er-normalization",
     name: "1. ER Modeling & Normalization",
@@ -159,9 +156,6 @@ JOIN Departments d ON s.dept_id = d.dept_id;`
     ]
   },
 
-  // ========================================================
-  // MODULE 2: TRANSACTIONS, CONSTRAINTS & DDL (0/3)
-  // ========================================================
   {
     id: "dbms-transactions-ddl",
     name: "2. Transactions, Constraints & DDL",
@@ -351,9 +345,6 @@ SELECT * FROM Appointments;`
     ]
   },
 
-  // ========================================================
-  // MODULE 3: DATA MANIPULATION & QUERYING (0/3)
-  // ========================================================
   {
     id: "dbms-data-manipulation",
     name: "3. Data Manipulation & Querying",
@@ -552,9 +543,6 @@ ORDER BY annual_spend DESC;`
     ]
   },
 
-  // ========================================================
-  // MODULE 4: AGGREGATION, REPORTING & ANALYTICS (0/2)
-  // ========================================================
   {
     id: "dbms-aggregation-reporting",
     name: "4. Aggregation, Reporting & Analytics",
@@ -696,9 +684,6 @@ FROM ProductSales;`
     ]
   },
 
-  // ========================================================
-  // MODULE 5: JOINS, VIEWS & QUERY PERFORMANCE (0/2)
-  // ========================================================
   {
     id: "dbms-joins-views-performance",
     name: "5. Joins, Views & Query Performance",
@@ -826,9 +811,6 @@ EXPLAIN SELECT * FROM Customers WHERE city = 'Chennai';`
     ]
   },
 
-  // ========================================================
-  // MODULE 6: STORED PROCEDURES & TRANSACTION CONTROL (0/2)
-  // ========================================================
   {
     id: "dbms-procedures-transactions",
     name: "6. Stored Procedures & Transaction Control",
@@ -872,9 +854,9 @@ CREATE PROCEDURE CalculateAnnualBonus(
 )
 BEGIN
     DECLARE v_salary DECIMAL(10,2);
-    
+
     SELECT salary INTO v_salary FROM Employees WHERE emp_id = p_emp_id;
-    
+
     IF v_salary >= 70000 THEN
         SET p_bonus = v_salary * 0.15;
     ELSE
@@ -950,7 +932,7 @@ BEGIN
     START TRANSACTION;
         UPDATE BankAccounts SET balance = balance - amount WHERE acc_id = from_acc;
         SAVEPOINT after_debit;
-        
+
         UPDATE BankAccounts SET balance = balance + amount WHERE acc_id = to_acc;
     COMMIT;
     SELECT 'Transaction Completed Successfully' AS Status;
@@ -972,9 +954,6 @@ DELIMITER ;`
     ]
   },
 
-  // ========================================================
-  // MODULE 7: CAPSTONE DATABASE APPLICATION (0/1)
-  // ========================================================
   {
     id: "dbms-capstone-application",
     name: "7. Capstone Database Application",

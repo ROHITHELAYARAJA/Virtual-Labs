@@ -187,7 +187,7 @@ def handle_client(conn, addr):
     print(f"[+] Client connected from {addr}")
     clients.append(conn)
     conn.sendall(b"Welcome to VLab Chat Server! Type exit to quit.\\n")
-    
+
     while True:
         try:
             data = conn.recv(1024)
@@ -200,7 +200,7 @@ def handle_client(conn, addr):
                     c.sendall(broadcast_msg)
         except ConnectionResetError:
             break
-            
+
     clients.remove(conn)
     conn.close()
     print(f"[-] Client {addr} disconnected.")
@@ -268,7 +268,7 @@ def run_dns_server():
     server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     server.bind(("127.0.0.1", 5353))
     print("[*] UDP DNS Server active on 127.0.0.1:5353")
-    
+
     while True:
         domain_query, client_addr = server.recvfrom(512)
         domain = domain_query.decode('utf-8').strip()
@@ -334,7 +334,7 @@ import struct
 def sniff_packets():
     sniffer = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.ntohs(0x0003))
     print("[*] Capturing raw Ethernet frames...")
-    
+
     for _ in range(5):
         raw_data, _ = sniffer.recvfrom(65535)
         dest_mac, src_mac, proto = struct.unpack('! 6s 6s H', raw_data[:14])
@@ -405,7 +405,7 @@ def sniff_packets():
         if ip in self.arp_cache:
             print(f"[CACHE HIT] {ip} -> {self.arp_cache[ip]}")
             return self.arp_cache[ip]
-        
+
         # Broadcast ARP Request
         print(f"[BROADCAST] ARP Request: Who has {ip}? Tell 192.168.1.1")
         if ip in self.network_hosts:
@@ -546,14 +546,14 @@ def benchmark_udp_throughput(host="127.0.0.1", port=9999, duration=1.0):
     payload = b"X" * 1024  # 1 KB packet
     bytes_sent = 0
     start_time = time.time()
-    
+
     while time.time() - start_time < duration:
         try:
             sock.sendto(payload, (host, port))
             bytes_sent += len(payload)
         except Exception:
             break
-            
+
     elapsed = time.time() - start_time
     mbps = (bytes_sent * 8) / (elapsed * 1_000_000)
     print(f"UDP Throughput: {mbps:.2f} Mbps ({bytes_sent / 1024 / 1024:.2f} MB transmitted in {elapsed:.2f}s)")
@@ -607,7 +607,7 @@ benchmark_udp_throughput()`
             code: `def distance_vector_routing(cost_matrix, num_nodes):
     # Initialize Distance Tables: dist[i][j] is shortest dist from i to j
     dist = [row[:] for row in cost_matrix]
-    
+
     # Bellman-Ford Dynamic Programming Relaxation
     for _ in range(num_nodes - 1):
         for i in range(num_nodes):
@@ -615,7 +615,7 @@ benchmark_udp_throughput()`
                 for k in range(num_nodes):
                     if dist[i][k] + cost_matrix[k][j] < dist[i][j]:
                         dist[i][j] = dist[i][k] + cost_matrix[k][j]
-                        
+
     print("--- Converged Distance Vector Routing Table ---")
     for i in range(num_nodes):
         print(f"Router {chr(65+i)}:", [f"{chr(65+j)}: {dist[i][j]}" for j in range(num_nodes)])

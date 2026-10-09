@@ -80,7 +80,6 @@ public class User extends BaseEntity implements UserDetails {
         return enabled;
     }
 
-    // Getters and Setters
     public String getEmail() {
         return email;
     }

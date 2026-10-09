@@ -75,14 +75,12 @@ const navItems = [
   },
 ];
 
-// Phase 1: Complexity & Analysis (3)
 const complexityAnalysis = [
   { name: "Complexity & DS Matrix", url: "/visualizer/complexity-matrix", icon: BarChart3, description: "Big-O, Omega, Theta matrix" },
   { name: "Amortized Analysis", url: "/visualizer/amortized-analysis", icon: TrendingUp, description: "Dynamic array capacity doubling" },
   { name: "Space Complexity Analyzer", url: "/visualizer/space-complexity", icon: Layers, description: "Auxiliary vs total call stack RAM" },
 ];
 
-// Phase 2: Core Data Structures (11)
 const dataStructures = [
   { name: "Arrays & Strings", url: "/visualizer/arrays-strings", icon: Table, description: "1D/2D matrix & String Buffer" },
   { name: "Linked List", url: "/visualizer/linked-list", icon: List, description: "Singly, doubly, circular & skip lists" },
@@ -97,7 +95,6 @@ const dataStructures = [
   { name: "Segment & Fenwick Tree", url: "/visualizer/segment-tree", icon: Workflow, description: "Range queries & point updates" },
 ];
 
-// Phase 3: Sorting Simulators (9)
 const sortingAlgorithms = [
   { name: "Bubble Sort", url: "/visualizer/bubble-sort", icon: ArrowDownUp, description: "Adjacent comparisons & swaps" },
   { name: "Selection Sort", url: "/visualizer/selection-sort", icon: ArrowDownUp, description: "Minimum element selection" },
@@ -110,7 +107,6 @@ const sortingAlgorithms = [
   { name: "Cyclic Sort", url: "/visualizer/cyclic-sort", icon: Repeat, description: "1 to N in-place placement" },
 ];
 
-// Phase 3: Searching & Algorithmic Patterns (11)
 const algorithmicPatterns = [
   { name: "Binary Search", url: "/visualizer/binary-search", icon: Search, description: "Logarithmic O(log n) search" },
   { name: "Linear Search", url: "/visualizer/linear-search", icon: Search, description: "Sequential scan" },
@@ -125,7 +121,6 @@ const algorithmicPatterns = [
   { name: "Bit Manipulation Studio", url: "/visualizer/bit-manipulation", icon: Sliders, description: "Bitwise tricks, masks & subsets" },
 ];
 
-// Phase 3: Recursion & Backtracking (4)
 const recursionAndBacktracking = [
   { name: "Custom Recursion Studio", url: "/visualizer/custom-recursion", icon: BrainCircuit, description: "SVG tree, call stack & runner" },
   { name: "Subsets & Permutations", url: "/visualizer/subsets-permutations", icon: GitMerge, description: "Include/exclude decision tree" },
@@ -133,7 +128,6 @@ const recursionAndBacktracking = [
   { name: "Grid & Matrix Backtrack", url: "/visualizer/grid-backtracking", icon: Compass, description: "Rat in Maze & Sudoku solver" },
 ];
 
-// Phase 4: Graph Algorithms (7)
 const graphAlgorithms = [
   { name: "Graph Traversals (BFS/DFS)", url: "/visualizer/graph-traversal", icon: GitBranch, description: "BFS & DFS graph search" },
   { name: "Dijkstra's Algorithm", url: "/visualizer/dijkstra", icon: ArrowRightLeft, description: "Shortest path relaxation" },
@@ -144,7 +138,6 @@ const graphAlgorithms = [
   { name: "Advanced Graph Concepts", url: "/visualizer/advanced-graphs", icon: Network, description: "Bipartite coloring & max flow" },
 ];
 
-// Phase 3 & 4: Dynamic Programming & Greedy (5)
 const dynamicProgrammingGreedy = [
   { name: "0/1 & Unbounded Knapsack", url: "/visualizer/knapsack", icon: Cpu, description: "2D DP capacity matrix" },
   { name: "String DP (LCS & Edit)", url: "/visualizer/string-dp", icon: Code2, description: "LCS & Levenshtein distance" },
@@ -153,7 +146,6 @@ const dynamicProgrammingGreedy = [
   { name: "Advanced Greedy Patterns", url: "/visualizer/advanced-greedy", icon: TrendingUp, description: "Merge intervals & jump game" },
 ];
 
-// Phase 6: Applied Systems, LLD & Engineering (7)
 const appliedSystemsAndLld = [
   { name: "Infix to Postfix", url: "/visualizer/stack-applications", icon: Equal, description: "Shunting-yard operator parser" },
   { name: "Message Queue", url: "/visualizer/queue-applications", icon: MessageSquare, description: "Producer-consumer simulation" },

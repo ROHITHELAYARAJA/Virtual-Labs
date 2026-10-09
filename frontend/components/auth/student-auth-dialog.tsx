@@ -82,7 +82,6 @@ export function StudentAuthDialog({ open, onOpenChange }: StudentAuthDialogProps
   const [confirmDeleteAccount, setConfirmDeleteAccount] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Edit name state
   const [editingName, setEditingName] = useState(false);
   const [newName, setNewName] = useState("");
   const [nameSuccess, setNameSuccess] = useState(false);

@@ -44,7 +44,6 @@ export function SortingDisplay({
     }
   }, [comparingIndices, swappedIndices, sortedIndices, array, maxValue, soundEnabled]);
 
-  // Y-axis grid levels matching image.png
   const yAxisLevels = [100, 75, 50, 25, 0];
 
   return (
@@ -107,14 +106,13 @@ export function SortingDisplay({
                     const isSwapped = swappedIndices.includes(idx);
                     const isSorted = sortedIndices.includes(idx);
 
-                    // Colors strictly adhering to image.png
-                    let barBg = "bg-[#1e88e5]"; // Vibrant Blue for unsorted
+                    let barBg = "bg-[#1e88e5]";
                     if (isSorted) {
-                      barBg = "bg-[#10b981]"; // Emerald Green for sorted
+                      barBg = "bg-[#10b981]";
                     } else if (isSwapped) {
-                      barBg = "bg-[#ef4444]"; // Coral Red for swap
+                      barBg = "bg-[#ef4444]";
                     } else if (isComparing) {
-                      barBg = "bg-[#f59e0b]"; // Warm Amber for comparing
+                      barBg = "bg-[#f59e0b]";
                     }
 
                     const heightPercentage = Math.max((value / maxValue) * 100, 10);
@@ -231,4 +229,3 @@ export function SortingDisplay({
     </div>
   );
 }
-

@@ -13,7 +13,6 @@ export async function GET(request: NextRequest) {
   try {
     const parsedUrl = new URL(targetUrl);
 
-    // Fetch target webpage with realistic headers
     const response = await fetch(targetUrl, {
       headers: {
         "User-Agent":
@@ -34,13 +33,11 @@ export async function GET(request: NextRequest) {
 
     const contentType = response.headers.get("content-type") || "";
 
-    // If it's HTML, inject <base> tag to resolve relative assets, fonts, and stylesheets
     if (contentType.includes("text/html")) {
       let html = await response.text();
 
       const baseTag = `<base href="${parsedUrl.origin}${parsedUrl.pathname}" target="_blank">`;
 
-      // Inject base tag and custom styling to remove unwanted popups/scrolllocks & prevent frame-busting
       const customInjection = `
         ${baseTag}
         <style>
@@ -75,7 +72,6 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    // For non-HTML binary/assets
     const buffer = await response.arrayBuffer();
     return new NextResponse(buffer, {
       status: 200,

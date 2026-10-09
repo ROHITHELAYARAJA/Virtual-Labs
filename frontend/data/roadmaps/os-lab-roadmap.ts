@@ -412,11 +412,11 @@ void* producer(void* arg) {
     for (int i = 1; i <= 5; i++) {
         sem_wait(&empty_slots);
         pthread_mutex_lock(&mutex_lock);
-        
+
         buffer[in] = i * 10;
         printf("[PRODUCER] Produced %d at index %d\\n", buffer[in], in);
         in = (in + 1) % BUFFER_SIZE;
-        
+
         pthread_mutex_unlock(&mutex_lock);
         sem_post(&full_slots);
         usleep(100000);
@@ -428,11 +428,11 @@ void* consumer(void* arg) {
     for (int i = 1; i <= 5; i++) {
         sem_wait(&full_slots);
         pthread_mutex_lock(&mutex_lock);
-        
+
         int item = buffer[out];
         printf("  [CONSUMER] Consumed %d from index %d\\n", item, out);
         out = (out + 1) % BUFFER_SIZE;
-        
+
         pthread_mutex_unlock(&mutex_lock);
         sem_post(&empty_slots);
         usleep(150000);

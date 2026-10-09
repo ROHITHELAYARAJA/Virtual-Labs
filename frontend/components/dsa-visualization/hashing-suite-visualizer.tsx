@@ -12,12 +12,10 @@ export function HashingSuiteVisualizer({ defaultMode = "chaining" }: { defaultMo
   const [inputValue, setInputValue] = useState<string>("");
   const [isPlayingDemo, setIsPlayingDemo] = useState<boolean>(false);
 
-  // Chaining table: 10 buckets, each an array of numbers
   const [chainBuckets, setChainBuckets] = useState<number[][]>([
     [], [11], [], [], [], [25, 35], [], [], [18], []
   ]);
 
-  // Linear probing table: 10 slots
   const [probeTable, setProbeTable] = useState<(number | null)[]>([
     null, 11, null, null, null, 25, 35, null, 18, null
   ]);
@@ -164,7 +162,6 @@ export function HashingSuiteVisualizer({ defaultMode = "chaining" }: { defaultMo
           </span>
 
           {method === "chaining" ? (
-            // Separate Chaining
             <div className="space-y-2 pt-2">
               {chainBuckets.map((bucket, bIdx) => {
                 const isActive = activeBucket === bIdx;
@@ -201,7 +198,6 @@ export function HashingSuiteVisualizer({ defaultMode = "chaining" }: { defaultMo
               })}
             </div>
           ) : (
-            // Linear Probing
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 pt-2">
               {probeTable.map((val, slot) => {
                 const isActive = activeBucket === slot;
