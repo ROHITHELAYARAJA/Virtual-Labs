@@ -1,9 +1,3 @@
-/**
- * supabase.ts
- *
- * Supabase client and data access layer.
- * Powered by Supabase Auth, PostgreSQL tables, and Storage.
- */
 
 import { createClient, User as SupabaseUser, Session } from "@supabase/supabase-js";
 

@@ -1,10 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// Read frontend/data/experiments.ts to see what files are imported and concatenated
 const expContent = fs.readFileSync(path.join(__dirname, '../frontend/data/experiments.ts'), 'utf8');
 
-// Match all imported arrays in EXPERIMENTS_DATA
 const arrayMatch = expContent.match(/export const EXPERIMENTS_DATA:\s*Experiment\[\]\s*=\s*\[([\s\S]*?)\];/);
 if (!arrayMatch) {
   console.error("Could not find EXPERIMENTS_DATA");
@@ -17,7 +15,6 @@ const lines = arrayMatch[1].split('\n')
 
 console.log('Arrays in EXPERIMENTS_DATA:', lines);
 
-// Find which files export these arrays
 const importMatches = [...expContent.matchAll(/import\s*\{\s*([A-Za-z0-9_]+)\s*\}\s*from\s*["']([^"']+)["']/g)];
 const arrayToFile = {};
 for (const m of importMatches) {
@@ -50,7 +47,6 @@ for (const arrName of lines) {
 console.log('\n--- ACTIVE EXPERIMENTS IN EXPERIMENTS_DATA ---');
 console.table(counts);
 
-// Compare against LABS_DATA in labs.ts
 const labsContent = fs.readFileSync(path.join(__dirname, '../frontend/data/labs.ts'), 'utf8');
 const labBlocks = [...labsContent.matchAll(/id:\s*"([^"]+)"[\s\S]*?name:\s*"([^"]+)"[\s\S]*?experimentsCount:\s*(\d+)/g)];
 

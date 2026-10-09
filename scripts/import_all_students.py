@@ -75,7 +75,6 @@ headers = {
     'Prefer': 'resolution=merge-duplicates'
 }
 
-# Insert students in chunks of 50
 BATCH_SIZE = 50
 
 print("--- Uploading to public.students ---")

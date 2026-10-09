@@ -1,10 +1,3 @@
-/**
- * code-runner-engine.ts
- *
- * Client-side recursive execution engine derived from Recursion_Visualizer-main.
- * Runs 100% offline in browser without API keys.
- * Supports: Java, Python, C, C++, JavaScript
- */
 
 export interface StepCall {
   type: 'call';
@@ -30,19 +23,15 @@ export interface ExecutionResult {
   invocation: string;
 }
 
-// ─── Transpilers ─────────────────────────────────────────────────────────────
-
 export function transpileCStyle(code: string): string {
   let r = code;
 
-  // STEP 1: Comments and directives
   r = r.replace(/#\s*include\s*[<"][^"'>\n]*[>"]\s*/g, '');
   r = r.replace(/#\s*define\s+[^\n]*/g, '');
   r = r.replace(/#\s*pragma\s+[^\n]*/g, '');
   r = r.replace(/\/\/.*$/gm, '');
   r = r.replace(/\/\*[\s\S]*?\*\//g, '');
 
-  // STEP 2: Remove class / interface / struct wrappers
   r = r.replace(/(?:public\s+)?(?:class|interface|struct)\s+\w+(?:\s*implements\s+[^{]*)?(?:\s*extends\s+[^{]*)?\s*\{/g, '');
   {
     const opens = (r.match(/\{/g) || []).length;
@@ -54,33 +43,27 @@ export function transpileCStyle(code: string): string {
     }
   }
 
-  // STEP 3: Remove access modifiers & keywords
   r = r.replace(/\b(public|private|protected)\s*:/g, '');
   r = r.replace(/\b(public|private|protected|static|final|synchronized|volatile|transient|inline|virtual|override|explicit|constexpr)\s+/g, ' ');
 
-  // Strip generics safely
   let prev = '';
   do {
     prev = r;
     r = r.replace(/\b([A-Z]\w*)\s*<[^<>]*>/g, '$1');
   } while (r !== prev);
 
-  // STEP 4: Convert Java / C method declarations to JS functions
   r = r.replace(
     /\b(?:[A-Z]\w*|int|long\s+long|long|double|float|boolean|bool|char|void|auto|size_t|unsigned(?:\s+int)?|unsigned\s+long|String|string)\s+(?:\[\]\s*)*([A-Za-z_]\w*)\s*\(/g,
     'function $1('
   );
 
-  // Constants
   r = r.replace(/\bInteger\.MAX_VALUE\b/g, '2147483647');
   r = r.replace(/\bInteger\.MIN_VALUE\b/g, '-2147483648');
   r = r.replace(/\bDouble\.POSITIVE_INFINITY\b/g, 'Infinity');
   r = r.replace(/\bDouble\.NEGATIVE_INFINITY\b/g, '-Infinity');
 
-  // Java Arrays helper
   r = r.replace(/\bArrays\.copyOfRange\s*\(\s*([^,]+),\s*([^,]+),\s*([^)]+)\s*\)/g, '$1.slice($2, $3)');
 
-  // Clean params
   r = r.replace(/function\s+(\w+)\s*\(([^)]*)\)/g, (_match, funcName, params) => {
     const cleanedParams = params
       .split(',')
@@ -97,35 +80,28 @@ export function transpileCStyle(code: string): string {
     return `function ${funcName}(${cleanedParams})`;
   });
 
-  // Collections instantiations
   r = r.replace(/\bnew\s+(?:ArrayList|LinkedList|HashSet|Stack|ArrayDeque|Vector)\s*\(\s*([^)]+)\s*\)/g, '[...$1]');
   r = r.replace(/\bnew\s+(?:ArrayList|LinkedList|HashSet|Stack|ArrayDeque|Vector)\s*\(\s*\)/g, '[]');
   r = r.replace(/\bnew\s+boolean\s*\[\s*([^\]]+)\s*\]/g, 'new Array($1).fill(false)');
   r = r.replace(/\bnew\s+(?:int|long|double|float|char)\s*\[\s*([^\]]+)\s*\]/g, 'new Array($1).fill(0)');
   r = r.replace(/\bnew\s+(?:String|string)\s*\[\s*([^\]]+)\s*\]/g, 'new Array($1).fill("")');
 
-  // Array literals: new int[]{1,2,3} -> [1,2,3]
   r = r.replace(/new\s+(?:[A-Z]\w*|int|long|double|float|boolean|bool|char|String|string|auto)\s*(?:\[\s*\])+\s*\{([^}]*)\}/g, '[$1]');
   r = r.replace(/=\s*\{([^}]*)\}\s*;/g, '= [$1];');
 
-  // Variables declarations
   const javaTypes = 'List|ArrayList|LinkedList|Set|HashSet|Map|HashMap|Stack|Queue|Deque|ArrayDeque|Vector|int|long|double|float|boolean|bool|char|void|auto|size_t|unsigned|String|string';
   r = r.replace(new RegExp(`\\b(?:${javaTypes})(?:\\s*\\[\\s*\\])*\\s+([A-Za-z_]\\w*)\\s*=`, 'g'), 'var $1 =');
   r = r.replace(new RegExp(`\\b(?:${javaTypes})(?:\\s*\\[\\s*\\])*\\s+([A-Za-z_]\\w*)\\s*;`, 'g'), 'var $1;');
   r = r.replace(/\bfor\s*\(\s*(?:${javaTypes})\s+(\w+)\s*=/g, 'for (var $1 =');
 
-  // Type casts
   r = r.replace(/\(\s*(int|long|double|float|char|unsigned)\s*\)\s*/g, '');
 
-  // String methods
   r = r.replace(/\.length\s*\(\s*\)/g, '.length');
   r = r.replace(/\.toCharArray\s*\(\s*\)/g, '.split("")');
 
-  // IO
   r = r.replace(/System\.out\.println\s*\(/g, 'console.log(');
   r = r.replace(/System\.out\.print\s*\(/g, 'console.log(');
 
-  // Keywords
   r = r.replace(/\bnullptr\b/g, 'null');
 
   return r;
@@ -229,8 +205,6 @@ export function transpileToJS(code: string, language: string): string {
   }
 }
 
-// ─── Function & Invocation Detection ─────────────────────────────────────────
-
 const IGNORED = new Set([
   'println','print','printf','fprintf','sprintf','scanf','log','warn','error',
   'console','System','out','err','main','Main','setup','init','run','start',
@@ -302,8 +276,6 @@ function getParamNames(jsCode: string, funcName: string): string[] {
   }
   return [];
 }
-
-// ─── Execution with Tracing ──────────────────────────────────────────────────
 
 function executeWithTracing(jsCode: string, definedNames: string[], entry: { name: string; invocation: string }): ExecutionStep[] {
   const steps: ExecutionStep[] = [];
@@ -379,7 +351,6 @@ function executeWithTracing(jsCode: string, definedNames: string[], entry: { nam
     return (${entry.invocation});
   `;
 
-  // Run in sandboxed Function constructor
   new Function('__trace', 'console', sandboxCode)(guardedTrace, {
     log: () => {},
     warn: () => {},
@@ -424,8 +395,6 @@ export function runCodeLocally(code: string, language: string = 'java', customCa
   const steps = executeWithTracing(jsCode, definedNames, entry);
   return { steps, funcName: entry.name, invocation: entry.invocation };
 }
-
-// ─── Preset Simulators ────────────────────────────────────────────────────────
 
 export const PRESET_SIMULATORS: Record<string, (input: any) => ExecutionStep[]> = {
   factorial: (n: number) => {
@@ -575,8 +544,6 @@ export const PRESET_SIMULATORS: Record<string, (input: any) => ExecutionStep[]> 
     return steps;
   }
 };
-
-// ─── Preset Catalog ──────────────────────────────────────────────────────────
 
 export const RECURSION_EXAMPLES = [
   {

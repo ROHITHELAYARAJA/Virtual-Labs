@@ -13,13 +13,10 @@ function cleanMarkdownTableText(str) {
   return str.replace(/^\|[\s\S]*?---\s*\|/m, '').replace(/\|/g, '').trim();
 }
 
-// =========================================================================
-// 1. PROGRAMMING IN C LAB (15 Experiments)
-// =========================================================================
 function buildCProgramming() {
   const content = fs.readFileSync(path.join(mdDir, 'PROGRAMMING IN C LAB MANUAL.md'), 'utf8');
   const expRegex = /\|\s*\*\*Experiment\s*(\d+):\s*([^\*\|]+)\*\*[\s\S]*?\*\*Aim\*\*([\s\S]*?)\*\*Procedure \/ Algorithm\*\*([\s\S]*?)\*\*Program\*\*([\s\S]*?)\*\*Output\*\*([\s\S]*?)\*\*Result\*\*([\s\S]*?)(?=(\|\s*\*\*Experiment|$))/g;
-  
+
   const experiments = [];
   let m;
   while ((m = expRegex.exec(content)) !== null) {
@@ -30,10 +27,10 @@ function buildCProgramming() {
     const proc = procRaw.split(/\r?\n/)
       .map(s => s.trim().replace(/^\|\s*|\s*\|$/g, ''))
       .filter(s => /^\d+\./.test(s));
-    
+
     let codeRaw = cleanMarkdownTableText(m[5]);
     codeRaw = codeRaw.replace(/\s{2,}/g, '\n  ').replace(/#include/g, '\n#include').trim();
-    
+
     let outRaw = cleanMarkdownTableText(m[6]).replace(/\s{2,}/g, '\n');
 
     const slug = `c-exp-${num}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
@@ -100,9 +97,6 @@ function buildCProgramming() {
   console.log(`[1/8] Generated c-programming-experiments.ts (${experiments.length} experiments)`);
 }
 
-// =========================================================================
-// 2. DBMS LAB (15 Experiments)
-// =========================================================================
 function buildDBMS() {
   const content = fs.readFileSync(path.join(mdDir, 'AIDS_DBMS LAB MANUAL.md'), 'utf8');
   const sections = content.split(/Ex\.\s*No:\s*(\d+)/i);
@@ -111,7 +105,7 @@ function buildDBMS() {
   for (let i = 1; i < sections.length; i += 2) {
     const num = parseInt(sections[i], 10);
     const body = sections[i + 1];
-    
+
     const lines = body.trim().split(/\r?\n/).map(l => l.trim()).filter(Boolean);
     const title = lines[0].replace(/^#+\s*/, '').trim();
 
@@ -135,7 +129,6 @@ function buildDBMS() {
       ];
     }
 
-    // Extract SQL code blocks
     let sqlCode = '';
     const codeBlocks = [...body.matchAll(/```(?:sql)?\s*([\s\S]*?)```/gi)];
     if (codeBlocks.length > 0) {
@@ -150,7 +143,6 @@ function buildDBMS() {
       sqlCode = `-- SQL Implementation for ${title}\nCREATE DATABASE IF NOT EXISTS vlab_db;\nUSE vlab_db;\n\n-- Schema definitions and queries from VSB Lab Manual\nSELECT 'Execution completed successfully' AS status;`;
     }
 
-    // Extract Output
     let expectedOutput = `Query OK, rows affected.\nData verified according to VSB DBMS lab manual specification.`;
     const outMatch = body.match(/(?:Output|Result):\s*([\s\S]*?)(?=(?:Ex\.\s*No:|$))/i);
     if (outMatch) {
@@ -215,13 +207,10 @@ function buildDBMS() {
   console.log(`[2/8] Generated dbms-experiments.ts (${experiments.length} experiments)`);
 }
 
-// =========================================================================
-// 3. DSA LAB (15 Experiments)
-// =========================================================================
 function buildDSA() {
   const content = fs.readFileSync(path.join(mdDir, 'AIDS_DSA LAB MANUAL.md'), 'utf8');
   const sections = content.split(/Ex\.\s*No\.?:\s*(\d+)/i);
-  
+
   const dsaCanonicalTitles = [
     'Singly Linked List Implementation and Operations',
     'Doubly Linked List and Circular Linked List Implementation',
@@ -274,7 +263,6 @@ function buildDSA() {
       javaCode = `// Java Implementation of ${title}\npublic class DSALabExp${num} {\n    public static void main(String[] args) {\n        System.out.println("Execution of ${title} completed.");\n    }\n}`;
     }
 
-    // Determine simulator
     let sim = 'custom';
     if (/singly|doubly|linked/i.test(title)) sim = 'linked-list';
     else if (/stack/i.test(title)) sim = 'stack';
@@ -341,9 +329,6 @@ function buildDSA() {
   console.log(`[3/8] Generated dsa-experiments.ts (${experiments.length} experiments)`);
 }
 
-// =========================================================================
-// 4. OOPS JAVA LAB (15 Experiments)
-// =========================================================================
 function buildOOPJava() {
   const content = fs.readFileSync(path.join(mdDir, 'AIDS_OOP_final lab manual 02072026.md'), 'utf8');
   const sections = content.split(/Ex\.No:(\d+)/i);
@@ -353,7 +338,7 @@ function buildOOPJava() {
   for (let i = 1; i < sections.length; i += 2) {
     const rawNum = sections[i];
     const body = sections[i + 1];
-    
+
     const lines = body.trim().split(/\r?\n/).map(l => l.trim()).filter(Boolean);
     let title = lines[0].replace(/^#+\s*/, '').trim();
     let numId = rawNum;
@@ -452,9 +437,6 @@ function buildOOPJava() {
   console.log(`[4/8] Generated oops-java-experiments.ts (${experiments.length} experiments)`);
 }
 
-// =========================================================================
-// 5. BIG DATA ANALYTICS LAB (7 Experiments)
-// =========================================================================
 function buildBDA() {
   const content = fs.readFileSync(path.join(mdDir, 'BDA AIDS LAB  MANUAL.md'), 'utf8');
   const sections = content.split(/Exp\.No:\s*(\d+)/i);
@@ -463,7 +445,7 @@ function buildBDA() {
   for (let i = 1; i < sections.length; i += 2) {
     const num = parseInt(sections[i], 10);
     const body = sections[i + 1];
-    
+
     const lines = body.trim().split(/\r?\n/).map(l => l.trim()).filter(Boolean);
     const title = lines[0].replace(/^#+\s*/, '').trim();
 
@@ -552,9 +534,6 @@ function buildBDA() {
   console.log(`[5/8] Generated bda-experiments.ts (${experiments.length} experiments)`);
 }
 
-// =========================================================================
-// 6. BUSINESS ANALYTICS & DATA SCIENCE (11 Experiments)
-// =========================================================================
 function buildBusinessAnalytics() {
   const baExperiments = [
     {
@@ -688,9 +667,6 @@ function buildBusinessAnalytics() {
   console.log(`[6/8] Generated data-science-experiments.ts (${experiments.length} experiments)`);
 }
 
-// =========================================================================
-// 7. CLOUD SERVICE MANAGEMENT LAB (5 Experiments)
-// =========================================================================
 function buildCSM() {
   const csmExperiments = [
     {
@@ -788,9 +764,6 @@ function buildCSM() {
   console.log(`[7/8] Generated csm-experiments.ts (${experiments.length} experiments)`);
 }
 
-// =========================================================================
-// 8. DEEP LEARNING LAB (8 Experiments)
-// =========================================================================
 function buildDL() {
   const dlExperiments = [
     {
@@ -915,7 +888,6 @@ function buildDL() {
   console.log(`[8/8] Generated dl-experiments.ts (${experiments.length} experiments)`);
 }
 
-// Run all 8 builders
 console.log('--- Generating All 8 Department Lab Manual Experiments ---');
 buildCProgramming();
 buildDBMS();

@@ -163,7 +163,6 @@
   font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-/* Background Grid Pattern */
 .bg-grid-pattern {
   background-size: 40px 40px;
   background-image: 
@@ -181,7 +180,6 @@
   box-shadow: 0 0 30px -5px rgba(225, 29, 72, 0.4);
 }
 
-/* Big Silhouette Watermark */
 .watermark-text {
   font-family: 'General Sans', 'Pilcrow Rounded', sans-serif;
   font-weight: 900;
@@ -199,7 +197,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Giant Bottom Fade Mask Text with Fluid Metallic Shimmer Animation */
 .bottom-brand-mask {
   font-family: 'Pilcrow Rounded', 'General Sans', 'Outfit', -apple-system, sans-serif;
   font-weight: 950;
@@ -248,7 +245,6 @@
   animation: pulse-glow 5s ease-in-out infinite;
 }
 
-/* Infinite Marquee Animation */
 @keyframes marquee {
   0% {
     transform: translateX(0%);
@@ -284,7 +280,6 @@
   animation-play-state: paused;
 }
 
-/* Hide Next.js Dev Indicators & Static Route Indicator Badge */
 nextjs-portal,
 #nextjs-dev-overlay,
 [data-nextjs-dev-indicator],
@@ -297,7 +292,6 @@ div[data-nextjs-route-announcer] {
   pointer-events: none !important;
 }
 
-/* Custom Sleek Scrollbar for Code Editors */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

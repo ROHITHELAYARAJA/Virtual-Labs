@@ -4,7 +4,6 @@ const path = require('path');
 const mdDir = 'c:/Users/erohi/OneDrive/Desktop/Virtual-Labs/MD';
 const outDir = 'c:/Users/erohi/OneDrive/Desktop/Virtual-Labs/frontend/data/experiments-data';
 
-// Helper to escape strings for TypeScript templates
 function esc(str) {
   if (!str) return '';
   return str

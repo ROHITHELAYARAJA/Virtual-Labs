@@ -465,19 +465,14 @@ export function generateCyclicSortSteps(initial: number[]): SortingStep[] {
     swaps: 0
   });
 
-  // Calculate target sorted index for each element
-  // Works seamlessly for 1..N, 0..N-1, or arbitrary random integers
   const sortedCopy = [...arr].sort((a, b) => a - b);
   const getCorrectIndex = (val: number, currentIdx: number) => {
-    // If consecutive 1..N numbers
     const isOneToN = arr.every(x => x >= 1 && x <= n);
     if (isOneToN) return val - 1;
 
-    // If consecutive 0..N-1 numbers
     const isZeroToNMinusOne = arr.every(x => x >= 0 && x < n);
     if (isZeroToNMinusOne) return val;
 
-    // General Rank Mapping for arbitrary integers
     let rank = sortedCopy.indexOf(val);
     while (rank < n && sortedCopy[rank] === val && arr[rank] === val && rank !== currentIdx) {
       rank++;
@@ -541,7 +536,6 @@ export function generateCyclicSortSteps(initial: number[]): SortingStep[] {
     }
   }
 
-  // Ensure all elements marked sorted
   steps.push({
     array: [...arr],
     comparingIndices: [],
@@ -732,7 +726,6 @@ export function generateHeapSortSteps(initial: number[]): SortingStep[] {
     }
   }
 
-  // Build max heap
   for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
     heapify(n, i);
   }
@@ -747,7 +740,6 @@ export function generateHeapSortSteps(initial: number[]): SortingStep[] {
     swaps
   });
 
-  // Extract elements from heap one by one
   for (let i = n - 1; i > 0; i--) {
     swaps++;
     [arr[0], arr[i]] = [arr[i], arr[0]];
@@ -851,7 +843,6 @@ export function useSorting(
   algorithm: SortingAlgorithm = "bubble",
   initialArray: number[] = [45, 12, 89, 34, 23, 76, 50, 9]
 ) {
-  // Preset array tailored for cyclic sort (1..N permutation)
   const defaultArr = algorithm === "cyclic" 
     ? [3, 5, 2, 1, 4, 8, 6, 7] 
     : initialArray;
@@ -863,7 +854,6 @@ export function useSorting(
   const [speedMs, setSpeedMs] = useState<number>(600);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Generate steps based on algorithm
   const generateSteps = useCallback((arr: number[], algo: SortingAlgorithm) => {
     let generated: SortingStep[] = [];
     if (algo === "bubble") generated = generateBubbleSortSteps(arr);
@@ -883,7 +873,6 @@ export function useSorting(
     generateSteps(arrayInput, algorithm);
   }, [algorithm, arrayInput, generateSteps]);
 
-  // Animation player
   useEffect(() => {
     if (isPlaying) {
       if (currentStepIndex >= steps.length - 1) {
@@ -925,7 +914,6 @@ export function useSorting(
     setCurrentStepIndex(0);
   };
 
-  // Load saved array & speed from localStorage
   useEffect(() => {
     try {
       const savedArr = localStorage.getItem(`dsa_sorting_array_${algorithm}`);
@@ -943,11 +931,9 @@ export function useSorting(
         }
       }
     } catch (e) {
-      // Ignore storage errors
     }
   }, [algorithm]);
 
-  // Automatically mark algorithm as mastered in checklist when sorting completes
   useEffect(() => {
     if (steps.length > 2 && currentStepIndex === steps.length - 1) {
       try {
@@ -979,7 +965,6 @@ export function useSorting(
 
   const randomize = (size: number = 8) => {
     if (algorithm === "cyclic") {
-      // Generate a shuffled 1..size permutation for clear cycle showcase
       const perm = Array.from({ length: size }, (_, i) => i + 1);
       for (let i = perm.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));

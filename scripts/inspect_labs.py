@@ -3,7 +3,6 @@ import re
 with open('frontend/data/labs.ts', encoding='utf-8') as f:
     text = f.read()
 
-# Match each object in LABS_DATA
 lab_blocks = text.split('id: "')
 print(f"Total blocks: {len(lab_blocks)-1}")
 for b in lab_blocks[1:]:

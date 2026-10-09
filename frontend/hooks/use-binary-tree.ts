@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { BinaryTreeNode } from "@/components/visualizer/binary-tree/types"
 
-// Add a counter for generating unique IDs
 let nodeIdCounter = 1;
 
 function buildInitialBST(values: number[] = [50, 30, 70, 20, 40, 60, 80]): BinaryTreeNode | null {
@@ -92,7 +91,7 @@ export function useBinaryTree() {
     const highlight = (nodeId: string, value: number) => {
       setHighlightedNodes(prev => [...prev, nodeId])
       setTraversalHistory(prev => [...prev, value])
-      
+
       setTimeout(() => {
         setHighlightedNodes(prev => prev.filter(id => id !== nodeId))
       }, 1000)
@@ -137,7 +136,7 @@ export function useBinaryTree() {
     setIsAnimating(true)
     setHighlightedNodes([])
     setTraversalHistory([])
-    
+
     try {
       await traverseWithAnimation(tree, (node) => {
         console.log('Visiting:', node.value)

@@ -11,16 +11,14 @@ export function useQueue(maxSize: number = 8) {
 
   const enqueue = async (value: number) => {
     if (queue.length >= maxSize || isAnimating) return
-    
+
     setIsAnimating(true)
     setOperations(prev => [...prev, { type: 'enqueue', value, timestamp: Date.now() }])
 
-    // Highlight the new position
     setHighlightedIndex(queue.length)
-    
-    // Add new node with animation delay
+
     await new Promise(resolve => setTimeout(resolve, 500))
-    
+
     setQueue(prev => [
       ...prev,
       {
@@ -37,7 +35,7 @@ export function useQueue(maxSize: number = 8) {
 
   const dequeue = async () => {
     if (queue.length === 0 || isAnimating) return
-    
+
     setIsAnimating(true)
     setOperations(prev => [...prev, { 
       type: 'dequeue', 
@@ -45,20 +43,18 @@ export function useQueue(maxSize: number = 8) {
       timestamp: Date.now() 
     }])
 
-    // Highlight the first element
     setHighlightedIndex(0)
-    
+
     await new Promise(resolve => setTimeout(resolve, 500))
-    
+
     setQueue(prev => {
       const newQueue = prev.slice(1)
-      // Update indices
       return newQueue.map((node, i) => ({
         ...node,
         index: i,
       }))
     })
-    
+
     await new Promise(resolve => setTimeout(resolve, 500))
     setHighlightedIndex(null)
     setIsAnimating(false)

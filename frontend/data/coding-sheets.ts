@@ -1,11 +1,3 @@
-/**
- * coding-sheets.ts
- *
- * Comprehensive dataset of LeetCode Top Interview 150, LeetCode 75, and Top SQL 50.
- * Includes direct LeetCode problem links, difficulty, ratings out of 10,
- * Product-Based Companies (Tier-1 / Top Tech), Service-Based Companies (TCS, Infosys, etc.),
- * and direct learning platform links (GeeksforGeeks, HackerRank, Codeforces, W3Schools).
- */
 
 export type DifficultyLevel = "Easy" | "Medium" | "Hard";
 export type SheetType = "top-interview-150" | "leetcode-75" | "sql-50";

@@ -8,7 +8,6 @@ const supabaseKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pYnF4Z3lnanppbG9qdnZzYXljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzOTg4MDcsImV4cCI6MjEwNTk3NDgwN30.KQpaLb0aXqMs07ZSDFYRx_7mQxHE8V04-FzmwbKNYt4";
 
 export const createClient = (request: NextRequest) => {
-  // Create an unmodified response
   let supabaseResponse = NextResponse.next({
     request: {
       headers: request.headers,

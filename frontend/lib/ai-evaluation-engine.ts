@@ -1,9 +1,3 @@
-/**
- * ai-evaluation-engine.ts
- *
- * Client-side heuristic analysis engine for Machine Coding solutions & Behavioral STAR stories.
- * Provides instant feedback, SOLID compliance scores, and metric-driven suggestions.
- */
 
 export interface CodeReviewResult {
   score: number;
@@ -34,9 +28,6 @@ export interface StarEvaluationResult {
   suggestedActionImprovements: string[];
 }
 
-/**
- * Evaluates machine coding code against SOLID principles and software engineering best practices.
- */
 export function evaluateMachineCodingCode(
   code: string,
   language: "java" | "python" | "typescript",
@@ -161,9 +152,6 @@ export function evaluateMachineCodingCode(
   };
 }
 
-/**
- * Evaluates behavioral STAR story against 5-point calibration rubric.
- */
 export function evaluateStarStory(
   situation: string,
   task: string,

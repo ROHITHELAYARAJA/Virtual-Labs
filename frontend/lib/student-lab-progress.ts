@@ -1,13 +1,3 @@
-/**
- * student-lab-progress.ts
- *
- * Authoritative laboratory curriculum and progress evaluation for AIDS cohorts.
- * Handles:
- * - Second Year (II AIDS): Currently studying Semester III -> Mandatory Semester III Labs
- * - Third Year (III AIDS): Currently studying Semester V -> Mandatory Semester V Labs
- * - Fourth Year (IV AIDS): Currently studying Semester VII -> Capstone Labs
- * - Online progress calculation, live status badges, and Gmail reminder links.
- */
 
 import { StudentProfile } from "./supabase";
 
@@ -203,9 +193,6 @@ export interface StudentProgressEvaluation {
   completedExperimentIds: string[];
 }
 
-/**
- * Determine a student's active semester and required labs based on profile
- */
 export function getStudentSemesterKey(student: Partial<StudentProfile>): string {
   const semStr = (student.yearSemester || "").toLowerCase();
   const classStr = (student.className || student.cohort || "").toLowerCase();
@@ -248,9 +235,6 @@ export function getStudentSemesterKey(student: Partial<StudentProfile>): string 
   return "Semester III";
 }
 
-/**
- * Check if a required lab is completed by checking the student's completed_experiments array
- */
 export function isLabCompleted(lab: LabRequirement, completedExperiments: string[] = []): boolean {
   if (!completedExperiments || completedExperiments.length === 0) return false;
 
@@ -266,9 +250,6 @@ export function isLabCompleted(lab: LabRequirement, completedExperiments: string
   });
 }
 
-/**
- * Evaluate complete progress for a student
- */
 export function evaluateStudentProgress(student: Partial<StudentProfile>): StudentProgressEvaluation {
   const semesterKey = getStudentSemesterKey(student);
   const requiredLabs = SEMESTER_LAB_REQUIREMENTS[semesterKey] || SEMESTER_LAB_REQUIREMENTS["Semester III"];
@@ -309,9 +290,6 @@ export function evaluateStudentProgress(student: Partial<StudentProfile>): Stude
   };
 }
 
-/**
- * Generate official Gmail compose URL for laboratory reminders
- */
 export function generateGmailReminderUrl(student: StudentProfile): string {
   const evalData = evaluateStudentProgress(student);
   const recipient = student.email || `${student.registerNumber}@vsb.ac.in`;
@@ -367,9 +345,6 @@ V.S.B. Engineering College, NH-67, Karur - 639 111, Tamil Nadu.
   return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
 }
 
-/**
- * Generate formatted text for clipboard copying
- */
 export function generateReminderClipboardText(student: StudentProfile): string {
   const evalData = evaluateStudentProgress(student);
   const pendingNames = evalData.pendingLabs.map((l) => `${l.code} ${l.shortName}`).join(", ") || "None";

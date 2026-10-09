@@ -61,7 +61,6 @@ export function usePolynomial() {
   }
 
   const loadExample = () => {
-    // Example: (2x^2 + 3x + 1) * (x + 2)
     const terms1 = [
       { coefficient: 2, exponent: 2 },
       { coefficient: 3, exponent: 1 },
@@ -80,10 +79,9 @@ export function usePolynomial() {
   }
 
   const parsePolynomial = (input: string): Term[] => {
-    // Basic parsing of format like "2x^2 + 3x + 1"
     const terms: Term[] = []
     const parts = input.split(/\s*\+\s*/)
-    
+
     parts.forEach(part => {
       const match = part.match(/^(-?\d*)?(?:x(?:\^(\d+))?)?$/)
       if (match) {
@@ -92,7 +90,7 @@ export function usePolynomial() {
         terms.push({ coefficient, exponent })
       }
     })
-    
+
     return terms.sort((a, b) => b.exponent - a.exponent)
   }
 
@@ -108,7 +106,6 @@ export function usePolynomial() {
       while (node2) {
         const term2 = poly2.nodes.get(node2)!.term
 
-        // Step 1: Select terms
         steps.push({
           type: 'SELECT_TERMS',
           term1,
@@ -118,11 +115,10 @@ export function usePolynomial() {
           message: `Selecting terms: ${formatTerm(term1)} and ${formatTerm(term2)}`
         })
 
-        // Step 2: Multiply terms
         const resultExp = term1.exponent + term2.exponent
         const resultCoef = term1.coefficient * term2.coefficient
         const resultTerm = { coefficient: resultCoef, exponent: resultExp }
-        
+
         steps.push({
           type: 'MULTIPLY',
           term1,
@@ -133,17 +129,13 @@ export function usePolynomial() {
           message: `${formatTerm(term1)} × ${formatTerm(term2)} = ${formatTerm(resultTerm)}`
         })
 
-        // Step 3: Add to result
         const currentValue = resultTerms.get(resultExp) || 0
         resultTerms.set(resultExp, currentValue + resultCoef)
 
-        // Create a sorted array of all current terms
         const currentTerms = Array.from(resultTerms.entries())
           .map(([exp, coef]) => ({ coefficient: coef, exponent: exp }))
           .sort((a, b) => {
-            // Sort by exponent first
             if (b.exponent !== a.exponent) return b.exponent - a.exponent
-            // If exponents are equal, sort by coefficient
             return Math.abs(b.coefficient) - Math.abs(a.coefficient)
           })
           .filter(term => term.coefficient !== 0) // Remove terms with coefficient 0
@@ -181,13 +173,10 @@ export function usePolynomial() {
     if (step.node1) newHighlighted.poly1.push(step.node1)
     if (step.node2) newHighlighted.poly2.push(step.node2)
 
-    // Update result based on current step
     if (step.type === 'ADD_TO_RESULT' && step.intermediateResult) {
-      // Create new polynomial from the current step's intermediate result
       const newResult = createPolynomial(step.intermediateResult)
       setResult(newResult)
 
-      // Highlight the current term being added
       if (step.resultTerm) {
         const resultNode = Array.from(newResult.nodes.entries())
           .find(([_, node]) => 

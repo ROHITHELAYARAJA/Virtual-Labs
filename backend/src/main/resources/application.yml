@@ -48,4 +48,3 @@ firebase:
   project-id: "virtual-lab-e7495"
   credentials-path: ${FIREBASE_CREDENTIALS_PATH:}
   enabled: true
-

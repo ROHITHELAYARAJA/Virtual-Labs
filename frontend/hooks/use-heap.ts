@@ -31,14 +31,12 @@ export function useHeap() {
 
   const heapifyUp = (array: number[], index: number) => {
     const parentIndex = Math.floor((index - 1) / 2)
-    
+
     if (parentIndex >= 0 && shouldSwap(array[parentIndex], array[index])) {
-      // Swap
       [array[parentIndex], array[index]] = [array[index], array[parentIndex]]
       heapifyUp(array, parentIndex)
     }
   }
-
 
   const insert = (value: number) => {
     const newArray = [...heapArray, value]
@@ -50,7 +48,7 @@ export function useHeap() {
   const insertMany = (values: string) => {
     const nums = values.split(',').map(v => parseInt(v.trim())).filter(n => !isNaN(n))
     const newArray = [...heapArray]
-    
+
     nums.forEach(value => {
       newArray.push(value)
       heapifyUp(newArray, newArray.length - 1)
@@ -63,13 +61,12 @@ export function useHeap() {
   const toggleHeapType = () => {
     const newType = heapType === 'max' ? 'min' : 'max'
     setHeapType(newType)
-    
-    // Rebuild heap with new type
+
     const newArray = [...heapArray]
     for (let i = Math.floor(newArray.length / 2); i >= 0; i--) {
       heapifyDown(newArray, i)
     }
-    
+
     setHeapArray(newArray)
     setHeap(arrayToTree(newArray))
   }

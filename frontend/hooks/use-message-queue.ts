@@ -39,7 +39,6 @@ export function useMessageQueue() {
     const message = queue[0]
     const newQueue = queue.slice(1)
 
-    // Update message and consumer status
     message.status = 'processing'
     setQueue(newQueue)
     setConsumers(prev => prev.map(c => 
@@ -48,10 +47,8 @@ export function useMessageQueue() {
         : c
     ))
 
-    // Simulate processing time
     await new Promise(resolve => setTimeout(resolve, DEFAULT_PROCESS_TIME))
 
-    // Mark as completed and update consumer
     message.status = 'completed'
     setProcessed(prev => [...prev, message])
     setConsumers(prev => prev.map(c => 

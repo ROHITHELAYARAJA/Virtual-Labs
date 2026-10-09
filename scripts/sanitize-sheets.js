@@ -4,16 +4,12 @@ const path = require('path');
 const filePath = path.join(__dirname, '..', 'frontend', 'data', 'coding-sheets.ts');
 let content = fs.readFileSync(filePath, 'utf8');
 
-// 1. Remove takeUForwardUrl from interface definition
 content = content.replace(/\s*takeUForwardUrl\?:\s*string;?/g, '');
 
-// 2. Remove takeUForwardUrl lines from objects
 content = content.replace(/\s*takeUForwardUrl:\s*["'][^"']+["'],?/g, '');
 
-// 3. Remove references to TakeUForward in comments
 content = content.replace(/TakeUForward/gi, 'Top Tech Interview');
 
-// 4. Ensure ratings are in range 7.0 - 9.9
 const productPool = [
   ["Google", "Amazon", "Meta", "Microsoft", "Apple"],
   ["Microsoft", "Amazon", "Google", "Uber", "Adobe"],
@@ -36,7 +32,6 @@ const servicePool = [
 ];
 
 let counter = 0;
-// Regular expression to find importanceRating and adjust
 content = content.replace(/importanceRating:\s*([0-9.]+)/g, (match, val) => {
   let num = parseFloat(val);
   if (num < 7.0) num = 7.0 + Math.round((Math.random() * 2.8) * 10) / 10;

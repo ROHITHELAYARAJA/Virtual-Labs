@@ -46,10 +46,6 @@ public class FirebaseTokenVerifier {
         }
     }
 
-    /**
-     * Verifies if the given token is a valid Firebase ID token.
-     * Uses FirebaseAuth Admin SDK when available, with resilient fallback to payload claims inspection.
-     */
     public FirebaseUserPrincipal verifyToken(String idToken) {
         if (idToken == null || idToken.trim().isEmpty()) {
             return null;

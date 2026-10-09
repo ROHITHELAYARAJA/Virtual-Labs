@@ -45,9 +45,6 @@ MATERIAL_CONTENTS["bda-lab-manual"] = MATERIAL_CONTENTS["bigdata-lab-manual"];
 MATERIAL_CONTENTS["ml-lab-manual"] = MATERIAL_CONTENTS["dl-lab-manual"];
 MATERIAL_CONTENTS["data-science-lab-manual"] = MATERIAL_CONTENTS["business-analytics-manual"];
 
-/**
- * Helper to match any resource item to its corresponding rich in-app material
- */
 export function getMaterialForResource(resource: {
   title?: string;
   subject?: string;

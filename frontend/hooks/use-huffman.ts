@@ -38,18 +38,15 @@ export function useHuffman() {
     setCodes(new Map())
     setOriginalText(text)
 
-    // Get character frequencies
     const freqs = getFrequencies(text)
     setFrequencies(freqs)
     const leafNodes = Array.from(freqs.entries()).map(([char, freq]) => 
       createNode(char, freq)
     )
 
-    // Create priority queue
     let priorityQueue = [...leafNodes].sort((a, b) => a.frequency - b.frequency)
     let allNodes = [...leafNodes]
-    
-    // Initial state
+
     setSteps([{
       type: 'BUILD_QUEUE',
       nodes: allNodes,
@@ -58,12 +55,10 @@ export function useHuffman() {
       highlightedNodes: allNodes.map(n => n.id)
     }])
 
-    // Build tree step by step
     while (priorityQueue.length > 1) {
       const left = priorityQueue.shift()!
       const right = priorityQueue.shift()!
 
-      // Highlight nodes being merged
       setSteps(prev => [...prev, {
         type: 'MERGE_NODES',
         nodes: allNodes,
@@ -80,7 +75,6 @@ export function useHuffman() {
       parent.right = right
       allNodes.push(parent)
 
-      // Insert new node in correct position
       let i = 0
       while (i < priorityQueue.length && 
              priorityQueue[i].frequency < parent.frequency) {
@@ -88,7 +82,6 @@ export function useHuffman() {
       }
       priorityQueue.splice(i, 0, parent)
 
-      // Show merged result
       setSteps(prev => [...prev, {
         type: 'MERGE_NODES',
         nodes: allNodes,
@@ -101,7 +94,6 @@ export function useHuffman() {
     const root = priorityQueue[0]
     setTree(root)
 
-    // Generate codes step by step
     const newCodes = new Map<string, string>()
     const assignCodes = (node: HuffmanNode, code: string = '') => {
       if (!node.left && !node.right) {

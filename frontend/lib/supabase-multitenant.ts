@@ -1,9 +1,3 @@
-/**
- * supabase-multitenant.ts
- *
- * Multi-tenant Data Access Layer for Virtual Labs Enterprise SaaS.
- * Isolates data per college (VSB, CIT, PSG, etc.) with strict tenant scoping.
- */
 
 import { supabase, StudentProfile } from "./supabase";
 

@@ -11,16 +11,14 @@ export function useStack(maxSize: number = 8) {
 
   const push = async (value: number) => {
     if (stack.length >= maxSize || isAnimating) return
-    
+
     setIsAnimating(true)
     setOperations(prev => [...prev, { type: 'push', value, timestamp: Date.now() }])
 
-    // Highlight the new position
     setHighlightedIndex(stack.length)
-    
-    // Add new node with animation delay
+
     await new Promise(resolve => setTimeout(resolve, 500))
-    
+
     setStack(prev => [
       ...prev,
       {
@@ -37,17 +35,16 @@ export function useStack(maxSize: number = 8) {
 
   const pop = async () => {
     if (stack.length === 0 || isAnimating) return
-    
+
     setIsAnimating(true)
     setOperations(prev => [...prev, { type: 'pop', value: stack[stack.length - 1].value, timestamp: Date.now() }])
 
-    // Highlight the top element
     setHighlightedIndex(stack.length - 1)
-    
+
     await new Promise(resolve => setTimeout(resolve, 500))
-    
+
     setStack(prev => prev.slice(0, -1))
-    
+
     await new Promise(resolve => setTimeout(resolve, 500))
     setHighlightedIndex(null)
     setIsAnimating(false)

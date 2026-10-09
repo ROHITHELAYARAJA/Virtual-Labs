@@ -10,22 +10,18 @@ export function useAVLTree() {
   const [rotationHistory, setRotationHistory] = useState<string[]>([])
   const [isAnimating, setIsAnimating] = useState(false)
 
-  // Get height of a node
   const getHeight = (node: AVLTreeNode | null): number => {
     return node ? node.height : 0
   }
 
-  // Get balance factor
   const getBalance = (node: AVLTreeNode | null): number => {
     return node ? getHeight(node.left) - getHeight(node.right) : 0
   }
 
-  // Update height of a node
   const updateHeight = (node: AVLTreeNode): number => {
     return Math.max(getHeight(node.left), getHeight(node.right)) + 1
   }
 
-  // Right rotation
   const rightRotate = (y: AVLTreeNode): AVLTreeNode => {
     const x = y.left!
     const T2 = x.right
@@ -40,7 +36,6 @@ export function useAVLTree() {
     return x
   }
 
-  // Left rotation
   const leftRotate = (x: AVLTreeNode): AVLTreeNode => {
     const y = x.right!
     const T2 = y.left
@@ -59,7 +54,6 @@ export function useAVLTree() {
     if (isNaN(value)) return
 
     const insertNode = (node: AVLTreeNode | null): AVLTreeNode => {
-      // Base case: create new node
       if (!node) {
         return {
           id: `node-${nodeIdCounter++}`,
@@ -70,42 +64,34 @@ export function useAVLTree() {
         }
       }
 
-      // Create a new node object to maintain immutability
       const newNode = { ...node }
 
-      // Perform BST insertion
       if (value < newNode.value) {
         newNode.left = insertNode(newNode.left)
       } else {
         newNode.right = insertNode(newNode.right)
       }
 
-      // Update height
       newNode.height = 1 + Math.max(
         getHeight(newNode.left),
         getHeight(newNode.right)
       )
 
-      // Get balance factor
       const balance = getBalance(newNode)
 
-      // Left Left Case
       if (balance > 1 && value < newNode.left!.value) {
         return rightRotate(newNode)
       }
 
-      // Right Right Case
       if (balance < -1 && value >= newNode.right!.value) {
         return leftRotate(newNode)
       }
 
-      // Left Right Case
       if (balance > 1 && value >= newNode.left!.value) {
         newNode.left = leftRotate(newNode.left!)
         return rightRotate(newNode)
       }
 
-      // Right Left Case
       if (balance < -1 && value < newNode.right!.value) {
         newNode.right = rightRotate(newNode.right!)
         return leftRotate(newNode)
@@ -117,7 +103,6 @@ export function useAVLTree() {
     setTree(prevTree => insertNode(prevTree))
   }
 
-  // Traversal functions similar to binary tree
   const traverseWithAnimation = async (
     node: AVLTreeNode | null,
     visit: (node: AVLTreeNode) => void,
@@ -128,7 +113,7 @@ export function useAVLTree() {
     const highlight = (nodeId: string, value: number) => {
       setHighlightedNodes(prev => [...prev, nodeId])
       setTraversalHistory(prev => [...prev, value])
-      
+
       setTimeout(() => {
         setHighlightedNodes(prev => prev.filter(id => id !== nodeId))
       }, 1000)
@@ -174,7 +159,7 @@ export function useAVLTree() {
     setIsAnimating(true)
     setHighlightedNodes([])
     setTraversalHistory([])
-    
+
     try {
       await traverseWithAnimation(tree, () => {}, "inorder")
     } finally {

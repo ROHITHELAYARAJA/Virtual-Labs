@@ -64,7 +64,6 @@ export function useLinkedList(type: ListType) {
   })
   const [isAnimating, setIsAnimating] = useState(false)
 
-  // Re-initialize if list type changes
   useEffect(() => {
     setList(buildInitialList(type, [10, 20, 30, 40]))
     setAnimationState({
@@ -123,11 +122,11 @@ export function useLinkedList(type: ListType) {
     } else {
       const oldHead = nodes.get(list.head)!
       newNode.next = list.head
-      
+
       if (type === 'DLL' || type === 'CDLL') {
         oldHead.prev = newNode.id
       }
-      
+
       if (type === 'CSLL' || type === 'CDLL') {
         const tail = nodes.get(list.tail!)!
         tail.next = newNode.id
@@ -163,11 +162,11 @@ export function useLinkedList(type: ListType) {
     } else {
       const oldTail = nodes.get(list.tail)!
       oldTail.next = newNode.id
-      
+
       if (type === 'DLL' || type === 'CDLL') {
         newNode.prev = list.tail
       }
-      
+
       if (type === 'CSLL' || type === 'CDLL') {
         newNode.next = list.head
       }
@@ -188,21 +187,20 @@ export function useLinkedList(type: ListType) {
 
     const nodes = new Map(list.nodes)
     const oldHead = nodes.get(list.head)!
-    
+
     setHighlight([list.head], `Removing HEAD node (${oldHead.value})...`)
     await new Promise(r => setTimeout(r, 500))
 
     if (list.head === list.tail) {
-      // Last node
       setList({ ...list, head: null, tail: null, nodes: new Map() })
     } else {
       const newHead = oldHead.next!
       const newHeadNode = nodes.get(newHead)!
-      
+
       if (type === 'DLL' || type === 'CDLL') {
         newHeadNode.prev = type === 'CDLL' ? list.tail : null
       }
-      
+
       if (type === 'CSLL' || type === 'CDLL') {
         const tail = nodes.get(list.tail!)!
         tail.next = newHead
@@ -223,17 +221,16 @@ export function useLinkedList(type: ListType) {
 
     const nodes = new Map(list.nodes)
     const oldTail = nodes.get(list.tail)!
-    
+
     setHighlight([list.tail], `Removing TAIL node (${oldTail?.value})...`)
     await new Promise(r => setTimeout(r, 500))
 
     if (list.head === list.tail) {
-      // Last node
       setList({ ...list, head: null, tail: null, nodes: new Map() })
     } else {
       let newTail: string | null = list.head
       let current: string | null = list.head
-      
+
       while (current !== null) {
         const currentNode = nodes.get(current)
         if (!currentNode) break
@@ -248,7 +245,7 @@ export function useLinkedList(type: ListType) {
         const newTailNode = nodes.get(newTail)
         if (newTailNode) {
           newTailNode.next = type === 'CSLL' || type === 'CDLL' ? list.head : null
-          
+
           if (type === 'CDLL' && list.head) {
             const headNode = nodes.get(list.head)
             if (headNode) {
@@ -279,7 +276,7 @@ export function useLinkedList(type: ListType) {
     while (curr) {
       if (visited.has(curr)) break
       visited.add(curr)
-      
+
       const node = list.nodes.get(curr)
       if (!node) break
 
@@ -329,9 +326,8 @@ export function useLinkedList(type: ListType) {
       setHighlight([curr], `Reversing pointer of node ${currentNode.value}`)
       await new Promise(r => setTimeout(r, 500))
 
-      // Reverse current node's pointer
       currentNode.next = prev
-      
+
       if (type === 'DLL' || type === 'CDLL') {
         if (prev) {
           const prevNode = nodes.get(prev)
@@ -349,7 +345,6 @@ export function useLinkedList(type: ListType) {
       curr = next
     }
 
-    // Update circular links if needed
     if (type === 'CSLL' || type === 'CDLL') {
       if (originalHead && originalTail) {
         const newTailNode = nodes.get(originalHead)

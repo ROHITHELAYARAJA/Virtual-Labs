@@ -34,9 +34,9 @@ export function usePostfixEvaluation() {
     setIsEvaluating(true)
     setSteps([])
     setResult(null)
-    
+
     const stack: number[] = []
-    
+
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i]
       await new Promise(resolve => setTimeout(resolve, 1000))
@@ -70,7 +70,7 @@ export function usePostfixEvaluation() {
           i, 
           `Pop ${b} and ${a}, compute ${a} ${token.value} ${b} = ${result}`
         )
-        
+
         stack.push(result)
         addStep(stack, token, i, `Push result ${result} to stack`)
       }

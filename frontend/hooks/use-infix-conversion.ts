@@ -10,7 +10,7 @@ export function useInfixConversion() {
   const tokenize = (expression: string): Token[] => {
     const tokens: Token[] = []
     let current = ''
-    
+
     for (const char of expression.replace(/\s+/g, '')) {
       if (isOperator(char)) {
         if (current) {
@@ -28,11 +28,11 @@ export function useInfixConversion() {
         current += char
       }
     }
-    
+
     if (current) {
       tokens.push({ value: current, type: 'operand' })
     }
-    
+
     return tokens
   }
 
@@ -59,15 +59,15 @@ export function useInfixConversion() {
   const convert = async (expression: string) => {
     setIsConverting(true)
     setSteps([])
-    
+
     const tokens = tokenize(expression)
     const stack: Token[] = []
     const output: Token[] = []
-    
+
     for (let i = 0; i < tokens.length; i++) {
       const token = tokens[i]
       await new Promise(resolve => setTimeout(resolve, 1000))
-      
+
       if (token.type === 'operand') {
         output.push(token)
         addStep(stack, output, token, i, `Add operand ${token.value} to output`)
@@ -97,13 +97,13 @@ export function useInfixConversion() {
         addStep(stack, output, token, i, `Remove opening parenthesis from stack`)
       }
     }
-    
+
     while (stack.length > 0) {
       const operator = stack.pop()!
       output.push(operator)
       addStep(stack, output, undefined, tokens.length, `Pop remaining operator ${operator.value} from stack to output`)
     }
-    
+
     setResult(output)
     setIsConverting(false)
   }
